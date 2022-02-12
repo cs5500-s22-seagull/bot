@@ -65,9 +65,9 @@ test {
     useJUnitPlatform()
 }
 
-// Target Java 1.8 - make sure system.properties matches this as well
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+// Target Java 11 - make sure system.properties matches this as well
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 sourceSets {
     main {
