@@ -129,3 +129,6 @@ gradle-app.setting
 
 # used by direnv
 .envrc
+
+# Do not ignore recommended extensions
+!.vscode/extensions.json
