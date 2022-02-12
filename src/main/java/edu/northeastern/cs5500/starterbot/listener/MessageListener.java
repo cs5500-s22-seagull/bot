@@ -21,7 +21,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onSlashCommand(SlashCommandEvent event) {
         for (Command command : commands) {
-            if (event.getName().equals(event.getName())) {
+            if (command.getName().equals(event.getName())) {
                 command.onEvent(event);
                 return;
             }
@@ -29,16 +29,6 @@ public class MessageListener extends ListenerAdapter {
     }
 
     public Collection<CommandData> allCommandData() {
-        return commands.stream().map(c -> c.getCommandData()).collect(Collectors.toList());
+        return commands.stream().map(Command::getCommandData).collect(Collectors.toList());
     }
 }
-
-// public class MessageListener extends ListenerAdapter {
-//     @Override
-//     public void onSlashCommand(SlashCommandEvent event) {
-//         switch (event.getName()) {
-//             case "say":
-//                 event.reply(event.getOption("content").getAsString()).queue();
-//         }
-//     }
-// }

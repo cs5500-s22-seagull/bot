@@ -13,8 +13,6 @@ public class App {
 
         get(
                 "/",
-                (request, response) -> {
-                    return "{\"status\": \"OK\"}";
-                });
+                (request, response) -> "{\"status\": \"OK\"}");
     }
 }
