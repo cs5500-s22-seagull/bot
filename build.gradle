@@ -19,8 +19,8 @@ repositories {
     mavenCentral()
     jcenter()
     maven {
-      name 'm2-dv8tion'
-      url 'https://m2.dv8tion.net/releases'
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
     }
 }
 
@@ -34,10 +34,10 @@ dependencies {
     implementation "com.sparkjava:spark-core:_"
 
     // Use JUnit Jupiter API for testing.
-    testImplementation Testing.junit.api
+    testImplementation Testing.junit.jupiter.api
 
     // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly Testing.junit.engine
+    testRuntimeOnly Testing.junit.jupiter.engine
 
     // Annotations such as Nullable
     implementation 'com.google.code.findbugs:annotations:_'
@@ -53,6 +53,14 @@ dependencies {
         // Remove the next line if your bot needs voice support!
         exclude module: "opus-java"
     }
+
+    // Dagger for dependency injection
+    implementation Google.dagger
+    annotationProcessor Google.dagger.compiler
+
+    // MongoDB for data storage
+    implementation 'org.mongodb:mongo-java-driver:_'
+
 }
 
 application {
