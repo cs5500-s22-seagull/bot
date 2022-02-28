@@ -38,7 +38,7 @@ public class PreferredNameCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /preferredname");
         String preferredName = event.getOption("name").getAsString();
-        
+
         String discordUserId = event.getUser().getId();
 
         String oldPreferredName = userPreferenceController.getPreferredNameForUser(discordUserId);

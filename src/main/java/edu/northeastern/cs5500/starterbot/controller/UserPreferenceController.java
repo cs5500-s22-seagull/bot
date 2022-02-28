@@ -9,16 +9,25 @@ import javax.inject.Inject;
 
 public class UserPreferenceController {
 
-    @Inject GenericRepository<UserPreference> userPreferenceRepository;
+    GenericRepository<UserPreference> userPreferenceRepository;
 
     @Inject
-    UserPreferenceController() {}
+    UserPreferenceController(GenericRepository<UserPreference> userPreferenceRepository) {
+        this.userPreferenceRepository = userPreferenceRepository;
+
+        if (userPreferenceRepository.count() == 0) {
+            UserPreference userPreference = new UserPreference();
+            userPreference.setDiscordUserId("1234");
+            userPreference.setPreferredName("Alex");
+            userPreferenceRepository.add(userPreference);
+        }
+    }
 
     public void setPreferredNameForUser(String discordMemberId, String preferredName) {
         UserPreference userPreference = getUserPreferenceForMemberId(discordMemberId);
 
         userPreference.setPreferredName(preferredName);
-        userPreferenceRepository.add(userPreference);
+        userPreferenceRepository.update(userPreference);
     }
 
     @Nullable
@@ -37,6 +46,7 @@ public class UserPreferenceController {
 
         UserPreference userPreference = new UserPreference();
         userPreference.setDiscordUserId(discordMemberId);
+        userPreferenceRepository.add(userPreference);
         return userPreference;
     }
 }

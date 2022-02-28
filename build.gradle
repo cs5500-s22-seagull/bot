@@ -68,10 +68,31 @@ application {
     mainClassName = 'edu.northeastern.cs5500.starterbot.App'
 }
 
+// Enable jacoco coverage
+apply plugin: 'jacoco'
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+
+    // Create a Jacoco report after each test run
+    finalizedBy jacocoTestReport
 }
+
+// Generate an XML report that the coverage extension can use
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        // Change html.enabled to true if you want html reports
+        html.enabled false
+        csv.enabled false
+        xml.destination file("${buildDir}/reports/jacoco.xml")
+    }
+}
+
+// Check coverage after each test run
+check.dependsOn jacocoTestCoverageVerification
 
 // Target Java 11 - make sure system.properties matches this as well
 sourceCompatibility = 1.11

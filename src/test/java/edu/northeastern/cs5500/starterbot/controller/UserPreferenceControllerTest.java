@@ -13,8 +13,8 @@ class UserPreferenceControllerTest {
     static final String PREFERRED_NAME_2 = "Penny";
 
     private UserPreferenceController getUserPreferenceController() {
-        UserPreferenceController userPreferenceController = new UserPreferenceController();
-        userPreferenceController.userPreferenceRepository = new InMemoryRepository<>();
+        UserPreferenceController userPreferenceController =
+                new UserPreferenceController(new InMemoryRepository<>());
         return userPreferenceController;
     }
 
