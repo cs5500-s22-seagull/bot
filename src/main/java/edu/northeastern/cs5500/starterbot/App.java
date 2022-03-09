@@ -11,8 +11,6 @@ public class App {
 
         port(8080);
 
-        get(
-                "/",
-                (request, response) -> "{\"status\": \"OK\"}");
+        get("/", (request, response) -> "{\"status\": \"OK\"}");
     }
 }
