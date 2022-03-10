@@ -18,4 +18,10 @@ public class CommandModule {
     public Command providePreferredNameCommand(PreferredNameCommand preferredNameCommand) {
         return preferredNameCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideSetNameCommand(SetNameCommand setNameCommand) {
+        return setNameCommand;
+    }
 }
