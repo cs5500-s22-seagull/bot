@@ -1,5 +1,9 @@
-eclipse.preferences.version=1
+#
+#Mon Feb 28 15:09:16 PST 2022
+org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11
-org.eclipse.jdt.core.compiler.compliance=11
-org.eclipse.jdt.core.compiler.problem.unusedWarningToken=ignore
 org.eclipse.jdt.core.compiler.source=11
+org.eclipse.jdt.core.compiler.problem.unusedWarningToken=ignore
+eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+org.eclipse.jdt.core.compiler.compliance=11
