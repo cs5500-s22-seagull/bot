@@ -2,8 +2,8 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
-import edu.northeastern.cs5500.starterbot.model.UserPreference;
 import edu.northeastern.cs5500.starterbot.model.Player;
+import edu.northeastern.cs5500.starterbot.model.UserPreference;
 
 @Module
 public class RepositoryModule {
