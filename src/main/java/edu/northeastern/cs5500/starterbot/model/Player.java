@@ -15,6 +15,6 @@ public class Player implements Model {
     Integer totalXP;
     Date date;
     List<ObjectId> pokemonList;
-    ObjectId friends;
+    List<ObjectId> friends;
     HashMap<String, Integer> items;
 }

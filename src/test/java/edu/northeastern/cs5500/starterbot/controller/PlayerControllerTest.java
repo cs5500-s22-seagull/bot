@@ -50,7 +50,7 @@ public class PlayerControllerTest {
 
     @Test
     void testSetLevelForPlayer() {
-        Player player = playerController.getPlayerFromMemberId("123");
+        playerController.getPlayerFromMemberId("123");
         playerController.setLevelForPlayer("123", 12);
         assertEquals(12, playerController.getLevelForPlayer("123"));
     }
@@ -64,7 +64,7 @@ public class PlayerControllerTest {
 
     @Test
     void testSetTotalXPForPlayer() {
-        Player player = playerController.getPlayerFromMemberId("123");
+        playerController.getPlayerFromMemberId("123");
         playerController.setTotalXpForPlayer("123", 12);
         assertEquals(12, playerController.getTotalXpForPlayer("123"));
     }

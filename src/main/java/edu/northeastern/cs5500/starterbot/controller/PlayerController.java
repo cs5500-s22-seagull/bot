@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.starterbot.controller;
 import com.mongodb.lang.Nullable;
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +56,7 @@ public class PlayerController {
         playerRepository.update(player);
     }
 
-    @Nullable
+    @Nonnull
     public List<ObjectId> getPokemonListForPlayer(String discordMemberId) {
         return getPlayerFromMemberId(discordMemberId).getPokemonList();
     }
@@ -72,6 +73,17 @@ public class PlayerController {
     }
 
     @Nonnull
+    public List<ObjectId> getFriendsForPlayer(String discordMemberId) {
+        return getPlayerFromMemberId(discordMemberId).getFriends();
+    }
+
+    public void setFriendsForPlayer(String discordMemberId, List<ObjectId> friends) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.setFriends(friends);
+        playerRepository.update(player);
+    }
+
+    @Nonnull
     public Player getPlayerFromMemberId(String discordMemberId) {
         Collection<Player> players = playerRepository.getAll();
         for (Player player : players) {
@@ -85,6 +97,8 @@ public class PlayerController {
         player.setDate(new Date(System.currentTimeMillis()));
         player.setLevel(STARTING_LEVEL);
         player.setTotalXP(STARTING_XP);
+        player.setPokemonList(new ArrayList<>());
+        player.setFriends(new ArrayList<>());
         playerRepository.add(player);
         return player;
     }
