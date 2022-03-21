@@ -83,6 +83,22 @@ public class PlayerController {
         playerRepository.update(player);
     }
 
+    public void addFriendForPlayer(String discordMemberId, ObjectId friend) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.getFriends().add(friend);
+        playerRepository.update(player);
+    }
+
+    public void addFriendForPlayerByName(String discordMemberId, String friendName) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        for (Player findPlayer : playerRepository.getAll()) {
+            if (findPlayer.getName().equals(friendName)) {
+                player.getFriends().add(findPlayer.getId());
+                playerRepository.update(player);
+            }
+        }
+    }
+
     @Nonnull
     public Player getPlayerFromMemberId(String discordMemberId) {
         Collection<Player> players = playerRepository.getAll();
