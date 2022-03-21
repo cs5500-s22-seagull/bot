@@ -1,5 +1,7 @@
 package edu.northeastern.cs5500.starterbot.model;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -11,5 +13,8 @@ public class Player implements Model {
     String discordMemberId;
     Integer level;
     Integer totalXP;
-    List<Pokemon> pokemonList;
+    Date date;
+    List<ObjectId> pokemonList;
+    ObjectId friends;
+    HashMap<String, Integer> items;
 }

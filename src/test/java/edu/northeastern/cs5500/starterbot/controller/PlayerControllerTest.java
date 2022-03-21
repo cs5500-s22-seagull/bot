@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,42 @@ public class PlayerControllerTest {
         Player player = playerController.getPlayerFromMemberId("123");
         player.setName("name1");
         assertEquals("name1", playerController.getNameForPlayer("123"));
+    }
+
+    @Test
+    void testGetDateForPlayer() {
+        Player player = playerController.getPlayerFromMemberId("123");
+        Date date = new Date();
+        player.setDate(date);
+        assertEquals(date, playerController.getStartDateForPlayer("123"));
+    }
+
+    @Test
+    void testGetLevelForPlayer() {
+        Player player = playerController.getPlayerFromMemberId("123");
+        player.setLevel(12);
+        assertEquals(12, playerController.getLevelForPlayer("123"));
+    }
+
+    @Test
+    void testSetLevelForPlayer() {
+        Player player = playerController.getPlayerFromMemberId("123");
+        playerController.setLevelForPlayer("123", 12);
+        assertEquals(12, playerController.getLevelForPlayer("123"));
+    }
+
+    @Test
+    void testGetTotalXPForPlayer() {
+        Player player = playerController.getPlayerFromMemberId("123");
+        player.setTotalXP(12);
+        assertEquals(12, playerController.getTotalXpForPlayer("123"));
+    }
+
+    @Test
+    void testSetTotalXPForPlayer() {
+        Player player = playerController.getPlayerFromMemberId("123");
+        playerController.setTotalXpForPlayer("123", 12);
+        assertEquals(12, playerController.getTotalXpForPlayer("123"));
     }
 
     @Test
