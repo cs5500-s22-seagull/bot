@@ -1,6 +1,4 @@
-/**
- * This class is used to store the information of the players
- */
+/** This class is used to store the information of the players */
 package edu.northeastern.cs5500.starterbot.model;
 
 import java.util.Date;
