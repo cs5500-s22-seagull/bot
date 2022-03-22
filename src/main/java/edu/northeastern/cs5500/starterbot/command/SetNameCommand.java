@@ -37,14 +37,13 @@ public class SetNameCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /setname");
+
         String name = event.getOption("name").getAsString();
-        String discordUserId = event.getUser().getId();
+        String discordUserId = event.getMember().getId();
         String oldName = playerController.getNameForPlayer(discordUserId);
-        playerController.getPlayerFromMemberId(discordUserId).setName(name);
-        ;
+        playerController.setNameForPlayer(discordUserId, name);
         if (oldName == null) {
             event.reply("Your name has been set to " + name).queue();
-            ;
         } else {
             event.reply("Your name has been changed from " + oldName + " to " + name).queue();
         }

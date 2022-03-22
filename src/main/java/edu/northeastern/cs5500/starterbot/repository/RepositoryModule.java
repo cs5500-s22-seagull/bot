@@ -27,8 +27,12 @@ public class RepositoryModule {
     }
 
     @Provides
-    public GenericRepository<Player> providePlayerRepository(
-            InMemoryRepository<Player> repository) {
+    public GenericRepository<Player> providePlayerRepository(MongoDBRepository<Player> repository) {
         return repository;
+    }
+
+    @Provides
+    public Class<Player> providePlayer() {
+        return Player.class;
     }
 }
