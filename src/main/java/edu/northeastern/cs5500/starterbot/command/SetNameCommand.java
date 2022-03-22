@@ -1,3 +1,6 @@
+/**
+ * This class is used to provide command that sets the name of the user
+ */
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
@@ -18,11 +21,21 @@ public class SetNameCommand implements Command {
     @Inject
     public SetNameCommand() {}
 
+/**
+ * It returns the name of the command.
+ * 
+ * @return The name of the command.
+ */
     @Override
     public String getName() {
         return "setname";
     }
 
+/**
+ * It returns a new CommandData object with the name of the command, and a description of what it does
+ * 
+ * @return The command data object.
+ */
     @Override
     public CommandData getCommandData() {
         return new CommandData(getName(), "Ask the bot to set your name")
@@ -34,6 +47,11 @@ public class SetNameCommand implements Command {
                                 .setRequired(true));
     }
 
+/**
+ * This function is called when the user types the command /setname and allows the user to set their name
+ * 
+ * @param event The CommandInteraction object that was passed to the command.
+ */
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /setname");
