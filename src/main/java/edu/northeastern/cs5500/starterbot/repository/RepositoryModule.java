@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.model.UserPreference;
 
 @Module
@@ -23,5 +24,15 @@ public class RepositoryModule {
     @Provides
     public Class<UserPreference> provideUserPreference() {
         return UserPreference.class;
+    }
+
+    @Provides
+    public GenericRepository<Player> providePlayerRepository(MongoDBRepository<Player> repository) {
+        return repository;
+    }
+
+    @Provides
+    public Class<Player> providePlayer() {
+        return Player.class;
     }
 }

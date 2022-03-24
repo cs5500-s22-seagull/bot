@@ -91,6 +91,22 @@ jacocoTestReport {
     }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = false
+            element = 'CLASS'
+            includes = ['org.gradle.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                minimum = 0.5
+            }
+        }
+    }
+}
+
 // Check coverage after each test run
 check.dependsOn jacocoTestCoverageVerification
 
