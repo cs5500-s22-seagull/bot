@@ -18,4 +18,16 @@ public class CommandModule {
     public Command provideHelpCommand(HelpCommand helpCommand) {
         return helpCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command providePreferredNameCommand(PreferredNameCommand preferredNameCommand) {
+        return preferredNameCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideSetNameCommand(SetNameCommand setNameCommand) {
+        return setNameCommand;
+    }
 }
