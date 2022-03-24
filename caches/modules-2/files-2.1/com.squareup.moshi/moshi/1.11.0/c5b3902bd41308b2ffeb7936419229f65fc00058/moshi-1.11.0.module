@@ -1,0 +1,83 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.squareup.moshi",
+    "module": "moshi",
+    "version": "1.11.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.6.1",
+      "buildId": "5ukx57glyvfy3odnpiei5k6rha"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.squareup.okio",
+          "module": "okio",
+          "version": {
+            "requires": "1.17.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "moshi-1.11.0.jar",
+          "url": "moshi-1.11.0.jar",
+          "size": 151758,
+          "sha512": "e093c37f9fb07d61adfc7f4f6316272bb252bd51415d91fcb042bb28c37336dd0330151576f121370c5dde56e7500451de24c9cf92a746d2451962b5c174393f",
+          "sha256": "b6ee64fb84a7486aa9983e20c75259d4931bd597c169e1e67c3bc0521fd03b27",
+          "sha1": "14c426fc49ee29eb871e8b259326e967082a72ad",
+          "md5": "b071a526fc99f833408f7e17bb88af2a"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 7,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.squareup.okio",
+          "module": "okio",
+          "version": {
+            "requires": "1.17.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "moshi-1.11.0.jar",
+          "url": "moshi-1.11.0.jar",
+          "size": 151758,
+          "sha512": "e093c37f9fb07d61adfc7f4f6316272bb252bd51415d91fcb042bb28c37336dd0330151576f121370c5dde56e7500451de24c9cf92a746d2451962b5c174393f",
+          "sha256": "b6ee64fb84a7486aa9983e20c75259d4931bd597c169e1e67c3bc0521fd03b27",
+          "sha1": "14c426fc49ee29eb871e8b259326e967082a72ad",
+          "md5": "b071a526fc99f833408f7e17bb88af2a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.diffplug.spotless",
+    "module": "spotless-lib-extra",
+    "version": "2.22.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.diffplug.spotless",
+          "module": "spotless-lib",
+          "version": {
+            "requires": "2.22.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spotless-lib-extra-2.22.2.jar",
+          "url": "spotless-lib-extra-2.22.2.jar",
+          "size": 84135,
+          "sha512": "58a33fd28ba69c630977952e38e0800b6b339c0b292327a8dd8c618cee70987817339d479afb41d94e7f9edee6cbe8a36da5882fd304090f49aadde71ac16f92",
+          "sha256": "7fa15f1e27d7a7ec7960dc24cad20d68214a529d88fff5f19d0ef73f060a0886",
+          "sha1": "5de53d50115111c3ff5d149af0ac9defa96ab5b9",
+          "md5": "b15af23c67c3bca755a37d3605766d82"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.diffplug.durian",
+          "module": "durian-core",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "com.diffplug.durian",
+          "module": "durian-collect",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "org.eclipse.jgit",
+          "module": "org.eclipse.jgit",
+          "version": {
+            "requires": "5.13.0.202109080827-r"
+          }
+        },
+        {
+          "group": "com.googlecode.concurrent-trees",
+          "module": "concurrent-trees",
+          "version": {
+            "requires": "2.6.1"
+          }
+        },
+        {
+          "group": "org.codehaus.groovy",
+          "module": "groovy-xml",
+          "version": {
+            "requires": "3.0.9"
+          }
+        },
+        {
+          "group": "com.diffplug.spotless",
+          "module": "spotless-lib",
+          "version": {
+            "requires": "2.22.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "spotless-lib-extra-2.22.2.jar",
+          "url": "spotless-lib-extra-2.22.2.jar",
+          "size": 84135,
+          "sha512": "58a33fd28ba69c630977952e38e0800b6b339c0b292327a8dd8c618cee70987817339d479afb41d94e7f9edee6cbe8a36da5882fd304090f49aadde71ac16f92",
+          "sha256": "7fa15f1e27d7a7ec7960dc24cad20d68214a529d88fff5f19d0ef73f060a0886",
+          "sha1": "5de53d50115111c3ff5d149af0ac9defa96ab5b9",
+          "md5": "b15af23c67c3bca755a37d3605766d82"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spotless-lib-extra-2.22.2-javadoc.jar",
+          "url": "spotless-lib-extra-2.22.2-javadoc.jar",
+          "size": 455829,
+          "sha512": "88a3f8703cd9051c3341dd3c9654aeaba2f2b368e664622df12fd1beab8ad84aea5f13683fc59b86421777a48935ca80f995d99407da7d47776c195f76a66290",
+          "sha256": "6eac7459883c1a11793b44ab068e7ebcd3ce34993f5d5ac4c1835e4748870caf",
+          "sha1": "8c4dddb18fe5f2cd6425cd6386830e4390a0e7bb",
+          "md5": "eeaf36694e20c1ef48da8d0412d83fa1"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "spotless-lib-extra-2.22.2-sources.jar",
+          "url": "spotless-lib-extra-2.22.2-sources.jar",
+          "size": 60449,
+          "sha512": "5d4fb14af84788e8e6ed75c8f2d73a2bedba8904401981a74e030a12cf8944cdcb638a06c88cb7ced0bd95ce4c6ce7b6c0e9e58bf245e6f795beefacf1f5d464",
+          "sha256": "399ebdda96aa2281a789c147c21debc960fd7e195bbd9e51a42c3b86c52f3d5e",
+          "sha1": "5d2f2ab3bd3ca8391b4048c161cfcece795b2b41",
+          "md5": "3558e6720772efe4917a6381b6b7b967"
+        }
+      ]
+    }
+  ]
+}

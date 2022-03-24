@@ -1,0 +1,137 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "de.fayard.refreshVersions",
+    "module": "refreshVersions-core",
+    "version": "0.40.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "refreshVersions-core-0.40.1.jar",
+          "url": "refreshVersions-core-0.40.1.jar",
+          "size": 560433,
+          "sha512": "fcd21e5735d95e846586faef363b54867bbba84f8cbe70a42d4da5690f89100d78796b01af2e9260db4ce78d42a093cfee6cb8063a06050eee2af51a01742432",
+          "sha256": "7b6b426018cd3d0da123f4390075dc5a01b92d9b6753686f68b0e2f6d087a40a",
+          "sha1": "d3e065a316979caf2bcb4d4a4f36b67c6d77e5c8",
+          "md5": "78a75a3fe41255eafc93b0b45a688ac4"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.6.0",
+            "rejects": [
+              "_"
+            ]
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.9.3",
+            "rejects": [
+              "_"
+            ]
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.9.3",
+            "rejects": [
+              "_"
+            ]
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.9.0",
+            "rejects": [
+              "_"
+            ]
+          },
+          "reason": "It has ready to use HttpException class"
+        },
+        {
+          "group": "com.squareup.moshi",
+          "module": "moshi-kotlin",
+          "version": {
+            "requires": "1.11.0",
+            "rejects": [
+              "_"
+            ]
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "refreshVersions-core-0.40.1.jar",
+          "url": "refreshVersions-core-0.40.1.jar",
+          "size": 560433,
+          "sha512": "fcd21e5735d95e846586faef363b54867bbba84f8cbe70a42d4da5690f89100d78796b01af2e9260db4ce78d42a093cfee6cb8063a06050eee2af51a01742432",
+          "sha256": "7b6b426018cd3d0da123f4390075dc5a01b92d9b6753686f68b0e2f6d087a40a",
+          "sha1": "d3e065a316979caf2bcb4d4a4f36b67c6d77e5c8",
+          "md5": "78a75a3fe41255eafc93b0b45a688ac4"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "refreshVersions-core-0.40.1-sources.jar",
+          "url": "refreshVersions-core-0.40.1-sources.jar",
+          "size": 90795,
+          "sha512": "764a677558592d61c2b9c85f0f2cffa77812fd0f8e0694ed6168aa0834f4173f6732fc4e069fb1a014ab7f0e53cf14e49274820f4a96d5422cd4114038a6be39",
+          "sha256": "2649f34da8a95fd178124cc5282ad3114596bdfe7a3073cd226e8dc8ea6b1fe7",
+          "sha1": "b6ea676d30ed87302012dc3b9d52eb78d584b9a2",
+          "md5": "f57d09a0d22096c448772f79e02ffac1"
+        }
+      ]
+    }
+  ]
+}

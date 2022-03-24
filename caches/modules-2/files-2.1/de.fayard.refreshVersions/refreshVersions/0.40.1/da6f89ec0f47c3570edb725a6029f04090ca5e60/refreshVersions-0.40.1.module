@@ -1,0 +1,112 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "de.fayard.refreshVersions",
+    "module": "refreshVersions",
+    "version": "0.40.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "de.fayard.refreshVersions",
+          "module": "refreshVersions-core",
+          "version": {
+            "requires": "0.40.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "refreshVersions-0.40.1.jar",
+          "url": "refreshVersions-0.40.1.jar",
+          "size": 351455,
+          "sha512": "a4ff8c46e0a6cddc3a55258a1adfbd66d6a28c8c689c87267815f1bac35690769cc4f5f8cb1ff6fc578239cbab71a334d4bea8097aee5fa514bb420011800b86",
+          "sha256": "b7f06e8ee3b0169306bd8571473ba9d9c4fa8c1d5593be873ccd60fc67102c9d",
+          "sha1": "14b9849cdd77a1b55914a7123b3912c95aa9967f",
+          "md5": "f0f9591b02baf41bf3f17d2108d16fe0"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.6.0",
+            "rejects": [
+              "_"
+            ]
+          }
+        },
+        {
+          "group": "de.fayard.refreshVersions",
+          "module": "refreshVersions-core",
+          "version": {
+            "requires": "0.40.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "refreshVersions-0.40.1.jar",
+          "url": "refreshVersions-0.40.1.jar",
+          "size": 351455,
+          "sha512": "a4ff8c46e0a6cddc3a55258a1adfbd66d6a28c8c689c87267815f1bac35690769cc4f5f8cb1ff6fc578239cbab71a334d4bea8097aee5fa514bb420011800b86",
+          "sha256": "b7f06e8ee3b0169306bd8571473ba9d9c4fa8c1d5593be873ccd60fc67102c9d",
+          "sha1": "14b9849cdd77a1b55914a7123b3912c95aa9967f",
+          "md5": "f0f9591b02baf41bf3f17d2108d16fe0"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "refreshVersions-0.40.1-sources.jar",
+          "url": "refreshVersions-0.40.1-sources.jar",
+          "size": 72149,
+          "sha512": "71fbf5840986e3b7766a84c14fa62b99448c534c02cb945d9540a8b128c695a1af269b68ca795268d67b05cdf66da9687a74f6daef3d823bda494ba0300bc37c",
+          "sha256": "86df322b89fd07c936ee25b0ab051dea05cbb8a5d8f6bb68be01ff34fba00510",
+          "sha1": "615cd98c69f77fa037a056a5ece243d0bb6658cc",
+          "md5": "5dc3ac1f2d6b4a0eece608d676a2a767"
+        }
+      ]
+    }
+  ]
+}

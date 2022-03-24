@@ -28,7 +28,8 @@ public class Bot {
     @Inject MessageListener messageListener;
 
     static String getBotToken() {
-        return new ProcessBuilder().environment().get("BOT_TOKEN");
+        return "OTQyNjQ1NDMzMTA3MzgyMjgy.Ygng-A.HkiV9y_UMIGDfyUozvMdiQaZMP4";
+        // return new ProcessBuilder().environment().get("BOT_TOKEN");
     }
 
     @SneakyThrows(LoginException.class)
