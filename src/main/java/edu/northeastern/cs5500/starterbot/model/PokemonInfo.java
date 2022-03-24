@@ -1,16 +1,11 @@
 package edu.northeastern.cs5500.starterbot.model;
 
-import org.bson.types.ObjectId;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 public class PokemonInfo implements Model {
 
-
-
-
     private ObjectId id;
-
-
 
     private String pokemonName;
     private int pokemonNumber;
@@ -19,9 +14,14 @@ public class PokemonInfo implements Model {
     private List<PokemonInfo> evolution;
     private String introduction;
 
-
-    public PokemonInfo(ObjectId id, String pokemonName, String gender, int pokemonNumber, List<String> pokemonType,
-        List<PokemonInfo> evolution, String introduction) {
+    public PokemonInfo(
+            ObjectId id,
+            String pokemonName,
+            String gender,
+            int pokemonNumber,
+            List<String> pokemonType,
+            List<PokemonInfo> evolution,
+            String introduction) {
         this.id = id;
         this.pokemonName = pokemonName;
         this.gender = gender;
@@ -54,7 +54,7 @@ public class PokemonInfo implements Model {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
+
     public List<String> getPokemonType() {
         return pokemonType;
     }
@@ -79,11 +79,6 @@ public class PokemonInfo implements Model {
         this.introduction = introduction;
     }
 
-
-
-
-
-
     @Override
     public ObjectId getId() {
         // TODO Auto-generated method stub
@@ -93,11 +88,5 @@ public class PokemonInfo implements Model {
     @Override
     public void setId(ObjectId id) {
         this.id = id;
-        
     }
- 
-    
-
-
-
 }
