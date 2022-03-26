@@ -5,15 +5,13 @@ import lombok.Data;
 import org.bson.types.ObjectId;
 
 @Data
-public class Pokemon implements Model {
+public class Pokedex implements Model {
 
     @Inject
-    public Pokemon() {}
+    public Pokedex() {}
 
     private ObjectId id;
-    private int cp;
-    private String gender;
+    private int seen;
+    private int caught;
     private ObjectId pokemonInfo;
-    private int level;
-    private int hp;
 }

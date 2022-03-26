@@ -57,7 +57,7 @@ public class SetNameCommand implements Command {
         log.info("event: /setname");
 
         String name = event.getOption("name").getAsString();
-        String discordUserId = event.getMember().getId();
+        String discordUserId = event.getUser().getId();
         String oldName = playerController.getNameForPlayer(discordUserId);
         playerController.setNameForPlayer(discordUserId, name);
         if (oldName == null) {
