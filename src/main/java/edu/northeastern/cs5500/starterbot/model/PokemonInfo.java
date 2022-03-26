@@ -12,6 +12,6 @@ public class PokemonInfo implements Model {
     private int pokemonNumber;
     private String gender;
     private List<String> pokemonType;
-    private List<PokemonInfo> evolution;
+    private List<ObjectId> evolution;
     private String introduction;
 }
