@@ -1,14 +1,10 @@
 package edu.northeastern.cs5500.starterbot.model;
 
-import javax.inject.Inject;
 import lombok.Data;
 import org.bson.types.ObjectId;
 
 @Data
 public class Pokemon implements Model {
-
-    @Inject
-    public Pokemon() {}
 
     private ObjectId id;
     private int cp;
