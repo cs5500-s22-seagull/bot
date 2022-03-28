@@ -4,15 +4,14 @@ package edu.northeastern.cs5500.starterbot.model;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.inject.Inject;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 @Data
+@NoArgsConstructor
 public class Player implements Model {
 
-    @Inject
-    public Player() {}
     // the discord snowflake id
     ObjectId id;
     // the name user set for themselves
