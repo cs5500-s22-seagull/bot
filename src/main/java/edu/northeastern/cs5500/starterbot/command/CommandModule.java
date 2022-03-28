@@ -18,4 +18,10 @@ public class CommandModule {
     public Command provideSetNameCommand(SetNameCommand setNameCommand) {
         return setNameCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideAddFriendCommand(AddFriendCommand addFriendCommand) {
+        return addFriendCommand;
+    }
 }

@@ -44,6 +44,15 @@ public class PlayerController {
     }
 
     /**
+     * Get all players from the database
+     *
+     * @return A collection of Player objects.
+     */
+    public Collection<Player> getAllPlayers() {
+        return playerRepository.getAll();
+    }
+
+    /**
      * Given a Discord member ID, return the name of the player that Discord member is playing as
      *
      * @param discordMemberId The id of the discord member.
