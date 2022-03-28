@@ -3,10 +3,8 @@
  */
 package edu.northeastern.cs5500.starterbot.controller;
 
-import com.mongodb.lang.Nullable;
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -17,11 +15,6 @@ import org.bson.types.ObjectId;
 
 @Data
 public class PlayerController {
-
-    // starting level for the player
-    private static final Integer STARTING_LEVEL = 0;
-    // startting xp for the player
-    private static final Integer STARTING_XP = 0;
 
     // This is a generic repository. It is a repository that can store any type of object. In
     // this case,
@@ -56,7 +49,7 @@ public class PlayerController {
      * @param discordMemberId The id of the discord member.
      * @return The name of the player.
      */
-    @Nullable
+    @Nonnull
     public String getNameForPlayer(String discordMemberId) {
         return getPlayerFromMemberId(discordMemberId).getName();
     }
@@ -210,10 +203,6 @@ public class PlayerController {
         Player player = new Player();
         player.setDiscordMemberId(discordMemberId);
         player.setDate(new Date(System.currentTimeMillis()));
-        player.setLevel(STARTING_LEVEL);
-        player.setTotalXP(STARTING_XP);
-        player.setPokemonList(new ArrayList<>());
-        player.setFriends(new ArrayList<>());
         playerRepository.add(player);
         return player;
     }
