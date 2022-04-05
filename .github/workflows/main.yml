@@ -11,5 +11,6 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - uses: superfly/flyctl-actions/setup-flyctl@master
-          with:
-            args: "deploy"
+        - run: >
+          flyctl
+          deploy
