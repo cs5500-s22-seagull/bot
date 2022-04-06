@@ -15,11 +15,14 @@ public class Player implements Model {
     static final String DEFAULT_NAME = "trainer";
     static final Integer DEFAULT_LEVEL = 1;
     static final Integer DEFAULT_XP = 0;
+    static final String DEFAULT_DISCORD_NAME = "default name";
 
     // the discord snowflake id
     ObjectId id;
     // the name user set for themselves
     String name = DEFAULT_NAME;
+    // This is setting the default value of the discordName to "discordName".
+    String discordName = DEFAULT_DISCORD_NAME;
     // the user's discord member id
     String discordMemberId;
     // the user's level

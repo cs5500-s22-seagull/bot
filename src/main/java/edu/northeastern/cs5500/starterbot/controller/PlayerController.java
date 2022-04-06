@@ -206,6 +206,28 @@ public class PlayerController {
     }
 
     /**
+     * Given a Discord member ID, return the player's Discord name
+     *
+     * @param discordMemberId The discord id of the player
+     * @return The name of the player.
+     */
+    public String getDiscordName(String discordMemberId) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        return player.getDiscordName();
+    }
+
+    /**
+     * This function sets the discord name of a player
+     *
+     * @param discordMemberId The id of the discord member.
+     * @param name The name of the player
+     */
+    public void setDiscordName(String discordMemberId, String name) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.setDiscordName(name);
+    }
+
+    /**
      * Given a Discord member ID, return the corresponding Player object
      *
      * @param discordMemberId The id of the discord member.
