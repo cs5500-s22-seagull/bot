@@ -31,8 +31,12 @@ public class AddFriendSelectionHandler implements SelectionHandler {
             if (objectId.equals(playerController.getPlayerFromMemberId(friendName).getId())) {
                 event.reply(
                                 "You already added "
+                                        + playerController.getDiscordName(friendName)
+                                        + " ("
                                         + playerController.getNameForPlayer(friendName)
+                                        + ")"
                                         + " as a friend")
+                        .setEphemeral(true)
                         .queue();
                 return;
             }
@@ -41,7 +45,10 @@ public class AddFriendSelectionHandler implements SelectionHandler {
         playerController.setFriendsForPlayer(event.getUser().getId(), friendsList);
         event.reply(
                         "Succesfully added "
+                                + playerController.getDiscordName(friendName)
+                                + " ("
                                 + playerController.getNameForPlayer(friendName)
+                                + ")"
                                 + " as a friend")
                 .setEphemeral(true)
                 .queue();

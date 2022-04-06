@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class SayCommandTest {
     @Test
     void testNameMatchesData() {
-        SayCommand sayCommand = new SayCommand();
+        RegisterCommand sayCommand = new RegisterCommand();
         String name = sayCommand.getName();
         CommandData commandData = sayCommand.getCommandData();
 

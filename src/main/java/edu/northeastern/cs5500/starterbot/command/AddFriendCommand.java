@@ -39,7 +39,12 @@ public class AddFriendCommand implements Command {
             if (string.equals(event.getUser().getId())) {
                 continue;
             }
-            menu.addOption(playerController.getNameForPlayer(string), string);
+            menu.addOption(
+                    playerController.getNameForPlayer(string)
+                            + " ("
+                            + playerController.getDiscordName(string)
+                            + ")",
+                    string);
         }
         event.deferReply(true).addActionRow(menu.build()).queue();
     }
