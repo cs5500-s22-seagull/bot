@@ -36,6 +36,7 @@ public class AddFriendSelectionHandler implements SelectionHandler {
                                         + playerController.getNameForPlayer(friendName)
                                         + ")"
                                         + " as a friend")
+                        .setEphemeral(true)
                         .queue();
                 return;
             }

@@ -23,7 +23,7 @@ public class RegisterCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Ask the bot to reply with the provided text");
+        return new CommandData(getName(), "Register new user to the game");
     }
 
     @Override

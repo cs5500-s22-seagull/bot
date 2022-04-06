@@ -9,8 +9,8 @@ public class CommandModule {
 
     @Provides
     @IntoSet
-    public Command provideSayCommand(RegisterCommand sayCommand) {
-        return sayCommand;
+    public Command provideSayCommand(RegisterCommand registerCommand) {
+        return registerCommand;
     }
 
     @Provides
