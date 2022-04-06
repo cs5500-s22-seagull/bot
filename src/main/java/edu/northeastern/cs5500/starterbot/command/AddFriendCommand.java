@@ -41,6 +41,6 @@ public class AddFriendCommand implements Command {
             }
             menu.addOption(playerController.getNameForPlayer(string), string);
         }
-        event.deferReply().addActionRow(menu.build()).queue();
+        event.deferReply(true).addActionRow(menu.build()).queue();
     }
 }

@@ -61,9 +61,11 @@ public class SetNameCommand implements Command {
         String oldName = playerController.getNameForPlayer(discordUserId);
         playerController.setNameForPlayer(discordUserId, name);
         if (oldName == null) {
-            event.reply("Your name has been set to " + name).queue();
+            event.reply("Your name has been set to " + name).setEphemeral(true).queue();
         } else {
-            event.reply("Your name has been changed from " + oldName + " to " + name).queue();
+            event.reply("Your name has been changed from " + oldName + " to " + name)
+                    .setEphemeral(true)
+                    .queue();
         }
         log.info("name: " + playerController.getNameForPlayer(discordUserId));
         log.info("discordUserID: " + discordUserId);
