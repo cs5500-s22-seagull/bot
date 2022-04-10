@@ -1,9 +1,11 @@
 package edu.northeastern.cs5500.starterbot;
 
 import dagger.Component;
+import edu.northeastern.cs5500.starterbot.buttonHandler.ButtonHandlerModule;
 import edu.northeastern.cs5500.starterbot.command.CommandModule;
 import edu.northeastern.cs5500.starterbot.listener.MessageListener;
 import edu.northeastern.cs5500.starterbot.repository.RepositoryModule;
+import edu.northeastern.cs5500.starterbot.selectionHandler.SelectionHandlerModule;
 import java.util.EnumSet;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,7 +16,13 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
-@Component(modules = {CommandModule.class, RepositoryModule.class})
+@Component(
+        modules = {
+            CommandModule.class,
+            RepositoryModule.class,
+            SelectionHandlerModule.class,
+            ButtonHandlerModule.class
+        })
 @Singleton
 interface BotComponent {
     public Bot bot();

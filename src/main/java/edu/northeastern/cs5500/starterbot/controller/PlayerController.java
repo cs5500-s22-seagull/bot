@@ -5,6 +5,7 @@ package edu.northeastern.cs5500.starterbot.controller;
 
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -16,17 +17,21 @@ import org.bson.types.ObjectId;
 @Data
 public class PlayerController {
 
-    // This is a generic repository. It is a repository that can store any type of object. In
+    // This is a generic repository. It is a repository that can store any type of
+    // object. In
     // this case,
     // storing Player objects.
     @Inject GenericRepository<Player> playerRepository;
 
-    // This is a constructor injection. The `@Inject` annotation tells Dagger to inject the
+    // This is a constructor injection. The `@Inject` annotation tells Dagger to
+    // inject the
     // `PlayerController`
-    // object into the `PlayerController` class. The `PlayerController` class is a Dagger
+    // object into the `PlayerController` class. The `PlayerController` class is a
+    // Dagger
     // controller, which
     // means that
-    // Dagger will automatically call the `PlayerController` constructor when the Dagger application
+    // Dagger will automatically call the `PlayerController` constructor when the
+    // Dagger application
     // starts.
     @Inject
     PlayerController() {}
@@ -44,6 +49,32 @@ public class PlayerController {
     }
 
     /**
+     * Get all the player names from the database
+     *
+     * @return A collection of strings.
+     */
+    public Collection<String> getAllPlayerNames() {
+        Collection<String> playerNames = new ArrayList<String>();
+        for (Player player : playerRepository.getAll()) {
+            playerNames.add(player.getName());
+        }
+        return playerNames;
+    }
+
+    /**
+     * This function returns a collection of all the player's discord member id
+     *
+     * @return A collection of all the player's discord member id.
+     */
+    public Collection<String> getAllPlayerMemberId() {
+        Collection<String> playerId = new ArrayList<String>();
+        for (Player player : playerRepository.getAll()) {
+            playerId.add(player.getDiscordMemberId());
+        }
+        return playerId;
+    }
+
+    /**
      * Given a Discord member ID, return the name of the player that Discord member is playing as
      *
      * @param discordMemberId The id of the discord member.
@@ -53,6 +84,7 @@ public class PlayerController {
     public String getNameForPlayer(String discordMemberId) {
         return getPlayerFromMemberId(discordMemberId).getName();
     }
+
     /**
      * Given a Discord member ID, return the player's level
      *
@@ -158,18 +190,6 @@ public class PlayerController {
     }
 
     /**
-     * Add a friend for a player
-     *
-     * @param discordMemberId The Discord ID of the player who is adding a friend.
-     * @param friend The friend's ObjectId
-     */
-    public void addFriendForPlayer(String discordMemberId, ObjectId friend) {
-        Player player = getPlayerFromMemberId(discordMemberId);
-        player.getFriends().add(friend);
-        playerRepository.update(player);
-    }
-
-    /**
      * Given a player's discord id and a friend's name, add the friend to the player's friend list
      *
      * @param discordMemberId The id of the player who is adding a friend.
@@ -183,6 +203,28 @@ public class PlayerController {
                 playerRepository.update(player);
             }
         }
+    }
+
+    /**
+     * Given a Discord member ID, return the player's Discord name
+     *
+     * @param discordMemberId The discord id of the player
+     * @return The name of the player.
+     */
+    public String getDiscordName(String discordMemberId) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        return player.getDiscordName();
+    }
+
+    /**
+     * This function sets the discord name of a player
+     *
+     * @param discordMemberId The id of the discord member.
+     * @param name The name of the player
+     */
+    public void setDiscordName(String discordMemberId, String name) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.setDiscordName(name);
     }
 
     /**
