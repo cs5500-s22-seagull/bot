@@ -30,4 +30,22 @@ public class CommandModule {
     public Command provideClearFriendCommand(ClearFriendCommand clearFriendCommand) {
         return clearFriendCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideLookUpPokemonCommand(LookUpPokemonCommand lookUpPokemonCommand) {
+        return lookUpPokemonCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideCatchCommand(CatchCommand catchCommand) {
+        return catchCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideSeeWildPokemonsCommand(SeeWildPokemonsCommand seeWildPokemonsCommand) {
+        return seeWildPokemonsCommand;
+    }
 }
