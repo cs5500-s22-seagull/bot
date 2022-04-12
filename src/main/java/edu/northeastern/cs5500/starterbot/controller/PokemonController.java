@@ -10,6 +10,9 @@ import org.bson.types.ObjectId;
 @Data
 public class PokemonController {
 
+    @Inject
+    PokemonController() {}
+
     @Inject GenericRepository<Pokemon> pokemonRepository;
     @Inject GenericRepository<PokemonInfo> pokemonInfoRepository;
 
