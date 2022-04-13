@@ -1,11 +1,14 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.CatchController;
+import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Builder;
 
 @Singleton
 @Slf4j
@@ -29,8 +32,13 @@ public class SeeWildPokemonsCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /seewild");
-        catchController.seeWildPokemons();
+        ArrayList<String> wildPoke = catchController.seeWildPokemons();
 
-        // event.reply("").queue();
+        Builder menu =
+                SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a wild pokemon");
+        for (String string : wildPoke) {
+            menu.addOption(string, string);
+        }
+        event.deferReply(true).addActionRow(menu.build()).queue();
     }
 }

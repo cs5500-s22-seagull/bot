@@ -17,4 +17,5 @@ public class PokemonInfo implements Model {
     private String introduction;
     private String pictureAddress;
     private int maxHP;
+    private int maxCP;
 }

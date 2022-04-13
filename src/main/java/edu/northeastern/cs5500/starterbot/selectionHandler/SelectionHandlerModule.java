@@ -12,4 +12,10 @@ public class SelectionHandlerModule {
     public SelectionHandler provideAddFriendHandler(AddFriendSelectionHandler handler) {
         return handler;
     }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideWildPokemonsHandler(WildPokemonsHandler handler) {
+        return handler;
+    }
 }

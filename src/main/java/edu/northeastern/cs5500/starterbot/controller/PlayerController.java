@@ -4,10 +4,12 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
 import edu.northeastern.cs5500.starterbot.model.Player;
+import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -156,6 +158,18 @@ public class PlayerController {
     }
 
     /**
+     * add a wew pokemon to the pokemon list
+     *
+     * @param discordMemberId The Discord ID of the player.
+     * @param pokemon The pokemon need to add
+     */
+    public void addNewPokemonInList(String discordMemberId, Pokemon pokemon) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.getPokemonList().add(pokemon.getId());
+        playerRepository.update(player);
+    }
+
+    /**
      * Returns the date that the player started playing the game
      *
      * @param discordMemberId The id of the discord member.
@@ -175,6 +189,28 @@ public class PlayerController {
     @Nonnull
     public List<ObjectId> getFriendsForPlayer(String discordMemberId) {
         return getPlayerFromMemberId(discordMemberId).getFriends();
+    }
+
+    /**
+     * This function returns a list of all the items of a player
+     *
+     * @param discordMemberId The id of the discord member you want to get the friends of.
+     * @return a HashMap of items
+     */
+    public HashMap<String, Integer> getItemsForPlayer(String discordMemberId) {
+        return getPlayerFromMemberId(discordMemberId).getItems();
+    }
+
+    /**
+     * It sets the updated items for a player.
+     *
+     * @param discordMemberId The Discord ID of the player.
+     * @param updatedItems a HashMap of items
+     */
+    public void setItemsForPlayer(String discordMemberId, HashMap<String, Integer> updatedItems) {
+        Player player = getPlayerFromMemberId(discordMemberId);
+        player.setItems(updatedItems);
+        playerRepository.update(player);
     }
 
     /**
@@ -217,7 +253,7 @@ public class PlayerController {
     }
 
     /**
-     * This function sets the discord name of a player
+     * This function sets the discord name of a player, and add poke balls if it is a new user
      *
      * @param discordMemberId The id of the discord member.
      * @param name The name of the player
@@ -225,6 +261,14 @@ public class PlayerController {
     public void setDiscordName(String discordMemberId, String name) {
         Player player = getPlayerFromMemberId(discordMemberId);
         player.setDiscordName(name);
+        if (!player.getItems().containsKey("poke ball")) {
+            player.getItems().put("poke ball", 50);
+        }
+        if (!player.getItems().containsKey("great ball")) {
+            player.getItems().put("great ball", 10);
+        }
+
+        playerRepository.update(player);
     }
 
     /**
@@ -247,5 +291,31 @@ public class PlayerController {
         player.setDate(new Date(System.currentTimeMillis()));
         playerRepository.add(player);
         return player;
+    }
+
+    /**
+     * Use one poke ball and returns a list of all the items of a player
+     *
+     * @param discordMemberId The id of the discord member.
+     * @return a HashMap of items
+     */
+    public HashMap<String, Integer> usePokeBall(String discordMemberId) {
+        HashMap<String, Integer> items = getItemsForPlayer(discordMemberId);
+        items.put("poke ball", items.get("poke ball") - 1);
+        setItemsForPlayer(discordMemberId, items);
+        return items;
+    }
+
+    /**
+     * Use one great ball and returns a list of all the items of a player
+     *
+     * @param discordMemberId The id of the discord member.
+     * @return a HashMap of items
+     */
+    public HashMap<String, Integer> useGreatBall(String discordMemberId) {
+        HashMap<String, Integer> items = getItemsForPlayer(discordMemberId);
+        items.put("great ball", items.get("great ball") - 1);
+        setItemsForPlayer(discordMemberId, items);
+        return items;
     }
 }
