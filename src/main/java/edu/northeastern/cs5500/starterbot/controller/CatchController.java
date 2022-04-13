@@ -81,7 +81,7 @@ public class CatchController {
                         (pokemonInfoController.getMaxCpbyName(pokeName)
                                 * (Math.random() * 0.45 + 0.45));
         int hp = (int) ((cp / 19) * (1 + Math.random() * 0.1));
-        int level = (int) (cp / pokemonInfoController.getMaxCpbyName(pokeName));
+        int level = (int) (cp / pokemonInfoController.getMaxCpbyName(pokeName) * 100);
         String gender = Math.random() > 0.5 ? "male" : "female";
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
