@@ -52,9 +52,9 @@ public class LookUpPokemonCommand implements Command {
             String pictureAddress = res.get(3);
 
             EmbedBuilder info = new EmbedBuilder();
-            info.setTitle("Pokémon information");
-            info.addField("Pokémon name: ", pokemonName, false);
-            info.addField("Pokémon number: ", "#" + pokemonNumber, false);
+            info.setTitle("Pokemon information");
+            info.addField("Pokemon name: ", pokemonName, false);
+            info.addField("Pokemon number: ", "#" + pokemonNumber, false);
             info.addField("Introduction: ", introduction, false);
             info.setImage(pictureAddress);
             info.setColor(0xf45642);
