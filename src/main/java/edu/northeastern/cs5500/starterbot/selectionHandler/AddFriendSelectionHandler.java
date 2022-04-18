@@ -25,7 +25,6 @@ public class AddFriendSelectionHandler implements SelectionHandler {
     @Override
     public void onEvent(SelectionMenuEvent event) {
         String friendName = event.getSelectedOptions().get(0).getValue();
-        log.info(friendName);
         List<ObjectId> friendsList = playerController.getFriendsForPlayer(event.getUser().getId());
         for (ObjectId objectId : friendsList) {
             if (objectId.equals(playerController.getPlayerFromMemberId(friendName).getId())) {

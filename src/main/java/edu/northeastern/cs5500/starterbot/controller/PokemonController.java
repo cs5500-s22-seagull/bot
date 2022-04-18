@@ -5,8 +5,10 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import javax.inject.Inject;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 
+@Slf4j
 @Data
 public class PokemonController {
 
@@ -49,5 +51,31 @@ public class PokemonController {
     public void evolve(ObjectId id) {
         Pokemon pokemon = pokemonRepository.get(id);
         pokemon.setLevel(pokemon.getLevel() + 1);
+    }
+
+    public String getName(ObjectId id) {
+        return pokemonInfoRepository.get(getPokemonInfo(id)).getPokemonName();
+    }
+
+    public int getHp(ObjectId id) {
+        return getPokemonByObjectId(id).getHp();
+    }
+
+    public int getMaxHp(ObjectId id) {
+        return pokemonInfoRepository.get(getPokemonInfo(id)).getMaxHP();
+    }
+
+    public String getImage(ObjectId id) {
+        return pokemonInfoRepository.get(getPokemonInfo(id)).getPictureAddress();
+    }
+
+    public int getCurrentHp(ObjectId id) {
+        return getPokemonByObjectId(id).getCurrentHp();
+    }
+
+    public void setCurrentHp(ObjectId id, int hp) {
+        Pokemon pokemon = getPokemonByObjectId(id);
+        pokemon.setCurrentHp(hp);
+        pokemonRepository.update(pokemon);
     }
 }

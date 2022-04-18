@@ -24,6 +24,7 @@ public class PlayerController {
     // this case,
     // storing Player objects.
     @Inject GenericRepository<Player> playerRepository;
+    @Inject PokemonController pokemonController;
 
     // This is a constructor injection. The `@Inject` annotation tells Dagger to
     // inject the
@@ -317,5 +318,37 @@ public class PlayerController {
         items.put("great ball", items.get("great ball") - 1);
         setItemsForPlayer(discordMemberId, items);
         return items;
+    }
+
+    /**
+     * Get the player with the given object id.
+     *
+     * @param id The id of the player to get.
+     * @return A Player object
+     */
+    public Player getPlayerByObjectId(ObjectId id) {
+        return playerRepository.get(id);
+    }
+
+    /**
+     * Get the selected pokemon of the player with the given discord id.
+     *
+     * @param discordId The discord id of the user
+     * @return The selected pokemon's ObjectId
+     */
+    public ObjectId getSeletedPokemonByDiscordId(String discordId) {
+        return getPlayerFromMemberId(discordId).getSelectedPokemon();
+    }
+
+    /**
+     * Set the selected pokemon for the player with the given id to the pokemon with the given id.
+     *
+     * @param pokemonId The id of the pokemon that the player wants to select
+     * @param id The id of the player
+     */
+    public void setSelectedPokemonForPlayer(ObjectId pokemonId, String id) {
+        Player player = getPlayerFromMemberId(id);
+        player.setSelectedPokemon(pokemonId);
+        playerRepository.update(player);
     }
 }

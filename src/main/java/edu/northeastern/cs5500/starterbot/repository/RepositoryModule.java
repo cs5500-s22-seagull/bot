@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.starterbot.repository;
 
 import dagger.Module;
 import dagger.Provides;
+import edu.northeastern.cs5500.starterbot.model.Combat;
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.model.Pokedex;
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
@@ -51,5 +52,15 @@ public class RepositoryModule {
     @Provides
     public Class<PokemonInfo> providePokemonInfo() {
         return PokemonInfo.class;
+    }
+
+    @Provides
+    public GenericRepository<Combat> provideCombatRepository(MongoDBRepository<Combat> repository) {
+        return repository;
+    }
+
+    @Provides
+    public Class<Combat> provideCombat() {
+        return Combat.class;
     }
 }

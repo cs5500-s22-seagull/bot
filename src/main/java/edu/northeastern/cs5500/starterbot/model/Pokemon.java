@@ -14,4 +14,5 @@ public class Pokemon implements Model {
     private ObjectId pokemonInfo;
     private int level;
     private int hp;
+    private int currentHp;
 }
