@@ -37,4 +37,6 @@ public class Player implements Model {
     List<ObjectId> friends = new ArrayList<>();
     // This is a hashmap that is storing the items that the user has.
     HashMap<String, Integer> items = new HashMap<>();
+    // This is the id of the pokemon that the user has selected.
+    ObjectId selectedPokemon;
 }

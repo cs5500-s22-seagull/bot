@@ -90,6 +90,7 @@ public class CatchController {
                 pokemon.setPokemonInfo(pokemonInfo.getId());
                 pokemon.setCp(cp);
                 pokemon.setHp(hp);
+                pokemon.setCurrentHp(hp);
                 pokemon.setLevel(level);
                 pokemon.setGender(gender);
                 pokemonRepository.add(pokemon);

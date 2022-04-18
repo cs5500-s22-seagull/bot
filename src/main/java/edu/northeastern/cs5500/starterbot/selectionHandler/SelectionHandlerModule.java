@@ -18,4 +18,22 @@ public class SelectionHandlerModule {
     public SelectionHandler provideWildPokemonsHandler(WildPokemonsHandler handler) {
         return handler;
     }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideChallengeFriendHandler(ChallengeFriendSelectionHandler handler) {
+        return handler;
+    }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideSelectPokemonHandler(SelectPokemonSelectionHandler handler) {
+        return handler;
+    }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideSelectAbilitiesHandler(SelectAbilitiesHandler handler) {
+        return handler;
+    }
 }

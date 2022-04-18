@@ -39,13 +39,25 @@ public class CommandModule {
 
     @Provides
     @IntoSet
-    public Command provideCatchCommand(CatchCommand catchCommand) {
-        return catchCommand;
+    public Command provideSeeWildPokemonsCommand(SeeWildPokemonsCommand seeWildPokemonsCommand) {
+        return seeWildPokemonsCommand;
     }
 
     @Provides
     @IntoSet
-    public Command provideSeeWildPokemonsCommand(SeeWildPokemonsCommand seeWildPokemonsCommand) {
-        return seeWildPokemonsCommand;
+    public Command provideChallengeCommand(ChallengeCommand challengeCommand) {
+        return challengeCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideFightCommand(FightCommand fightCommand) {
+        return fightCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideSelectPokemonCommand(SelectPokemonCommand selectPokemonCommand) {
+        return selectPokemonCommand;
     }
 }

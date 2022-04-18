@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.util.Collection;
 import javax.inject.Inject;
 import lombok.Data;
+import org.bson.types.ObjectId;
 
 @Data
 public class PokemonInfoController {
@@ -22,5 +23,9 @@ public class PokemonInfoController {
             }
         }
         return -1;
+    }
+
+    public String getNameByObjectId(ObjectId id) {
+        return pokemonInfoRepository.get(id).getPokemonName();
     }
 }

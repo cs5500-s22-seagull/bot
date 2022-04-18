@@ -51,8 +51,13 @@ public class Bot {
                         .addEventListeners(messageListener)
                         .build();
 
+        // Guild myGuild = jda.getGuildById("942494600021553162");
+
         CommandListUpdateAction commands = jda.updateCommands();
+        // CommandListUpdateAction myCommands = myGuild.updateCommands();
         commands.addCommands(messageListener.allCommandData());
         commands.queue();
+        // myCommands.addCommands(messageListener.allCommandData());
+        // myCommands.queue();
     }
 }

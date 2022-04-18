@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -38,7 +39,9 @@ public class PlayerControllerTest {
         Player player = playerController.getPlayerFromMemberId("123");
         Date date = new Date();
         player.setDate(date);
-        assertEquals(date, playerController.getStartDateForPlayer("123"));
+        Date expected = playerController.getStartDateForPlayer("123");
+        assertThat(date).isEqualTo(expected);
+        // assertEquals(date, playerController.getStartDateForPlayer("123"));
     }
 
     @Test
