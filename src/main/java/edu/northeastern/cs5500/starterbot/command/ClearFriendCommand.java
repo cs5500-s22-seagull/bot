@@ -24,7 +24,7 @@ public class ClearFriendCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Ask the bot to show the friends UI");
+        return new CommandData(getName(), "Clear the friend list");
     }
 
     @Override

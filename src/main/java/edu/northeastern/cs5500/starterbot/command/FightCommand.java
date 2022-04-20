@@ -34,7 +34,7 @@ public class FightCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Accept pokemon battle challenge");
+        return new CommandData(getName(), "Select ability");
     }
 
     @Override
