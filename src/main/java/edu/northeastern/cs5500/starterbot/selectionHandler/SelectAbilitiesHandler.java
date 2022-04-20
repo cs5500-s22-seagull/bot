@@ -60,6 +60,7 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                                         + opponent
                                         + ">")
                         .queue();
+                event.reply("The fight has concluded");
                 return;
             } else {
                 pokemonController.setCurrentHp(pokemonId, currentHp);

@@ -65,7 +65,7 @@ public class LookUpPokemonCommand implements Command {
             event.reply(
                             ":warning: "
                                     + event.getOption("pokemonname").getAsString().strip()
-                                    + " not embodied! :warning: Try other Pokémon name!")
+                                    + " not embodied! :warning: Try other Pokemon name!")
                     .queue();
         }
     }
