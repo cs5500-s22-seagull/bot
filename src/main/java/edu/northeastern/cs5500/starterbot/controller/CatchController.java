@@ -31,11 +31,6 @@ public class CatchController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentTime = dtf.format(now).toString();
-        System.out.println(
-                "currentTime------------------------------------------------- " + currentTime);
-        System.out.println(
-                "currentTime------------------------------------- "
-                        + currentTime.substring(11, 13).strip());
 
         ArrayList<String> res = new ArrayList<String>();
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();

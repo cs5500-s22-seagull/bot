@@ -36,7 +36,6 @@ public class PokedexController {
     }
 
     public ArrayList<String> getGeneralInfo(String pokeName) {
-        System.out.println("pokeName-------------------------------------- " + pokeName);
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals(pokeName)) {
