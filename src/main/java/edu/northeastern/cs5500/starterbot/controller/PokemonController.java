@@ -78,4 +78,20 @@ public class PokemonController {
         pokemon.setCurrentHp(hp);
         pokemonRepository.update(pokemon);
     }
+
+    public String[] getOwnedMoves(ObjectId id) {
+        Object key1 = getPokemonByObjectId(id).getOwnedMoves().keySet().toArray()[0];
+        String valueForKey1 = getPokemonByObjectId(id).getOwnedMoves().get(key1);
+
+        Object key2 = getPokemonByObjectId(id).getOwnedMoves().keySet().toArray()[1];
+        String valueForKey2 = getPokemonByObjectId(id).getOwnedMoves().get(key2);
+
+        String[] res = new String[4];
+        res[0] = key1.toString();
+        res[1] = valueForKey1;
+        res[2] = key2.toString();
+        res[3] = valueForKey2;
+
+        return res;
+    }
 }

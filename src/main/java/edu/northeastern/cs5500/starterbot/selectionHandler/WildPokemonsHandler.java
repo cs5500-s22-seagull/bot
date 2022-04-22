@@ -44,17 +44,19 @@ public class WildPokemonsHandler implements SelectionHandler {
             items = playerController.useGreatBall(event.getUser().getId());
             catchController.catchPokemon(event.getUser().getId(), wildPoke);
             event.reply(
-                            "Successfully catched "
+                            "Successfully caught "
                                     + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
                                     + "!")
+                    .setEphemeral(true)
                     .queue();
         } else if (arr[0].equals("pokeball") && items.get("poke ball") > 0 && randomNumber >= 0.3) {
             items = playerController.usePokeBall(event.getUser().getId());
             catchController.catchPokemon(event.getUser().getId(), wildPoke);
             event.reply(
-                            "Successfully catched "
+                            "Successfully caught "
                                     + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
                                     + "!")
+                    .setEphemeral(true)
                     .queue();
         } else {
             if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber < 0.2) {

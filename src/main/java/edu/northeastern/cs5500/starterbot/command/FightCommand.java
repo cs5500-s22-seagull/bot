@@ -114,8 +114,15 @@ public class FightCommand implements Command {
         // for (String string : abilities) {
         //     menu.addOption(string, "10 0.8");
         // }
-        menu.addOption("ability a 10 damage 80% hit chance", "10 0.8");
-        menu.addOption("ability b 15 damage 60% hit chance", "15 0.6");
+        String[] res =
+                pokemonController.getOwnedMoves(
+                        playerController.getSeletedPokemonByDiscordId(event.getUser().getId()));
+
+        String[] splitM1 = res[1].split(" ");
+        String[] splitM2 = res[3].split(" ");
+
+        menu.addOption(res[0] + " - Power:" + splitM1[0] + "/Accuracy:" + splitM1[1], res[1]);
+        menu.addOption(res[2] + " - Power:" + splitM2[0] + "/Accuracy:" + splitM2[1], res[3]);
 
         event.replyEmbeds(embedBuilder.build())
                 .addActionRow(menu.build())
