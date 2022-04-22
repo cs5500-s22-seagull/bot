@@ -77,9 +77,7 @@ public class CatchController {
 
     public HashMap<String, String> generateMoves(String pokeName, PokemonInfo pokemonInfo) {
         int size = pokemonInfo.getMoves().size();
-        System.out.println("message----------------------------- size: " + size);
         int moves1no = (int) Math.random() * size;
-        System.out.println("message----------------------------- moves1no: " + moves1no);
         int moves2no = moves1no;
         while (moves2no == moves1no) {
             moves2no = (int) (Math.random() * size);
@@ -91,14 +89,6 @@ public class CatchController {
 
         Object key2 = pokemonInfo.getMoves().keySet().toArray()[moves2no];
         String valueForKey2 = pokemonInfo.getMoves().get(key2);
-
-        // System.out.println(
-        //         "message----------------------------- 1: " + key1.toString() + " " +
-        // valueForKey1);
-
-        // System.out.println(
-        //         "message----------------------------- 2: " + key2.toString() + " " +
-        // valueForKey2);
 
         res.put(key1.toString(), valueForKey1);
         res.put(key2.toString(), valueForKey2);
