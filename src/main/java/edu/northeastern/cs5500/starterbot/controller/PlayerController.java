@@ -268,7 +268,6 @@ public class PlayerController {
         if (!player.getItems().containsKey("great ball")) {
             player.getItems().put("great ball", 10);
         }
-
         playerRepository.update(player);
     }
 

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.inject.Inject;
 import lombok.Data;
 
@@ -30,11 +31,6 @@ public class CatchController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentTime = dtf.format(now).toString();
-        System.out.println(
-                "currentTime------------------------------------------------- " + currentTime);
-        System.out.println(
-                "currentTime------------------------------------- "
-                        + currentTime.substring(11, 13).strip());
 
         ArrayList<String> res = new ArrayList<String>();
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
@@ -74,6 +70,26 @@ public class CatchController {
         return randomNum;
     }
 
+    public HashMap<String, String> generateMoves(String pokeName, PokemonInfo pokemonInfo) {
+        int size = pokemonInfo.getMoves().size();
+        int moves1no = (int) Math.random() * size;
+        int moves2no = moves1no;
+        while (moves2no == moves1no) {
+            moves2no = (int) (Math.random() * size);
+        }
+        HashMap<String, String> res = new HashMap<>();
+
+        Object key1 = pokemonInfo.getMoves().keySet().toArray()[moves1no];
+        String valueForKey1 = pokemonInfo.getMoves().get(key1);
+
+        Object key2 = pokemonInfo.getMoves().keySet().toArray()[moves2no];
+        String valueForKey2 = pokemonInfo.getMoves().get(key2);
+
+        res.put(key1.toString(), valueForKey1);
+        res.put(key2.toString(), valueForKey2);
+        return res;
+    }
+
     public void catchPokemon(String discordMemberId, String arr) {
         String pokeName = arr.substring(arr.lastIndexOf(" ") + 1).strip();
         int cp =
@@ -81,7 +97,7 @@ public class CatchController {
                         (pokemonInfoController.getMaxCpbyName(pokeName)
                                 * (Math.random() * 0.45 + 0.45));
         int hp = (int) ((cp / 19) * (1 + Math.random() * 0.1));
-        int level = (int) (cp / pokemonInfoController.getMaxCpbyName(pokeName) * 100);
+        int level = (int) (cp * 100 / pokemonInfoController.getMaxCpbyName(pokeName));
         String gender = Math.random() > 0.5 ? "male" : "female";
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
@@ -93,10 +109,8 @@ public class CatchController {
                 pokemon.setCurrentHp(hp);
                 pokemon.setLevel(level);
                 pokemon.setGender(gender);
+                pokemon.setOwnedMoves(generateMoves(pokeName, pokemonInfo));
                 pokemonRepository.add(pokemon);
-                // Player player = playerController.getPlayerFromMemberId(discordMemberId);
-                // player.getPokemonList().add(pokemon.getId());
-                // playerRepository.update(player);
                 playerController.addNewPokemonInList(discordMemberId, pokemon);
                 return;
             }

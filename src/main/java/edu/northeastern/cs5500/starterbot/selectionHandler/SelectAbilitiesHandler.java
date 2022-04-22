@@ -33,8 +33,14 @@ public class SelectAbilitiesHandler implements SelectionHandler {
     public void onEvent(SelectionMenuEvent event) {
         String ability = event.getSelectedOptions().get(0).getValue();
         String[] split = ability.split(" ");
-        double dmg = Integer.parseInt(split[0]);
-        double hitChance = Double.parseDouble(split[1]);
+
+        double rate =
+                pokemonController.getLevel(
+                                playerController.getSeletedPokemonByDiscordId(
+                                        event.getUser().getId()))
+                        / 100.0;
+        double dmg = (int) (Integer.parseInt(split[0]) * 0.2 * rate);
+        double hitChance = Double.parseDouble(split[1]) / 100.0;
         Combat combat = combatController.getCombatByUserIds(event.getUser().getId());
         String opponent =
                 event.getUser().getId().equals(combat.getDiscordUserA())

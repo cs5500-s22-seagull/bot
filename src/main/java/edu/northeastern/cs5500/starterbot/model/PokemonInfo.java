@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.model;
 
+import java.util.HashMap;
 import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,4 +19,5 @@ public class PokemonInfo implements Model {
     private String pictureAddress;
     private int maxHP;
     private int maxCP;
+    private HashMap<String, String> moves; // Integer[0]:hurt; Integer[1]:accuracy
 }

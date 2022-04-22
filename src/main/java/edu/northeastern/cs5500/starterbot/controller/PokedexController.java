@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.inject.Inject;
 import lombok.Data;
 import org.bson.types.ObjectId;
@@ -35,7 +36,6 @@ public class PokedexController {
     }
 
     public ArrayList<String> getGeneralInfo(String pokeName) {
-        System.out.println("pokeName-------------------------------------- " + pokeName);
         Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals(pokeName)) {
@@ -124,6 +124,11 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://upload.wikimedia.org/wikipedia/en/a/aa/Pichu_artwork.png");
             pokemonInfoNew.setEvolution(pikaEvo);
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Volt Switch", "70 100");
+            newMoves.put("Thunderbolt", "90 100");
+            newMoves.put("Thunder", "110 70");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoRepository.add(pokemonInfoNew);
         }
 
@@ -137,6 +142,11 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://i.pinimg.com/564x/5d/59/26/5d592629a27f62ac4107692f6bc452ea.jpg");
             pokemonInfoNew.setEvolution(pikaEvo);
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Volt Switch", "70 100");
+            newMoves.put("Thunderbolt", "90 100");
+            newMoves.put("Thunder", "110 70");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoRepository.add(pokemonInfoNew);
         }
 
@@ -150,6 +160,13 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://w7.pngwing.com/pngs/351/952/png-transparent-pikachu-pokemon-x-and-y-raichu-pikachu-mammal-cat-like-mammal-carnivoran-thumbnail.png");
             pokemonInfoNew.setEvolution(pikaEvo);
+
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Volt Switch", "70 100");
+            newMoves.put("Thunderbolt", "90 100");
+            newMoves.put("Thunder", "110 70");
+            newMoves.put("Hyper Beam", "150 90");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoRepository.add(pokemonInfoNew);
         }
 
@@ -163,6 +180,11 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://archives.bulbagarden.net/media/upload/4/4d/174Igglybuff.png");
             pokemonInfoNew.setEvolution(jiggEvo);
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Facade", "70 100");
+            newMoves.put("Fire Blast", "110 85");
+            newMoves.put("Psychic", "90 100");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoRepository.add(pokemonInfoNew);
         }
 
@@ -176,6 +198,11 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://archives.bulbagarden.net/media/upload/3/3e/039Jigglypuff.png");
             pokemonInfoNew.setEvolution(jiggEvo);
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Facade", "70 100");
+            newMoves.put("Fire Blast", "110 85");
+            newMoves.put("Psychic", "90 100");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoRepository.add(pokemonInfoNew);
         }
 
@@ -189,6 +216,14 @@ public class PokedexController {
             pokemonInfoNew.setPictureAddress(
                     "https://archives.bulbagarden.net/media/upload/9/92/040Wigglytuff.png");
             pokemonInfoNew.setEvolution(jiggEvo);
+
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Facade", "70 100");
+            newMoves.put("Fire Blast", "110 85");
+            newMoves.put("Psychic", "90 100");
+            newMoves.put("Hyper Beam", "150 90");
+            pokemonInfoNew.setMoves(newMoves);
+
             pokemonInfoRepository.add(pokemonInfoNew);
         }
     }
