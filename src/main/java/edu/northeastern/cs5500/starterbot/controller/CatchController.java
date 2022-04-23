@@ -90,7 +90,7 @@ public class CatchController {
         return res;
     }
 
-    public void catchPokemon(String discordMemberId, String arr) {
+    public Pokemon catchPokemon(String discordMemberId, String arr) {
         String pokeName = arr.substring(arr.lastIndexOf(" ") + 1).strip();
         int cp =
                 (int)
@@ -112,8 +112,9 @@ public class CatchController {
                 pokemon.setOwnedMoves(generateMoves(pokeName, pokemonInfo));
                 pokemonRepository.add(pokemon);
                 playerController.addNewPokemonInList(discordMemberId, pokemon);
-                return;
+                return pokemon;
             }
         }
+        return null;
     }
 }
