@@ -5,12 +5,12 @@ import static com.google.common.truth.Truth.assertThat;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.junit.jupiter.api.Test;
 
-class SayCommandTest {
+class RegisterCommandTest {
     @Test
     void testNameMatchesData() {
-        RegisterCommand sayCommand = new RegisterCommand();
-        String name = sayCommand.getName();
-        CommandData commandData = sayCommand.getCommandData();
+        RegisterCommand registerCommand = new RegisterCommand();
+        String name = registerCommand.getName();
+        CommandData commandData = registerCommand.getCommandData();
 
         assertThat(name).isEqualTo(commandData.getName());
     }
