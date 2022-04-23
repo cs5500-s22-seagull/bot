@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import lombok.Data;
@@ -182,14 +183,27 @@ public class PlayerController {
     }
 
     /**
-     * This function returns a list of all the friends of a player
+     * This function returns a list of all of the IDs of a player's friends
      *
      * @param discordMemberId The id of the discord member you want to get the friends of.
      * @return A list of ObjectIds.
      */
     @Nonnull
-    public List<ObjectId> getFriendsForPlayer(String discordMemberId) {
+    public List<ObjectId> getFriendIdsForPlayer(String discordMemberId) {
         return getPlayerFromMemberId(discordMemberId).getFriends();
+    }
+
+    /**
+     * Return all of the {@link Player}s a user is friends with.
+     *
+     * @param discordMemberId
+     * @return
+     */
+    @Nonnull
+    public List<Player> getFriendsForPlayer(String discordMemberId) {
+        return getFriendIdsForPlayer(discordMemberId).stream()
+                .map(this::getPlayerByObjectId)
+                .collect(Collectors.toList());
     }
 
     /**

@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
-import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Builder;
-import org.bson.types.ObjectId;
 
 @Singleton
 @Slf4j
@@ -44,8 +42,8 @@ public class ChallengeCommand implements Command {
     }
 
     /**
-     * This function is called when the user types the command /setname and allows the user to set
-     * their name
+     * This function is called when the user types the command /challenge; this command is used to
+     * challenge a friend to a battle.
      *
      * @param event The CommandInteraction object that was passed to the command.
      */
@@ -53,16 +51,22 @@ public class ChallengeCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /challenge");
 
-        Collection<ObjectId> friendsId =
-                playerController.getFriendsForPlayer(event.getUser().getId());
-        Builder menu =
+        // TODO: if you have more than 25 friends, menu creation will crash.
+        // You probably want to do something different...
+        Collection<Player> friends = playerController.getFriendsForPlayer(event.getUser().getId());
+
+        SelectionMenu menu = createBattleMenu(friends);
+
+        event.deferReply(true).addActionRow(menu).queue();
+    }
+
+    SelectionMenu createBattleMenu(Collection<Player> friends) {
+        SelectionMenu.Builder menu =
                 SelectionMenu.create("menu:challenge")
                         .setPlaceholder("Choose a friend to challenge");
-        for (ObjectId id : friendsId) {
-            Player p = playerController.getPlayerByObjectId(id);
-
+        for (Player p : friends) {
             menu.addOption(p.getName() + " (" + p.getDiscordName() + ")", p.getDiscordMemberId());
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        return menu.build();
     }
 }
