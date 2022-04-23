@@ -36,4 +36,10 @@ public class SelectionHandlerModule {
     public SelectionHandler provideSelectAbilitiesHandler(SelectAbilitiesHandler handler) {
         return handler;
     }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideMyPokemonHandler(MyPokemonHandler handler) {
+        return handler;
+    }
 }

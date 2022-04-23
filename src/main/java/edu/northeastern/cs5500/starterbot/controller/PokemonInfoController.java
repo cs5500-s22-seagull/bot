@@ -28,4 +28,8 @@ public class PokemonInfoController {
     public String getNameByObjectId(ObjectId id) {
         return pokemonInfoRepository.get(id).getPokemonName();
     }
+
+    public String getPictureAddress(ObjectId id) {
+        return pokemonInfoRepository.get(id).getPictureAddress();
+    }
 }

@@ -4,10 +4,13 @@ import edu.northeastern.cs5500.starterbot.controller.CatchController;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokedexController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
+import edu.northeastern.cs5500.starterbot.controller.PokemonInfoController;
+import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import java.util.HashMap;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Builder;
@@ -20,6 +23,7 @@ public class WildPokemonsHandler implements SelectionHandler {
     @Inject PokedexController pokedexController;
     @Inject PokemonController pokemonController;
     @Inject CatchController catchController;
+    @Inject PokemonInfoController pokemonInfoController;
 
     @Inject
     WildPokemonsHandler() {}
@@ -42,22 +46,34 @@ public class WildPokemonsHandler implements SelectionHandler {
         String arr[] = wildPoke.split(" ", 2); // split the wildPoke for getting first words
         if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber >= 0.2) {
             items = playerController.useGreatBall(event.getUser().getId());
-            catchController.catchPokemon(event.getUser().getId(), wildPoke);
-            event.reply(
-                            "Successfully caught "
-                                    + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
-                                    + "!")
-                    .setEphemeral(true)
-                    .queue();
+            Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
+            EmbedBuilder info = new EmbedBuilder();
+            info.setTitle(
+                    "Successfully caught "
+                            + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
+                            + "!");
+            info.addField("Gender: ", caughtPoke.getGender(), false);
+            info.addField("CP: ", "" + caughtPoke.getCp(), false);
+            info.addField("HP: ", "" + caughtPoke.getHp(), false);
+            info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
+            info.setColor(0xf45642);
+            event.replyEmbeds(info.build()).queue();
         } else if (arr[0].equals("pokeball") && items.get("poke ball") > 0 && randomNumber >= 0.3) {
             items = playerController.usePokeBall(event.getUser().getId());
-            catchController.catchPokemon(event.getUser().getId(), wildPoke);
-            event.reply(
-                            "Successfully caught "
-                                    + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
-                                    + "!")
-                    .setEphemeral(true)
-                    .queue();
+            Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
+
+            EmbedBuilder info = new EmbedBuilder();
+            info.setTitle(
+                    "Successfully caught "
+                            + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
+                            + "!");
+            info.addField("Gender: ", caughtPoke.getGender(), false);
+            info.addField("CP: ", "" + caughtPoke.getCp(), false);
+            info.addField("HP: ", "" + caughtPoke.getHp(), false);
+            info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
+            info.setColor(0xf45642);
+            event.replyEmbeds(info.build()).queue();
+
         } else {
             if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber < 0.2) {
                 items = playerController.useGreatBall(event.getUser().getId());
