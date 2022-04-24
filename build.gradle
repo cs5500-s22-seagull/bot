@@ -77,6 +77,11 @@ test {
 
     // Create a Jacoco report after each test run
     finalizedBy jacocoTestReport
+
+    jacoco {
+    excludes += ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
+                        '**.listener.**', '**.RepositoryModule', '**.DaggerBotComponent.**']
+  }
 }
 
 // Generate an XML report that the coverage extension can use
@@ -85,23 +90,63 @@ jacocoTestReport {
     reports {
         xml.enabled true
         // Change html.enabled to true if you want html reports
-        html.enabled false
+        html.enabled true
         csv.enabled false
         xml.destination file("${buildDir}/reports/jacoco.xml")
     }
+      afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [
+                        '**/Bot.class',
+                        '**/App.class',
+                        '**/*Module.class',
+                        '**/listener/**',
+                        '**/DaggerBotComponent*',
+                        '**/*_Factory*',
+                        '**/MongoDBRepository.class',
+                        '**/MongoDBService.class',
+                        '**/*Exception.class'
+            ])
+        }))
+    }
 }
 
+
+
 jacocoTestCoverageVerification {
-    violationRules {
+ violationRules {
         rule {
-            enabled = false
             element = 'CLASS'
-            includes = ['org.gradle.*']
+            excludes = [
+                '**.Bot',
+                '**.App',
+                '**.PreferredNameCommand',
+                '**.*Module',
+                '**.listener.**',
+                '**.DaggerBotComponent.**',
+                '**.*_Factory.**',
+                'edu.northeastern.cs5500.starterbot.repository.MongoDBRepository',
+                'edu.northeastern.cs5500.starterbot.service.MongoDBService',
+                '**.*Exception'
+            ]
 
             limit {
                 counter = 'LINE'
-                value = 'TOTALCOUNT'
-                minimum = 0.5
+                minimum = 0.0
+            }
+
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.0
+            }
+        }
+        rule {
+            limit {
+                counter = 'CLASS'
+                excludes = ['**.Bot', '**.App', '**.PreferredNameCommand', '**.CommandModule',
+                        '**.listener.**', '**.RepositoryModule', '**.DaggerBotComponent.**']
+                minimum = 0
             }
         }
     }
