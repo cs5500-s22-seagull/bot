@@ -43,6 +43,6 @@ public class MyPokemonHandler implements SelectionHandler {
         info.setImage(
                 pokemonInfoController.getPictureAddress(pokemonController.getPokemonInfo(id)));
         info.setColor(0xf45642);
-        event.replyEmbeds(info.build()).queue();
+        event.replyEmbeds(info.build()).setEphemeral(true).queue();
     }
 }
