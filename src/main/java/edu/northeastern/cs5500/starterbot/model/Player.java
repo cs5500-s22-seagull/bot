@@ -16,6 +16,7 @@ public class Player implements Model {
     static final Integer DEFAULT_LEVEL = 1;
     static final Integer DEFAULT_XP = 0;
     static final String DEFAULT_DISCORD_NAME = "default name";
+    static final Integer DEFAULT_NODE = 1;
 
     // the discord snowflake id
     ObjectId id;
@@ -39,4 +40,5 @@ public class Player implements Model {
     HashMap<String, Integer> items = new HashMap<>();
     // This is the id of the pokemon that the user has selected.
     ObjectId selectedPokemon;
+    Integer currMapNode = DEFAULT_NODE;
 }
