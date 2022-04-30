@@ -2,11 +2,15 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
-import edu.northeastern.cs5500.starterbot.model.Player;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
@@ -53,19 +57,42 @@ public class ChallengeCommand implements Command {
 
         // TODO: if you have more than 25 friends, menu creation will crash.
         // You probably want to do something different...
-        Collection<Player> friends = playerController.getFriendsForPlayer(event.getUser().getId());
+        List<String> friendIds =
+                playerController.getPlayerFromUserId(event.getUser().getId()).getFriends();
 
-        SelectionMenu menu = createBattleMenu(friends);
-
-        event.deferReply(true).addActionRow(menu).queue();
+        lookupUsersById(event, friendIds);
     }
 
-    SelectionMenu createBattleMenu(Collection<Player> friends) {
+    private void lookupUsersById(CommandInteraction event, List<String> friendIds) {
+        List<CompletableFuture<User>> lookups = new ArrayList<>();
+        JDA jda = event.getJDA();
+        for (String friendId : friendIds) {
+            lookups.add(jda.retrieveUserById(friendId).submit());
+        }
+
+        CompletableFuture<?>[] lookupArray = new CompletableFuture<?>[lookups.size()];
+        lookups.toArray(lookupArray);
+
+        CompletableFuture.allOf(lookupArray)
+                .thenApply(
+                        ignored -> {
+                            List<User> users =
+                                    lookups.stream()
+                                            .map(future -> future.join())
+                                            .collect(Collectors.toList());
+                            SelectionMenu menu = createBattleMenu(users);
+                            event.deferReply(true).addActionRow(menu).queue();
+                            return null;
+                        });
+    }
+
+    SelectionMenu createBattleMenu(List<User> friends) {
         SelectionMenu.Builder menu =
                 SelectionMenu.create("menu:challenge")
                         .setPlaceholder("Choose a friend to challenge");
-        for (Player p : friends) {
-            menu.addOption(p.getName() + " (" + p.getDiscordName() + ")", p.getDiscordMemberId());
+
+        for (User user : friends) {
+            menu.addOption(user.getName(), user.getId());
         }
         return menu.build();
     }

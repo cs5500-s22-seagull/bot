@@ -33,19 +33,15 @@ public class ChallengeFriendSelectionHandler implements SelectionHandler {
         Combat combat =
                 combatController.getCombatByUserIds(event.getUser().getId(), friendDiscordId);
         log.info("msg " + friendDiscordId);
-        event.reply("I challenge " + playerController.getDiscordName(friendDiscordId))
-                .setEphemeral(true)
-                .queue();
+        event.reply("You have challenged your friend!").setEphemeral(true).queue();
         event.getChannel()
                 .sendMessage(
                         event.getUser().getName()
                                 + " has challenged "
-                                + playerController.getDiscordName(friendDiscordId)
-                                + " and it is "
                                 + "<@"
                                 + friendDiscordId
                                 + ">"
-                                + " 's turn")
+                                + " to a duel!")
                 .queue();
     }
 }

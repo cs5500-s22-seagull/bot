@@ -12,33 +12,23 @@ import org.bson.types.ObjectId;
 @Data
 @NoArgsConstructor
 public class Player implements Model {
-    static final String DEFAULT_NAME = "trainer";
-    static final Integer DEFAULT_LEVEL = 1;
-    static final Integer DEFAULT_XP = 0;
-    static final String DEFAULT_DISCORD_NAME = "default name";
-    static final Integer DEFAULT_NODE = 1;
-
-    // the discord snowflake id
+    // the unique key for the database
     ObjectId id;
-    // the name user set for themselves
-    String name = DEFAULT_NAME;
-    // This is setting the default value of the discordName to "discordName".
-    String discordName = DEFAULT_DISCORD_NAME;
-    // the user's discord member id
-    String discordMemberId;
+    // the user's discord member id; this is the snowflake id of the user
+    String discordUserId;
     // the user's level
-    Integer level = DEFAULT_LEVEL;
+    Integer level = 1;
     // the total XP the user has earned.
-    Integer totalXP = DEFAULT_XP;
+    Integer totalXP = 0;
     // the first time user started playing the game
     Date date;
     // a list of `ObjectId`s that are the ids of the pokemon that the user has.
     List<ObjectId> pokemonList = new ArrayList<>();
-    // This is a list of ObjectIds that are the ids of the friends that the user has.
-    List<ObjectId> friends = new ArrayList<>();
+    // This is a list of discordUserId that are the ids of the friends that the user has.
+    List<String> friends = new ArrayList<>();
     // This is a hashmap that is storing the items that the user has.
     HashMap<String, Integer> items = new HashMap<>();
     // This is the id of the pokemon that the user has selected.
     ObjectId selectedPokemon;
-    Integer currMapNode = DEFAULT_NODE;
+    Integer location = PokeMap.STARTING_LOCATION;
 }
