@@ -4,59 +4,49 @@ package edu.northeastern.cs5500.starterbot.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import javax.inject.Inject;
 import javax.inject.Singleton;
-import lombok.Data;
-import org.bson.types.ObjectId;
 
-@Data
-// @NoArgsConstructor
 @Singleton
-public class PokeMap implements Model {
-    private ObjectId id;
-    private HashMap<MapNode, ArrayList<MapNode>> adjNodes = new HashMap<>();
+public class PokeMap {
+    public static final Integer STARTING_LOCATION = 1;
+    private HashMap<MapNode, ArrayList<MapNode>> adjacentNodes;
 
+    public List<MapNode> getAdjacentNodes(MapNode node) {
+        return adjacentNodes.get(node);
+    }
+
+    @Inject
     public PokeMap() {
         HashMap<MapNode, ArrayList<MapNode>> pokeMap = new HashMap<>();
         ArrayList<MapNode> tsukushiVal =
-                new ArrayList<>(
-                        Arrays.asList(MapNode.buzenNode, MapNode.hizenNode, MapNode.higoNode));
+                new ArrayList<>(Arrays.asList(MapNode.BUZEN, MapNode.HIZEN, MapNode.HIGO));
         ArrayList<MapNode> buzenVal =
-                new ArrayList<>(Arrays.asList(MapNode.tsukushiNode, MapNode.bungoNode));
+                new ArrayList<>(Arrays.asList(MapNode.TSUKUSHI, MapNode.BUNGO));
         ArrayList<MapNode> hizenVal =
-                new ArrayList<>(Arrays.asList(MapNode.tsukushiNode, MapNode.higoNode));
+                new ArrayList<>(Arrays.asList(MapNode.TSUKUSHI, MapNode.HIGO));
         ArrayList<MapNode> higoVal =
                 new ArrayList<>(
                         Arrays.asList(
-                                MapNode.tsukushiNode,
-                                MapNode.hizenNode,
-                                MapNode.bungoNode,
-                                MapNode.satsumaNode));
+                                MapNode.TSUKUSHI, MapNode.HIZEN, MapNode.BUNGO, MapNode.SATSUMA));
         ArrayList<MapNode> bungoVal =
                 new ArrayList<>(
-                        Arrays.asList(
-                                MapNode.buzenNode,
-                                MapNode.higoNode,
-                                MapNode.hyugaNode,
-                                MapNode.satsumaNode));
+                        Arrays.asList(MapNode.BUZEN, MapNode.HIGO, MapNode.HYUGA, MapNode.SATSUMA));
         ArrayList<MapNode> satsumaVal =
-                new ArrayList<>(
-                        Arrays.asList(MapNode.higoNode, MapNode.bungoNode, MapNode.osumiNode));
+                new ArrayList<>(Arrays.asList(MapNode.HIGO, MapNode.BUNGO, MapNode.OSUMI));
         ArrayList<MapNode> osumiVal =
-                new ArrayList<>(Arrays.asList(MapNode.satsumaNode, MapNode.hyugaNode));
-        ArrayList<MapNode> hyugaVal =
-                new ArrayList<>(Arrays.asList(MapNode.bungoNode, MapNode.osumiNode));
-        pokeMap.put(MapNode.tsukushiNode, tsukushiVal);
-        pokeMap.put(MapNode.buzenNode, buzenVal);
-        pokeMap.put(MapNode.hizenNode, hizenVal);
-        pokeMap.put(MapNode.higoNode, higoVal);
-        pokeMap.put(MapNode.bungoNode, bungoVal);
-        pokeMap.put(MapNode.satsumaNode, satsumaVal);
-        pokeMap.put(MapNode.osumiNode, osumiVal);
-        pokeMap.put(MapNode.hyugaNode, hyugaVal);
+                new ArrayList<>(Arrays.asList(MapNode.SATSUMA, MapNode.HYUGA));
+        ArrayList<MapNode> hyugaVal = new ArrayList<>(Arrays.asList(MapNode.BUNGO, MapNode.OSUMI));
+        pokeMap.put(MapNode.TSUKUSHI, tsukushiVal);
+        pokeMap.put(MapNode.BUZEN, buzenVal);
+        pokeMap.put(MapNode.HIZEN, hizenVal);
+        pokeMap.put(MapNode.HIGO, higoVal);
+        pokeMap.put(MapNode.BUNGO, bungoVal);
+        pokeMap.put(MapNode.SATSUMA, satsumaVal);
+        pokeMap.put(MapNode.OSUMI, osumiVal);
+        pokeMap.put(MapNode.HYUGA, hyugaVal);
 
-        this.adjNodes = pokeMap;
+        this.adjacentNodes = pokeMap;
     }
-
-    // should be load while initializing
-    public static PokeMap pokeMap = new PokeMap();
 }

@@ -30,7 +30,7 @@ public class RegisterCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /register");
         String userId = event.getUser().getId();
-        playerController.setDiscordName(userId, event.getUser().getName());
+        playerController.getPlayerFromUserId(userId);
         event.reply("You have been registered").setEphemeral(true).queue();
     }
 }

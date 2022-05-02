@@ -52,9 +52,9 @@ public class FightCommand implements Command {
             return;
         }
         if (!combat.getDiscordUserA().equals(event.getUser().getId())) {
-            opponent = playerController.getPlayerFromMemberId(combat.getDiscordUserA()).getId();
+            opponent = playerController.getPlayerFromUserId(combat.getDiscordUserA()).getId();
         } else {
-            opponent = playerController.getPlayerFromMemberId(combat.getDiscordUserB()).getId();
+            opponent = playerController.getPlayerFromUserId(combat.getDiscordUserB()).getId();
         }
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
@@ -94,7 +94,7 @@ public class FightCommand implements Command {
                                         playerController.getSeletedPokemonByDiscordId(
                                                 playerController
                                                         .getPlayerByObjectId(opponent)
-                                                        .getDiscordMemberId())),
+                                                        .getDiscordUserId())),
                         false)
                 .setImage(
                         pokemonController.getImage(
@@ -105,7 +105,7 @@ public class FightCommand implements Command {
                                 playerController.getSeletedPokemonByDiscordId(
                                         playerController
                                                 .getPlayerByObjectId(opponent)
-                                                .getDiscordMemberId())));
+                                                .getDiscordUserId())));
 
         Collection<String> abilities = new ArrayList<>();
         abilities.add("smash");

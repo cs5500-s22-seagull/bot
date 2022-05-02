@@ -14,10 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-import lombok.Data;
+import javax.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 
-@Data
+@Singleton
+@Slf4j
 public class PlayerController {
 
     // This is a generic repository. It is a repository that can store any type of
@@ -41,31 +43,6 @@ public class PlayerController {
     PlayerController() {}
 
     /**
-     * It sets the name of a player.
-     *
-     * @param discordMemberId The id of the discord member.
-     * @param name The name of the player
-     */
-    public void setNameForPlayer(String discordMemberId, String name) {
-        Player player = getPlayerFromMemberId(discordMemberId);
-        player.setName(name);
-        playerRepository.update(player);
-    }
-
-    /**
-     * Get all the player names from the database
-     *
-     * @return A collection of strings.
-     */
-    public Collection<String> getAllPlayerNames() {
-        Collection<String> playerNames = new ArrayList<String>();
-        for (Player player : playerRepository.getAll()) {
-            playerNames.add(player.getName());
-        }
-        return playerNames;
-    }
-
-    /**
      * This function returns a collection of all the player's discord member id
      *
      * @return A collection of all the player's discord member id.
@@ -73,41 +50,30 @@ public class PlayerController {
     public Collection<String> getAllPlayerMemberId() {
         Collection<String> playerId = new ArrayList<String>();
         for (Player player : playerRepository.getAll()) {
-            playerId.add(player.getDiscordMemberId());
+            playerId.add(player.getDiscordUserId());
         }
         return playerId;
     }
 
     /**
-     * Given a Discord member ID, return the name of the player that Discord member is playing as
-     *
-     * @param discordMemberId The id of the discord member.
-     * @return The name of the player.
-     */
-    @Nonnull
-    public String getNameForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getName();
-    }
-
-    /**
      * Given a Discord member ID, return the player's level
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return The level of the player.
      */
     @Nonnull
-    public Integer getLevelForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getLevel();
+    public Integer getLevelForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getLevel();
     }
 
     /**
      * This function sets the level of a player
      *
-     * @param discordMemberId The Discord ID of the player.
+     * @param discordUserId The Discord ID of the player.
      * @param level The level you want to set the player to.
      */
-    public void setLevelForPlayer(String discordMemberId, Integer level) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void setLevelForPlayer(String discordUserId, Integer level) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.setLevel(level);
         playerRepository.update(player);
     }
@@ -115,22 +81,22 @@ public class PlayerController {
     /**
      * This function returns the total XP of a player
      *
-     * @param discordMemberId The id of the discord member you want to get the total xp for.
+     * @param discordUserId The id of the discord member you want to get the total xp for.
      * @return The total XP for the player.
      */
     @Nonnull
-    public Integer getTotalXpForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getTotalXP();
+    public Integer getTotalXpForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getTotalXP();
     }
 
     /**
      * This function sets the total XP for a player
      *
-     * @param discordMemberId The discord id of the player
+     * @param discordUserId The discord id of the player
      * @param Xp The amount of XP to add to the player.
      */
-    public void setTotalXpForPlayer(String discordMemberId, Integer Xp) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void setTotalXpForPlayer(String discordUserId, Integer Xp) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.setTotalXP(Xp);
         playerRepository.update(player);
     }
@@ -138,23 +104,23 @@ public class PlayerController {
     /**
      * This function returns a list of all the pokemon that the player has
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return A list of pokemon objects.
      */
     @Nonnull
-    public List<ObjectId> getPokemonListForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getPokemonList();
+    public List<ObjectId> getPokemonListForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getPokemonList();
     }
 
     /**
-     * This function takes in a discordMemberId and a list of pokemonIds and sets the player's
+     * This function takes in a discordUserId and a list of pokemonIds and sets the player's
      * pokemonList to the list of pokemonIds
      *
-     * @param discordMemberId The Discord ID of the player.
+     * @param discordUserId The Discord ID of the player.
      * @param pokemonList The list of Pokemon that the player has.
      */
-    public void setPokemonListPlayer(String discordMemberId, List<ObjectId> pokemonList) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void setPokemonListPlayer(String discordUserId, List<ObjectId> pokemonList) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.setPokemonList(pokemonList);
         playerRepository.update(player);
     }
@@ -162,11 +128,11 @@ public class PlayerController {
     /**
      * add a wew pokemon to the pokemon list
      *
-     * @param discordMemberId The Discord ID of the player.
+     * @param discordUserId The Discord ID of the player.
      * @param pokemon The pokemon need to add
      */
-    public void addNewPokemonInList(String discordMemberId, Pokemon pokemon) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void addNewPokemonInList(String discordUserId, Pokemon pokemon) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.getPokemonList().add(pokemon.getId());
         playerRepository.update(player);
     }
@@ -174,56 +140,56 @@ public class PlayerController {
     /**
      * Returns the date that the player started playing the game
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return The date that the player started playing.
      */
     @Nonnull
-    public Date getStartDateForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getDate();
+    public Date getStartDateForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getDate();
     }
 
     /**
      * This function returns a list of all of the IDs of a player's friends
      *
-     * @param discordMemberId The id of the discord member you want to get the friends of.
+     * @param discordUserId The id of the discord member you want to get the friends of.
      * @return A list of ObjectIds.
      */
     @Nonnull
-    public List<ObjectId> getFriendIdsForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getFriends();
+    public List<String> getFriendIdsForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getFriends();
     }
 
     /**
      * Return all of the {@link Player}s a user is friends with.
      *
-     * @param discordMemberId
+     * @param discordUserId
      * @return
      */
     @Nonnull
-    public List<Player> getFriendsForPlayer(String discordMemberId) {
-        return getFriendIdsForPlayer(discordMemberId).stream()
-                .map(this::getPlayerByObjectId)
+    public List<Player> getFriendsForPlayer(String discordUserId) {
+        return getFriendIdsForPlayer(discordUserId).stream()
+                .map(this::getPlayerFromUserId)
                 .collect(Collectors.toList());
     }
 
     /**
      * This function returns a list of all the items of a player
      *
-     * @param discordMemberId The id of the discord member you want to get the friends of.
+     * @param discordUserId The id of the discord member you want to get the friends of.
      * @return a HashMap of items
      */
-    public HashMap<String, Integer> getItemsForPlayer(String discordMemberId) {
-        return getPlayerFromMemberId(discordMemberId).getItems();
+    public HashMap<String, Integer> getItemsForPlayer(String discordUserId) {
+        return getPlayerFromUserId(discordUserId).getItems();
     }
 
     /**
      * It sets the updated items for a player.
      *
-     * @param discordMemberId The Discord ID of the player.
+     * @param discordUserId The Discord ID of the player.
      * @param updatedItems a HashMap of items
      */
-    public void setItemsForPlayer(String discordMemberId, HashMap<String, Integer> updatedItems) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void setItemsForPlayer(String discordUserId, HashMap<String, Integer> updatedItems) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.setItems(updatedItems);
         playerRepository.update(player);
     }
@@ -231,11 +197,11 @@ public class PlayerController {
     /**
      * It sets the friends for a player.
      *
-     * @param discordMemberId The Discord ID of the player.
+     * @param discordUserId The Discord ID of the player.
      * @param friends A list of ObjectIds of players that are friends with the player.
      */
-    public void setFriendsForPlayer(String discordMemberId, List<ObjectId> friends) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public void setFriendsForPlayer(String discordUserId, List<String> friends) {
+        Player player = getPlayerFromUserId(discordUserId);
         player.setFriends(friends);
         playerRepository.update(player);
     }
@@ -243,66 +209,43 @@ public class PlayerController {
     /**
      * Given a player's discord id and a friend's name, add the friend to the player's friend list
      *
-     * @param discordMemberId The id of the player who is adding a friend.
-     * @param friendName The name of the player you want to add as a friend.
+     * @param discordUserId The id of the player who is adding a friend.
+     * @param friendId The id of the player you want to add as a friend.
+     * @returns false if friendId could not be found
      */
-    public void addFriendForPlayerByName(String discordMemberId, String friendName) {
-        Player player = getPlayerFromMemberId(discordMemberId);
+    public boolean addFriendForPlayerByName(String discordUserId, String friendId) {
+        Player player = getPlayerFromUserId(discordUserId);
         for (Player findPlayer : playerRepository.getAll()) {
-            if (findPlayer.getName().equals(friendName)) {
-                player.getFriends().add(findPlayer.getId());
+            if (findPlayer.getDiscordUserId().equals(friendId)) {
+                player.getFriends().add(findPlayer.getDiscordUserId());
                 playerRepository.update(player);
+                return true;
             }
         }
-    }
-
-    /**
-     * Given a Discord member ID, return the player's Discord name
-     *
-     * @param discordMemberId The discord id of the player
-     * @return The name of the player.
-     */
-    public String getDiscordName(String discordMemberId) {
-        Player player = getPlayerFromMemberId(discordMemberId);
-        return player.getDiscordName();
-    }
-
-    /**
-     * This function sets the discord name of a player, and add poke balls if it is a new user
-     *
-     * @param discordMemberId The id of the discord member.
-     * @param name The name of the player
-     */
-    public void setDiscordName(String discordMemberId, String name) {
-        Player player = getPlayerFromMemberId(discordMemberId);
-        player.setDiscordName(name);
-        if (!player.getItems().containsKey("poke ball")) {
-            player.getItems().put("poke ball", 50);
-        }
-        if (!player.getItems().containsKey("great ball")) {
-            player.getItems().put("great ball", 10);
-        }
-        playerRepository.update(player);
+        log.info("Could not find a friend matching id {}", friendId);
+        return false;
     }
 
     /**
      * Given a Discord member ID, return the corresponding Player object
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return A Player object.
      */
     @Nonnull
-    public Player getPlayerFromMemberId(String discordMemberId) {
+    public Player getPlayerFromUserId(String discordUserId) {
         Collection<Player> players = playerRepository.getAll();
         for (Player player : players) {
-            if (player.getDiscordMemberId().equals(discordMemberId)) {
+            if (player.getDiscordUserId().equals(discordUserId)) {
                 return player;
             }
         }
 
         Player player = new Player();
-        player.setDiscordMemberId(discordMemberId);
+        player.setDiscordUserId(discordUserId);
         player.setDate(new Date(System.currentTimeMillis()));
+        player.getItems().put("poke ball", 50);
+        player.getItems().put("great ball", 10);
         playerRepository.add(player);
         return player;
     }
@@ -310,26 +253,26 @@ public class PlayerController {
     /**
      * Use one poke ball and returns a list of all the items of a player
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return a HashMap of items
      */
-    public HashMap<String, Integer> usePokeBall(String discordMemberId) {
-        HashMap<String, Integer> items = getItemsForPlayer(discordMemberId);
+    public HashMap<String, Integer> usePokeBall(String discordUserId) {
+        HashMap<String, Integer> items = getItemsForPlayer(discordUserId);
         items.put("poke ball", items.get("poke ball") - 1);
-        setItemsForPlayer(discordMemberId, items);
+        setItemsForPlayer(discordUserId, items);
         return items;
     }
 
     /**
      * Use one great ball and returns a list of all the items of a player
      *
-     * @param discordMemberId The id of the discord member.
+     * @param discordUserId The id of the discord member.
      * @return a HashMap of items
      */
-    public HashMap<String, Integer> useGreatBall(String discordMemberId) {
-        HashMap<String, Integer> items = getItemsForPlayer(discordMemberId);
+    public HashMap<String, Integer> useGreatBall(String discordUserId) {
+        HashMap<String, Integer> items = getItemsForPlayer(discordUserId);
         items.put("great ball", items.get("great ball") - 1);
-        setItemsForPlayer(discordMemberId, items);
+        setItemsForPlayer(discordUserId, items);
         return items;
     }
 
@@ -350,18 +293,24 @@ public class PlayerController {
      * @return The selected pokemon's ObjectId
      */
     public ObjectId getSeletedPokemonByDiscordId(String discordId) {
-        return getPlayerFromMemberId(discordId).getSelectedPokemon();
+        return getPlayerFromUserId(discordId).getSelectedPokemon();
     }
 
     /**
      * Set the selected pokemon for the player with the given id to the pokemon with the given id.
      *
      * @param pokemonId The id of the pokemon that the player wants to select
-     * @param id The id of the player
+     * @param discordId The id of the player
      */
-    public void setSelectedPokemonForPlayer(ObjectId pokemonId, String id) {
-        Player player = getPlayerFromMemberId(id);
+    public void setSelectedPokemonForPlayer(ObjectId pokemonId, String discordId) {
+        Player player = getPlayerFromUserId(discordId);
         player.setSelectedPokemon(pokemonId);
+        playerRepository.update(player);
+    }
+
+    public void moveToNode(String discordId, Integer newLocation) {
+        Player player = getPlayerFromUserId(discordId);
+        player.setLocation(newLocation);
         playerRepository.update(player);
     }
 }

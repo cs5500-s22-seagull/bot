@@ -15,12 +15,6 @@ public class CommandModule {
 
     @Provides
     @IntoSet
-    public Command provideSetNameCommand(SetNameCommand setNameCommand) {
-        return setNameCommand;
-    }
-
-    @Provides
-    @IntoSet
     public Command provideAddFriendCommand(AddFriendCommand addFriendCommand) {
         return addFriendCommand;
     }
@@ -65,5 +59,11 @@ public class CommandModule {
     @IntoSet
     public Command provideMyPokemonCommand(MyPokemonCommand myPokemonCommand) {
         return myPokemonCommand;
+    }
+
+    @Provides
+    @IntoSet
+    public Command provideMoveCommand(MovePositionCommand moveCommand) {
+        return moveCommand;
     }
 }

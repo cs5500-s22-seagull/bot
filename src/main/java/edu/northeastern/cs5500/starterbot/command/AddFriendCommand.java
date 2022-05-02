@@ -1,10 +1,16 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
@@ -26,7 +32,7 @@ public class AddFriendCommand implements Command {
 
     @Override
     public CommandData getCommandData() {
-        return new CommandData(getName(), "Ask the bot to show the friends UI");
+        return new CommandData(getName(), "Look for new friends to add");
     }
 
     @Override
@@ -34,18 +40,42 @@ public class AddFriendCommand implements Command {
         log.info("event: /addfriend");
 
         Collection<String> friendsId = playerController.getAllPlayerMemberId();
-        Builder menu = SelectionMenu.create("menu:friends").setPlaceholder("Choose a player");
-        for (String string : friendsId) {
-            if (string.equals(event.getUser().getId())) {
+        Builder menuBuilder =
+                SelectionMenu.create("menu:friends").setPlaceholder("Choose a player");
+        ArrayList<CompletableFuture<User>> lookups = new ArrayList<>();
+        String currentUserId = event.getUser().getId();
+        List<String> currentFriends = playerController.getFriendIdsForPlayer(currentUserId);
+        JDA jda = event.getJDA();
+        for (String friendId : friendsId) {
+            if (currentUserId.equals(friendId)) {
                 continue;
             }
-            menu.addOption(
-                    playerController.getNameForPlayer(string)
-                            + " ("
-                            + playerController.getDiscordName(string)
-                            + ")",
-                    string);
+            if (currentFriends.contains(friendId)) {
+                continue;
+            }
+            if (lookups.size() >= 25) {
+                // Can only show up to 25 options in a menu
+                break;
+            }
+            lookups.add(jda.retrieveUserById(friendId).submit());
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+
+        CompletableFuture<?>[] lookupArray = new CompletableFuture<?>[lookups.size()];
+        lookups.toArray(lookupArray);
+
+        CompletableFuture.allOf(lookupArray)
+                .thenApply(
+                        ignored -> {
+                            List<User> users =
+                                    lookups.stream()
+                                            .map(future -> future.join())
+                                            .collect(Collectors.toList());
+
+                            for (User user : users) {
+                                menuBuilder.addOption(user.getName(), user.getId());
+                            }
+                            event.deferReply(true).addActionRow(menuBuilder.build()).queue();
+                            return null;
+                        });
     }
 }

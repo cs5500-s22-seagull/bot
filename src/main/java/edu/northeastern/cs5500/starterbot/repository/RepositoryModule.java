@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import edu.northeastern.cs5500.starterbot.model.Combat;
 import edu.northeastern.cs5500.starterbot.model.Player;
+import edu.northeastern.cs5500.starterbot.model.PokeMap;
 import edu.northeastern.cs5500.starterbot.model.Pokedex;
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
@@ -62,5 +63,10 @@ public class RepositoryModule {
     @Provides
     public Class<Combat> provideCombat() {
         return Combat.class;
+    }
+
+    @Provides
+    public Class<PokeMap> providePokeMap() {
+        return PokeMap.class;
     }
 }
