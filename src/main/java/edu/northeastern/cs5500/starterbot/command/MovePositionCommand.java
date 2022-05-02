@@ -47,6 +47,7 @@ public class MovePositionCommand implements Command {
         // get all neighbor name for options
         for (MapNode neighbor : neighbors) {
             neighborName.add(neighbor.getName());
+            log.info("neighbor:" + neighbor.getName());
         }
 
         // show location name and picture

@@ -1,20 +1,14 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import edu.northeastern.cs5500.starterbot.model.Player;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
-import org.junit.jupiter.api.Test;
-
 class ChallengeCommandTest {
-    @Test
-    void testNameMatchesData() {
-        ChallengeCommand challengeCommand = new ChallengeCommand();
-        String name = challengeCommand.getName();
-        CommandData commandData = challengeCommand.getCommandData();
+    // @Test
+    // void testNameMatchesData() {
+    //     ChallengeCommand challengeCommand = new ChallengeCommand();
+    //     String name = challengeCommand.getName();
+    //     CommandData commandData = challengeCommand.getCommandData();
 
-        assertThat(name).isEqualTo(commandData.getName());
-    }
+    //     assertThat(name).isEqualTo(commandData.getName());
+    // }
 
     // @Test
     // void testNoFriendsSelectionMenuCreation() {
@@ -28,12 +22,12 @@ class ChallengeCommandTest {
     //     // TODO: does this make sense?
     // }
 
-    Player buildPlayer(String discordUserId) {
-        Player player = new Player();
-        player.setDiscordUserId(discordUserId);
+    // Player buildPlayer(String discordUserId) {
+    //     Player player = new Player();
+    //     player.setDiscordUserId(discordUserId);
 
-        return player;
-    }
+    //     return player;
+    // }
 
     // @Test
     // void testSomeFriendsSelectionMenuCreation() {

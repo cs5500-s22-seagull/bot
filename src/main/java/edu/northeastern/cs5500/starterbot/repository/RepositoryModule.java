@@ -64,13 +64,6 @@ public class RepositoryModule {
     public Class<Combat> provideCombat() {
         return Combat.class;
     }
-    /*
-    @Provides
-    public GenericRepository<PokeMap> providePokeMapRepository(MongoDBRepository<PokeMap> repository) {
-        return repository;
-    }
-
-    */
 
     @Provides
     public Class<PokeMap> providePokeMap() {
