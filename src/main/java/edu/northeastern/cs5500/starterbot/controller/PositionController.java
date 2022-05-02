@@ -3,7 +3,6 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.model.MapNode;
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.model.PokeMap;
-import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.util.List;
 import javax.inject.Inject;
 import lombok.Data;
@@ -12,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @Slf4j
 public class PositionController {
-    @Inject GenericRepository<PokeMap> positionRepository;
+    // @Inject GenericRepository<PokeMap> positionRepository;
     @Inject PlayerController playerController;
     @Inject PokeMap pokeMap;
 

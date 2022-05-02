@@ -25,6 +25,7 @@ public class NextNodeHandler implements SelectionHandler {
 
     @Override
     public void onEvent(SelectionMenuEvent event) {
+        log.info("curr loc:" + event.getSelectedOptions().get(0).getValue());
         Integer chosenLocation = Integer.valueOf(event.getSelectedOptions().get(0).getValue());
         MapNode chosenNode = MapNode.getNodeById(chosenLocation);
         log.info("chosen neighbor:" + chosenNode.getName());

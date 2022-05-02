@@ -60,4 +60,10 @@ public class CommandModule {
     public Command provideMyPokemonCommand(MyPokemonCommand myPokemonCommand) {
         return myPokemonCommand;
     }
+
+    @Provides
+    @IntoSet
+    public Command provideMoveCommand(MovePositionCommand moveCommand) {
+        return moveCommand;
+    }
 }

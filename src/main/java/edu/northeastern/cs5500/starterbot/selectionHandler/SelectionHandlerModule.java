@@ -42,4 +42,10 @@ public class SelectionHandlerModule {
     public SelectionHandler provideMyPokemonHandler(MyPokemonHandler handler) {
         return handler;
     }
+
+    @Provides
+    @IntoSet
+    public SelectionHandler provideNextNodeHandler(NextNodeHandler handler) {
+        return handler;
+    }
 }
