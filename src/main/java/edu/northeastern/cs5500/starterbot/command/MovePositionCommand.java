@@ -62,6 +62,6 @@ public class MovePositionCommand implements Command {
         for (MapNode neighbor : neighbors) {
             menu.addOption(neighbor.getName(), String.valueOf(neighbor.getLocation()));
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        event.deferReply(true).addActionRow(menu.build()).addEmbeds(info.build()).queue();
     }
 }
