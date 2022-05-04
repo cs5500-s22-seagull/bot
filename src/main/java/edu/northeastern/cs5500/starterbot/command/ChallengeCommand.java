@@ -55,8 +55,6 @@ public class ChallengeCommand implements Command {
     public void onEvent(CommandInteraction event) {
         log.info("event: /challenge");
 
-        // TODO: if you have more than 25 friends, menu creation will crash.
-        // You probably want to do something different...
         List<String> friendIds =
                 playerController.getPlayerFromUserId(event.getUser().getId()).getFriends();
 
@@ -93,6 +91,9 @@ public class ChallengeCommand implements Command {
 
         for (User user : friends) {
             menu.addOption(user.getName(), user.getId());
+            if (menu.getOptions().size() >= 25) {
+                break;
+            }
         }
         return menu.build();
     }

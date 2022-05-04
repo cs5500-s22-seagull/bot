@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.inject.Inject;
-import lombok.Data;
+import javax.inject.Singleton;
 import org.bson.types.ObjectId;
 
-@Data
+@Singleton
 public class PokedexController {
 
     @Inject

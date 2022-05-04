@@ -5,10 +5,10 @@ import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.model.PokeMap;
 import java.util.List;
 import javax.inject.Inject;
-import lombok.Data;
+import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
-@Data
+@Singleton
 @Slf4j
 public class PositionController {
     // @Inject GenericRepository<PokeMap> positionRepository;

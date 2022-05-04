@@ -38,6 +38,9 @@ public class SeeWildPokemonsCommand implements Command {
                 SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a wild pokemon");
         for (String string : wildPoke) {
             menu.addOption(string, string);
+            if (menu.getOptions().size() >= 25) {
+                break;
+            }
         }
         event.deferReply(true).addActionRow(menu.build()).queue();
     }

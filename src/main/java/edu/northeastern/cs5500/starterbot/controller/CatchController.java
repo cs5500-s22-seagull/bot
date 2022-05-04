@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import javax.inject.Inject;
-import lombok.Data;
+import javax.inject.Singleton;
 
-@Data
+@Singleton
 public class CatchController {
 
     @Inject

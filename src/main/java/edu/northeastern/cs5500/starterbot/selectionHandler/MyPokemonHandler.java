@@ -34,15 +34,16 @@ public class MyPokemonHandler implements SelectionHandler {
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle("" + pokemonController.getName(id));
         info.addField("Gender: ", pokemonController.getGender(id), false);
-        info.addField("Level: ", pokemonController.getLevel(id) + "", false);
-        info.addField("CP: ", "" + pokemonController.getCp(id), false);
+        info.addField("Level: ", String.valueOf(pokemonController.getLevel(id)), false);
+        info.addField("CP: ", String.valueOf(pokemonController.getCp(id)), false);
         info.addField(
                 "HP: ",
-                "" + pokemonController.getCurrentHp(id) + "/" + pokemonController.getHp(id),
+                String.format(
+                        "%s / %s", pokemonController.getCurrentHp(id), pokemonController.getHp(id)),
                 false);
         info.setImage(
                 pokemonInfoController.getPictureAddress(pokemonController.getPokemonInfo(id)));
         info.setColor(0xf45642);
-        event.replyEmbeds(info.build()).setEphemeral(true).queue();
+        event.replyEmbeds(info.build()).queue();
     }
 }

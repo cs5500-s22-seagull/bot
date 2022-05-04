@@ -32,7 +32,10 @@ public class SelectPokemonSelectionHandler implements SelectionHandler {
         String hexPokemon = event.getSelectedOptions().get(0).getValue();
         ObjectId id = new ObjectId(hexPokemon);
         playerController.setSelectedPokemonForPlayer(id, event.getUser().getId());
-        event.reply("Succesfully set " + pokemonController.getName(id) + " as the active pokemon")
+        event.reply(
+                        String.format(
+                                "Succesfully set %s as the active pokemon",
+                                pokemonController.getName(id)))
                 .queue();
     }
 }
