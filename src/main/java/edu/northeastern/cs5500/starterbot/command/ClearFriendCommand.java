@@ -30,7 +30,11 @@ public class ClearFriendCommand implements Command {
     @Override
     public void onEvent(CommandInteraction event) {
         log.info("event: /clearfriend");
-        playerController.setFriendsForPlayer(event.getUser().getId(), new ArrayList<>());
+        clearFriend(event.getUser().getId());
         event.reply("Your friends list has been cleared").setEphemeral(true).queue();
+    }
+
+    public void clearFriend(String userId) {
+        playerController.setFriendsForPlayer(userId, new ArrayList<>());
     }
 }
