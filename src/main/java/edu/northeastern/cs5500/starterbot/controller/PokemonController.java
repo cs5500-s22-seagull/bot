@@ -15,6 +15,8 @@ public class PokemonController {
     @Inject
     PokemonController() {}
 
+    @Inject PokemonInfoController pokemonInfoController;
+
     @Inject GenericRepository<Pokemon> pokemonRepository;
     @Inject GenericRepository<PokemonInfo> pokemonInfoRepository;
 
@@ -34,8 +36,7 @@ public class PokemonController {
 
     public ObjectId getPokemonInfo(ObjectId id) {
         Pokemon pokemon = pokemonRepository.get(id);
-        PokemonInfo pokemonInfo = pokemonInfoRepository.get(pokemon.getPokemonInfo());
-        return pokemonInfo.getId();
+        return pokemon.getPokemonInfo();
     }
 
     public int getLevel(ObjectId id) {
@@ -45,16 +46,14 @@ public class PokemonController {
 
     public void powerUp(ObjectId id) {
         Pokemon pokemon = pokemonRepository.get(id);
-        pokemon.setCp(pokemon.getCp() + 1);
-    }
-
-    public void evolve(ObjectId id) {
-        Pokemon pokemon = pokemonRepository.get(id);
         pokemon.setLevel(pokemon.getLevel() + 1);
+        pokemonRepository.update(pokemon);
     }
 
     public String getName(ObjectId id) {
-        return pokemonInfoRepository.get(getPokemonInfo(id)).getPokemonName();
+        return pokemonInfoController.getName(getPokemonInfo(id));
+
+        // return pokemonInfoRepository.get(getPokemonInfo(id)).getPokemonName();
     }
 
     public int getHp(ObjectId id) {
