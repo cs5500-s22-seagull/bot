@@ -47,6 +47,9 @@ public class SelectPokemonCommand implements Command {
             menu.addOption(
                     pokemonController.getName(id) + " cp:" + pokemonController.getCp(id),
                     id.toHexString());
+            if (menu.getOptions().size() >= 25) {
+                break;
+            }
         }
         event.deferReply(true).addActionRow(menu.build()).queue();
     }
