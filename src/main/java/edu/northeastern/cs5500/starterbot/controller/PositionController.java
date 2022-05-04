@@ -6,7 +6,6 @@ import edu.northeastern.cs5500.starterbot.model.PokeMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Singleton
