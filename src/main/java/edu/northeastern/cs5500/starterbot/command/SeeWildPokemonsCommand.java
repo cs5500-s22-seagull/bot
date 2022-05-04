@@ -34,6 +34,11 @@ public class SeeWildPokemonsCommand implements Command {
         log.info("event: /seewild");
         ArrayList<String> wildPoke = catchController.seeWildPokemons();
 
+        Builder menu = createMenuBuilder(wildPoke);
+        event.deferReply(true).addActionRow(menu.build()).queue();
+    }
+
+    public Builder createMenuBuilder(ArrayList<String> wildPoke) {
         Builder menu =
                 SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a wild pokemon");
         for (String string : wildPoke) {
@@ -42,6 +47,6 @@ public class SeeWildPokemonsCommand implements Command {
                 break;
             }
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        return menu;
     }
 }
