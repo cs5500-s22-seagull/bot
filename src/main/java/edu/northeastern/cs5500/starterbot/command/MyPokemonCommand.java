@@ -37,6 +37,11 @@ public class MyPokemonCommand implements Command {
         List<ObjectId> pokemonList =
                 playerController.getPokemonListForPlayer(event.getUser().getId());
 
+        Builder menu = createMenuBuilder(pokemonList);
+        event.deferReply(true).addActionRow(menu.build()).queue();
+    }
+
+    public Builder createMenuBuilder(List<ObjectId> pokemonList) {
         Builder menu =
                 SelectionMenu.create("menu:mypoke").setPlaceholder("Select a pokemon for details");
         for (ObjectId id : pokemonList) {
@@ -46,6 +51,6 @@ public class MyPokemonCommand implements Command {
                             pokemonController.getName(id), pokemonController.getCp(id)),
                     id.toHexString());
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        return menu;
     }
 }
