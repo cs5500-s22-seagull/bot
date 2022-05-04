@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import lombok.Data;
 import org.bson.types.ObjectId;
 
 @Singleton
