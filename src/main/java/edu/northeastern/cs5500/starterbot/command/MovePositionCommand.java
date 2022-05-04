@@ -51,12 +51,14 @@ public class MovePositionCommand implements Command {
         }
 
         // show location name and picture
-        EmbedBuilder info = new EmbedBuilder();
-        info.setTitle("Location Infomation");
-        info.addField("Current Location: ", locName, false);
-        info.setImage(locPic);
-        info.setColor(0xf45642);
+        EmbedBuilder info = createEmbedBuilder(locName, locPic);
 
+        Builder menu = createMenuBuilder(neighbors);
+
+        event.deferReply(true).addActionRow(menu.build()).addEmbeds(info.build()).queue();
+    }
+
+    public Builder createMenuBuilder(List<MapNode> neighbors) {
         Builder menu =
                 SelectionMenu.create("menu:nextnode").setPlaceholder("Choose your next node");
         for (MapNode neighbor : neighbors) {
@@ -65,6 +67,15 @@ public class MovePositionCommand implements Command {
                 break;
             }
         }
-        event.deferReply(true).addActionRow(menu.build()).addEmbeds(info.build()).queue();
+        return menu;
+    }
+
+    public EmbedBuilder createEmbedBuilder(String locName, String locPic) {
+        EmbedBuilder info = new EmbedBuilder();
+        info.setTitle("Location Infomation");
+        info.addField("Current Location: ", locName, false);
+        info.setImage(locPic);
+        info.setColor(0xf45642);
+        return info;
     }
 }
