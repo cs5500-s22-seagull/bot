@@ -1,6 +1,7 @@
 /** This class is used to provide command that sets the name of the user */
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class ChallengeCommand implements Command {
      * @param event The CommandInteraction object that was passed to the command.
      */
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /challenge");
 
@@ -61,6 +63,7 @@ public class ChallengeCommand implements Command {
         lookupUsersById(event, friendIds);
     }
 
+    @ExcludeFromJacocoGeneratedReport
     private void lookupUsersById(CommandInteraction event, List<String> friendIds) {
         List<CompletableFuture<User>> lookups = new ArrayList<>();
         JDA jda = event.getJDA();
@@ -84,6 +87,7 @@ public class ChallengeCommand implements Command {
                         });
     }
 
+    @ExcludeFromJacocoGeneratedReport
     SelectionMenu createBattleMenu(List<User> friends) {
         SelectionMenu.Builder menu =
                 SelectionMenu.create("menu:challenge")
