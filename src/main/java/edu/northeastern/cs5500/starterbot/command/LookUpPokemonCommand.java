@@ -46,27 +46,31 @@ public class LookUpPokemonCommand implements Command {
                 pokedexController.getGeneralInfo(
                         event.getOption("pokemonname").getAsString().strip());
         if (res != null) {
-            String pokemonName = res.get(0);
-            String pokemonNumber = res.get(1);
-            String introduction = res.get(2);
-            String pictureAddress = res.get(3);
-
-            EmbedBuilder info = new EmbedBuilder();
-            info.setTitle("Pokemon information");
-            info.addField("Pokemon name: ", pokemonName, false);
-            info.addField("Pokemon number: ", "#" + pokemonNumber, false);
-            info.addField("Introduction: ", introduction, false);
-            info.setImage(pictureAddress);
-            info.setColor(0xf45642);
-
+            EmbedBuilder info = createEmbedBuilder(res);
             event.replyEmbeds(info.build()).queue();
             info.clear();
         } else {
             event.reply(
-                            ":warning: "
-                                    + event.getOption("pokemonname").getAsString().strip()
-                                    + " not embodied! :warning: Try other Pokemon name!")
+                            String.format(
+                                    ":warning: %s not embodied! :warning: Try other Pokemon name!",
+                                    event.getOption("pokemonname").getAsString().strip()))
                     .queue();
         }
+    }
+
+    public EmbedBuilder createEmbedBuilder(ArrayList<String> res) {
+        String pokemonName = res.get(0);
+        String pokemonNumber = res.get(1);
+        String introduction = res.get(2);
+        String pictureAddress = res.get(3);
+
+        EmbedBuilder info = new EmbedBuilder();
+        info.setTitle("Pokemon information");
+        info.addField("Pokemon name: ", pokemonName, false);
+        info.addField("Pokemon number: ", "#" + pokemonNumber, false);
+        info.addField("Introduction: ", introduction, false);
+        info.setImage(pictureAddress);
+        info.setColor(0xf45642);
+        return info;
     }
 }
