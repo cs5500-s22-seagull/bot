@@ -46,7 +46,6 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                 event.getUser().getId().equals(combat.getDiscordUserA())
                         ? combat.getDiscordUserB()
                         : combat.getDiscordUserA();
-        combat.setTurn(opponent);
         Random random = new Random();
         double roll = random.nextDouble();
         ObjectId pokemonId = playerController.getSeletedPokemonByDiscordId(opponent);
@@ -61,10 +60,9 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                 combatController.resolveCombat(combat.getId());
                 event.getChannel()
                         .sendMessage(
-                                event.getUser().getAsMention()
-                                        + " has defeated <@"
-                                        + opponent
-                                        + ">")
+                                String.format(
+                                        "%s has defeated <@%s@>",
+                                        event.getUser().getAsMention(), opponent))
                         .queue();
                 event.reply("The fight has concluded");
                 return;
@@ -72,26 +70,25 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                 pokemonController.setCurrentHp(pokemonId, currentHp);
                 event.getChannel()
                         .sendMessage(
-                                event.getUser().getAsMention()
-                                        + " dealt "
-                                        + dmg
-                                        + " damage to <@"
-                                        + opponent
-                                        + ">"
-                                        + " using ability "
-                                        + event.getSelectedOptions().get(0).getLabel())
+                                String.format(
+                                        "%s dealt %s damage to <@%s@> using ability %s",
+                                        event.getUser().getAsMention(),
+                                        dmg,
+                                        opponent,
+                                        event.getSelectedOptions().get(0).getLabel()))
                         .queue();
             }
         } else {
             event.getChannel()
                     .sendMessage(
-                            event.getUser().getAsMention()
-                                    + " missed with ability "
-                                    + event.getSelectedOptions().get(0).getLabel())
+                            String.format(
+                                    "%s missed with ability %s",
+                                    event.getUser().getAsMention(),
+                                    event.getSelectedOptions().get(0).getLabel()))
                     .queue();
         }
         combatController.setTurn(opponent);
-        event.getChannel().sendMessage("It is " + "<@" + opponent + ">" + " 's turn").queue();
+        event.getChannel().sendMessage(String.format("It is <@%s@>'s turn", opponent)).queue();
         event.reply("waiting opponent's turn").setEphemeral(true).queue();
     }
 }
