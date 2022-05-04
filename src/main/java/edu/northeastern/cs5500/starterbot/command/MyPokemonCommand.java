@@ -41,7 +41,9 @@ public class MyPokemonCommand implements Command {
                 SelectionMenu.create("menu:mypoke").setPlaceholder("Select a pokemon for details");
         for (ObjectId id : pokemonList) {
             menu.addOption(
-                    pokemonController.getName(id) + " cp:" + pokemonController.getCp(id),
+                    String.format(
+                            "%s cp: %s",
+                            pokemonController.getName(id), pokemonController.getCp(id)),
                     id.toHexString());
         }
         event.deferReply(true).addActionRow(menu.build()).queue();
