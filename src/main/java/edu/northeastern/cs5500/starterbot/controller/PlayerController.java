@@ -22,23 +22,9 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class PlayerController {
 
-    // This is a generic repository. It is a repository that can store any type of
-    // object. In
-    // this case,
-    // storing Player objects.
     @Inject GenericRepository<Player> playerRepository;
     @Inject PokemonController pokemonController;
 
-    // This is a constructor injection. The `@Inject` annotation tells Dagger to
-    // inject the
-    // `PlayerController`
-    // object into the `PlayerController` class. The `PlayerController` class is a
-    // Dagger
-    // controller, which
-    // means that
-    // Dagger will automatically call the `PlayerController` constructor when the
-    // Dagger application
-    // starts.
     @Inject
     PlayerController() {}
 
