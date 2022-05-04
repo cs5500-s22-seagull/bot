@@ -3,12 +3,13 @@ package edu.northeastern.cs5500.starterbot.controller;
 import edu.northeastern.cs5500.starterbot.model.Combat;
 import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import javax.inject.Inject;
-import lombok.Data;
+import javax.inject.Singleton;
+
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 
 @Slf4j
-@Data
+@Singleton
 public class CombatController {
 
     @Inject
