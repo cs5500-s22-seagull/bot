@@ -40,6 +40,11 @@ public class SelectPokemonCommand implements Command {
         List<ObjectId> pokemonList =
                 playerController.getPokemonListForPlayer(event.getUser().getId());
 
+        Builder menu = createMenuBuilder(pokemonList);
+        event.deferReply(true).addActionRow(menu.build()).queue();
+    }
+
+    public Builder createMenuBuilder(List<ObjectId> pokemonList) {
         Builder menu =
                 SelectionMenu.create("menu:selectpokemon")
                         .setPlaceholder("Select a pokemon to use in battle");
@@ -53,6 +58,6 @@ public class SelectPokemonCommand implements Command {
                 break;
             }
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        return menu;
     }
 }
