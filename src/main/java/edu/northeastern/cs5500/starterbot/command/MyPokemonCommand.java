@@ -4,6 +4,8 @@ import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
 import java.util.List;
 import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.interactions.commands.CommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -12,6 +14,7 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Buil
 import org.bson.types.ObjectId;
 
 @Slf4j
+@Singleton
 public class MyPokemonCommand implements Command {
 
     @Inject PlayerController playerController;
