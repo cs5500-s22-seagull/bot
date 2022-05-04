@@ -39,8 +39,7 @@ public class MyPokemonHandler implements SelectionHandler {
         info.addField(
                 "HP: ",
                 String.format(
-                        "%s / %s",
-                        pokemonController.getCurrentHp(id) + "/" + pokemonController.getHp(id)),
+                        "%s / %s", pokemonController.getCurrentHp(id), pokemonController.getHp(id)),
                 false);
         info.setImage(
                 pokemonInfoController.getPictureAddress(pokemonController.getPokemonInfo(id)));
