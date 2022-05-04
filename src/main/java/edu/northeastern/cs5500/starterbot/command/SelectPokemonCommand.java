@@ -45,7 +45,9 @@ public class SelectPokemonCommand implements Command {
                         .setPlaceholder("Select a pokemon to use in battle");
         for (ObjectId id : pokemonList) {
             menu.addOption(
-                    pokemonController.getName(id) + " cp:" + pokemonController.getCp(id),
+                    String.format(
+                            "%s cp: %s",
+                            pokemonController.getName(id), pokemonController.getCp(id)),
                     id.toHexString());
             if (menu.getOptions().size() >= 25) {
                 break;
