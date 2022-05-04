@@ -64,12 +64,12 @@ public class WildPokemonsHandler implements SelectionHandler {
 
             EmbedBuilder info = new EmbedBuilder();
             info.setTitle(
-                    "Successfully caught "
-                            + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
-                            + "!");
+                    String.format(
+                            "Succesfully caught %s !",
+                            wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)));
             info.addField("Gender: ", caughtPoke.getGender(), false);
-            info.addField("CP: ", "" + caughtPoke.getCp(), false);
-            info.addField("HP: ", "" + caughtPoke.getHp(), false);
+            info.addField("CP: ", String.valueOf(caughtPoke.getCp()), false);
+            info.addField("HP: ", String.valueOf(caughtPoke.getHp()), false);
             info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
             info.setColor(0xf45642);
             event.replyEmbeds(info.build()).queue();

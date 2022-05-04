@@ -68,13 +68,14 @@ public class FightCommand implements Command {
                         false)
                 .addField(
                         "HP",
-                        pokemonController.getCurrentHp(
-                                        playerController.getSeletedPokemonByDiscordId(
-                                                event.getUser().getId()))
-                                + "/"
-                                + pokemonController.getHp(
+                        String.format(
+                                "%s / %s",
+                                pokemonController.getCurrentHp(
                                         playerController.getSeletedPokemonByDiscordId(
                                                 event.getUser().getId())),
+                                pokemonController.getHp(
+                                        playerController.getSeletedPokemonByDiscordId(
+                                                event.getUser().getId()))),
                         false)
                 .addField(
                         "Enemy Pokemon",
@@ -85,16 +86,17 @@ public class FightCommand implements Command {
                         false)
                 .addField(
                         "HP",
-                        pokemonController.getCurrentHp(
+                        String.format(
+                                "%s / %s",
+                                pokemonController.getCurrentHp(
                                         playerController
                                                 .getPlayerByObjectId(opponent)
-                                                .getSelectedPokemon())
-                                + "/"
-                                + pokemonController.getHp(
+                                                .getSelectedPokemon()),
+                                pokemonController.getHp(
                                         playerController.getSeletedPokemonByDiscordId(
                                                 playerController
                                                         .getPlayerByObjectId(opponent)
-                                                        .getDiscordUserId())),
+                                                        .getDiscordUserId()))),
                         false)
                 .setImage(
                         pokemonController.getImage(
@@ -111,9 +113,6 @@ public class FightCommand implements Command {
         abilities.add("smash");
         abilities.add("hit");
         Builder menu = SelectionMenu.create("menu:abilities").setPlaceholder("Choose an ability");
-        // for (String string : abilities) {
-        //     menu.addOption(string, "10 0.8");
-        // }
         String[] res =
                 pokemonController.getOwnedMoves(
                         playerController.getSeletedPokemonByDiscordId(event.getUser().getId()));
@@ -121,8 +120,12 @@ public class FightCommand implements Command {
         String[] splitM1 = res[1].split(" ");
         String[] splitM2 = res[3].split(" ");
 
-        menu.addOption(res[0] + " - Power:" + splitM1[0] + "/Accuracy:" + splitM1[1], res[1]);
-        menu.addOption(res[2] + " - Power:" + splitM2[0] + "/Accuracy:" + splitM2[1], res[3]);
+        menu.addOption(
+                String.format("%s - Power: %s /Accuracy: %s", res[0], splitM1[0], splitM1[1]),
+                res[1]);
+        menu.addOption(
+                String.format("%s - Power: %s /Accuracy: %s", res[2], splitM2[0], splitM2[1]),
+                res[3]);
 
         event.replyEmbeds(embedBuilder.build())
                 .addActionRow(menu.build())

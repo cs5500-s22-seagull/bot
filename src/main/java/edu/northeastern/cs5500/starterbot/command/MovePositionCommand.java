@@ -61,6 +61,9 @@ public class MovePositionCommand implements Command {
                 SelectionMenu.create("menu:nextnode").setPlaceholder("Choose your next node");
         for (MapNode neighbor : neighbors) {
             menu.addOption(neighbor.getName(), String.valueOf(neighbor.getLocation()));
+            if (menu.getOptions().size() >= 25) {
+                break;
+            }
         }
         event.deferReply(true).addActionRow(menu.build()).addEmbeds(info.build()).queue();
     }
