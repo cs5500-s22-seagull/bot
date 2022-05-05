@@ -52,12 +52,15 @@ public class PokedexController {
 
     public void addInitPokeInfo() {
 
-        boolean hasPikachu = false;
         boolean hasPichu = false;
+        boolean hasPikachu = false;
         boolean hasRaichu = false;
         boolean hasJigglypuff = false;
         boolean hasIgglybuff = false;
         boolean hasWigglytuff = false;
+        boolean hasBulbasaur = false;
+        boolean hasIvysaur = false;
+        boolean hasVenusaur = false;
 
         ArrayList<String> pikaEvo = new ArrayList<String>();
         pikaEvo.add("Pichu");
@@ -68,6 +71,11 @@ public class PokedexController {
         jiggEvo.add("Igglybuff");
         jiggEvo.add("Jigglypuff");
         jiggEvo.add("Wigglytuff");
+
+        ArrayList<String> saurEvo = new ArrayList<String>();
+        saurEvo.add("Bulbasaur");
+        saurEvo.add("Ivysaur");
+        saurEvo.add("Venusaur");
 
         Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
@@ -112,6 +120,16 @@ public class PokedexController {
                 pokemonInfoController.updateRepo(pokemonInfo);
                 hasWigglytuff = true;
             }
+
+            if (pokemonInfo.getPokemonName().equals("Bulbasaur")) {
+                hasBulbasaur = true;
+            }
+            if (pokemonInfo.getPokemonName().equals("Ivysaur")) {
+                hasIvysaur = true;
+            }
+            if (pokemonInfo.getPokemonName().equals("Venusaur")) {
+                hasVenusaur = true;
+            }
         }
 
         if (hasPichu == false) {
@@ -137,7 +155,7 @@ public class PokedexController {
             pokemonInfoNew.setPokemonName("Pikachu");
             pokemonInfoNew.setPokemonNumber(25);
             pokemonInfoNew.setIntroduction(
-                    "Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokémon mistook the intensity of its charge.");
+                    "Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokemon mistook the intensity of its charge.");
             pokemonInfoNew.setMaxCP(950);
             pokemonInfoNew.setPictureAddress(
                     "https://i.pinimg.com/564x/5d/59/26/5d592629a27f62ac4107692f6bc452ea.jpg");
@@ -211,7 +229,7 @@ public class PokedexController {
             pokemonInfoNew.setPokemonName("Wigglytuff");
             pokemonInfoNew.setPokemonNumber(40);
             pokemonInfoNew.setIntroduction(
-                    "Wigglytuff has large, saucerlike eyes. The surfaces of its eyes are always covered with a thin layer of tears. If any dust gets in this Pokémon's eyes, it is quickly washed away.");
+                    "Wigglytuff has large, saucerlike eyes. The surfaces of its eyes are always covered with a thin layer of tears. If any dust gets in this Pokemon's eyes, it is quickly washed away.");
             pokemonInfoNew.setMaxCP(1900);
             pokemonInfoNew.setPictureAddress(
                     "https://archives.bulbagarden.net/media/upload/9/92/040Wigglytuff.png");
@@ -223,7 +241,66 @@ public class PokedexController {
             newMoves.put("Psychic", "90 100");
             newMoves.put("Hyper Beam", "150 90");
             pokemonInfoNew.setMoves(newMoves);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
+        }
 
+        if (hasBulbasaur == false) {
+            PokemonInfo pokemonInfoNew = new PokemonInfo();
+            pokemonInfoNew.setPokemonName("Bulbasaur");
+            pokemonInfoNew.setPokemonNumber(1);
+            pokemonInfoNew.setIntroduction(
+                    "Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger.");
+            pokemonInfoNew.setMaxCP(1036);
+            pokemonInfoNew.setPictureAddress(
+                    "https://archives.bulbagarden.net/media/upload/2/21/001Bulbasaur.png");
+            pokemonInfoNew.setEvolution(saurEvo);
+
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Seed Bomb", "80 100");
+            newMoves.put("Take Down", "90 85");
+            newMoves.put("Solar Beam", "120 100");
+            newMoves.put("Bullet Seed", "25 100");
+            pokemonInfoNew.setMoves(newMoves);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
+        }
+
+        if (hasIvysaur == false) {
+            PokemonInfo pokemonInfoNew = new PokemonInfo();
+            pokemonInfoNew.setPokemonName("Ivysaur");
+            pokemonInfoNew.setPokemonNumber(2);
+            pokemonInfoNew.setIntroduction(
+                    "There is a bud on this Pokémon's back. To support its weight, Ivysaur's legs and trunk grow thick and strong. If it starts spending more time lying in the sunlight, it's a sign that the bud will bloom into a large flower soon.");
+            pokemonInfoNew.setMaxCP(1518);
+            pokemonInfoNew.setPictureAddress(
+                    "https://archives.bulbagarden.net/media/upload/7/73/002Ivysaur.png");
+            pokemonInfoNew.setEvolution(saurEvo);
+
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Seed Bomb", "80 100");
+            newMoves.put("Take Down", "90 85");
+            newMoves.put("Solar Beam", "120 100");
+            newMoves.put("Bullet Seed", "25 100");
+            pokemonInfoNew.setMoves(newMoves);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
+        }
+
+        if (hasVenusaur == false) {
+            PokemonInfo pokemonInfoNew = new PokemonInfo();
+            pokemonInfoNew.setPokemonName("Venusaur");
+            pokemonInfoNew.setPokemonNumber(3);
+            pokemonInfoNew.setIntroduction(
+                    "There is a large flower on Venusaur's back. The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower's aroma soothes the emotions of people.");
+            pokemonInfoNew.setMaxCP(2528);
+            pokemonInfoNew.setPictureAddress(
+                    "https://archives.bulbagarden.net/media/upload/thumb/7/73/003Venusaur-Mega.png/900px-003Venusaur-Mega.png");
+            pokemonInfoNew.setEvolution(saurEvo);
+
+            HashMap<String, String> newMoves = new HashMap<String, String>();
+            newMoves.put("Seed Bomb", "80 100");
+            newMoves.put("Take Down", "90 85");
+            newMoves.put("Solar Beam", "120 100");
+            newMoves.put("Bullet Seed", "25 100");
+            pokemonInfoNew.setMoves(newMoves);
             pokemonInfoController.addToRepo(pokemonInfoNew);
         }
     }
