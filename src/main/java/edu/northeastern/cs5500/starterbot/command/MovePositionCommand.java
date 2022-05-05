@@ -1,9 +1,8 @@
 package edu.northeastern.cs5500.starterbot.command;
 
-import edu.northeastern.cs5500.starterbot.controller.PlayerController;
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PositionController;
 import edu.northeastern.cs5500.starterbot.model.MapNode;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,11 +17,12 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Buil
 @Slf4j
 public class MovePositionCommand implements Command {
 
-    @Inject PlayerController playerController;
-    @Inject PositionController positionController;
+    private PositionController positionController;
 
     @Inject
-    public MovePositionCommand() {}
+    public MovePositionCommand(PositionController positionController) {
+        this.positionController = positionController;
+    }
 
     @Override
     public String getName() {
@@ -35,23 +35,14 @@ public class MovePositionCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /move");
         String discordId = event.getUser().getId();
         MapNode currNode = positionController.getPlayerLocation(discordId);
-        String locName = currNode.getName();
-        String locPic = currNode.getImageUrl();
         List<MapNode> neighbors = positionController.getPossibleMovesForUser(discordId);
-        ArrayList<String> neighborName = new ArrayList<>(20);
-
-        // get all neighbor name for options
-        for (MapNode neighbor : neighbors) {
-            neighborName.add(neighbor.getName());
-            log.info("neighbor:" + neighbor.getName());
-        }
-
         // show location name and picture
-        EmbedBuilder info = createEmbedBuilder(locName, locPic);
+        EmbedBuilder info = createEmbedBuilder(currNode);
 
         Builder menu = createMenuBuilder(neighbors);
 
@@ -70,7 +61,9 @@ public class MovePositionCommand implements Command {
         return menu;
     }
 
-    public EmbedBuilder createEmbedBuilder(String locName, String locPic) {
+    public EmbedBuilder createEmbedBuilder(MapNode currNode) {
+        String locName = currNode.getName();
+        String locPic = currNode.getImageUrl();
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle("Location Infomation");
         info.addField("Current Location: ", locName, false);
