@@ -22,12 +22,12 @@ public class CatchController {
     @Inject PokemonInfoController pokemonInfoController;
     @Inject PlayerController playerController;
     @Inject PokemonController pokemonController;
+    @Inject PositionController positionController;
 
-    public ArrayList<String> seeWildPokemons() {
+    public ArrayList<String> seeWildPokemons(String locName) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String currentTime = dtf.format(now).toString();
-
         ArrayList<String> res = new ArrayList<String>();
         Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
@@ -38,11 +38,19 @@ public class CatchController {
                 }
             } else if (Integer.valueOf(currentTime.substring(11, 13).strip()) >= 16
                     && Integer.valueOf(currentTime.substring(11, 13).strip()) <= 20) {
-                if (pokemonInfo.getPokemonNumber() < 100) {
+                if (pokemonInfo.getPokemonNumber() < 100 && pokemonInfo.getPokemonNumber() > 3) {
+                    res.add(pokemonInfo.getPokemonName());
+                }
+                if ((locName.equals("Bungo") || locName.equals("Satsuma"))
+                        && pokemonInfo.getPokemonNumber() == 3) {
                     res.add(pokemonInfo.getPokemonName());
                 }
             } else {
                 if (pokemonInfo.getMaxCP() < 1000 && pokemonInfo.getPokemonNumber() < 100) {
+                    res.add(pokemonInfo.getPokemonName());
+                }
+                if ((locName.equals("Bungo") || locName.equals("Satsuma"))
+                        && pokemonInfo.getPokemonNumber() < 3) {
                     res.add(pokemonInfo.getPokemonName());
                 }
             }

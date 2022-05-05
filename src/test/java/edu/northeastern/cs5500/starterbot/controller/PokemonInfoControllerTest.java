@@ -59,4 +59,22 @@ public class PokemonInfoControllerTest {
         assertThat(pokemonInfoController.getPictureAddress(pokemonInfo.getId()))
                 .isEqualTo("PictureAddress");
     }
+
+    @Test
+    void testUpdateRepo() {
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setPokemonName("pokemonName");
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
+        pokemonInfo.setPokemonName("newPokemonName");
+        pokemonInfoController.updateRepo(pokemonInfo);
+        assertThat(pokemonInfoController.getName(pokemonInfo.getId())).isEqualTo("newPokemonName");
+    }
+
+    @Test
+    void testAddToRepo() {
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setPokemonName("pokemonName");
+        pokemonInfoController.addToRepo(pokemonInfo);
+        assertThat(pokemonInfoController.getName(pokemonInfo.getId())).isEqualTo("pokemonName");
+    }
 }
