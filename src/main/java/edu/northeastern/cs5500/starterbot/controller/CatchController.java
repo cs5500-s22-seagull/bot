@@ -22,7 +22,6 @@ public class CatchController {
     @Inject PokemonInfoController pokemonInfoController;
     @Inject PlayerController playerController;
     @Inject PokemonController pokemonController;
-    @Inject PositionController positionController;
 
     public ArrayList<String> seeWildPokemons(String locName) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

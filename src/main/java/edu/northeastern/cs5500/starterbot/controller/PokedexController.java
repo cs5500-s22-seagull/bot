@@ -158,7 +158,7 @@ public class PokedexController {
                     "Whenever Pikachu comes across something new, it blasts it with a jolt of electricity. If you come across a blackened berry, it's evidence that this Pokemon mistook the intensity of its charge.");
             pokemonInfoNew.setMaxCP(950);
             pokemonInfoNew.setPictureAddress(
-                    "https://i.pinimg.com/564x/5d/59/26/5d592629a27f62ac4107692f6bc452ea.jpg");
+                    "https://archives.bulbagarden.net/media/upload/b/b1/025Pikachu_XY_anime_3.png");
             pokemonInfoNew.setEvolution(pikaEvo);
             HashMap<String, String> newMoves = new HashMap<String, String>();
             newMoves.put("Volt Switch", "70 100");
@@ -176,7 +176,7 @@ public class PokedexController {
                     "When you rub its cheeks, a sweet fragrance comes wafting out. However, you'll also get a light shock!");
             pokemonInfoNew.setMaxCP(2300);
             pokemonInfoNew.setPictureAddress(
-                    "https://w7.pngwing.com/pngs/351/952/png-transparent-pikachu-pokemon-x-and-y-raichu-pikachu-mammal-cat-like-mammal-carnivoran-thumbnail.png");
+                    "https://cdn.discordapp.com/attachments/955539523620700170/971671222788165692/Female_Raichu.webp");
             pokemonInfoNew.setEvolution(pikaEvo);
 
             HashMap<String, String> newMoves = new HashMap<String, String>();
