@@ -9,11 +9,12 @@ import org.bson.types.ObjectId;
 
 @Singleton
 public class PokemonInfoController {
+    private GenericRepository<PokemonInfo> pokemonInfoRepository;
 
     @Inject
-    PokemonInfoController() {}
-
-    @Inject GenericRepository<PokemonInfo> pokemonInfoRepository;
+    public PokemonInfoController(GenericRepository<PokemonInfo> pokemonInfoRepository) {
+        this.pokemonInfoRepository = pokemonInfoRepository;
+    }
 
     /**
      * Get max cp by pokemon name

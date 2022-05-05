@@ -14,15 +14,21 @@ import javax.inject.Singleton;
 
 @Singleton
 public class CatchController {
+    private PokemonInfoController pokemonInfoController;
+    private PlayerController playerController;
+    private PokemonController pokemonController;
 
     @Inject
-    CatchController() {}
-
-    @Inject GenericRepository<Pokedex> pokedexRepository;
-    @Inject PokemonInfoController pokemonInfoController;
-    @Inject PlayerController playerController;
-    @Inject PokemonController pokemonController;
-    @Inject PositionController positionController;
+    public CatchController(
+            GenericRepository<Pokedex> pokedexRepository,
+            PokemonInfoController pokemonInfoController,
+            PlayerController playerController,
+            PokemonController pokemonController,
+            PositionController positionController) {
+        this.pokemonInfoController = pokemonInfoController;
+        this.playerController = playerController;
+        this.pokemonController = pokemonController;
+    }
 
     public ArrayList<String> seeWildPokemons(String locName) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
