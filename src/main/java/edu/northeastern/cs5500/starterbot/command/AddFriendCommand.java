@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeClassFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu.Buil
 
 @Singleton
 @Slf4j
+@ExcludeClassFromJacocoGeneratedReport
 public class AddFriendCommand implements Command {
 
     @Inject PlayerController playerController;

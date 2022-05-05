@@ -42,7 +42,7 @@ public class PlayerController {
     }
 
     /**
-     * Given a Discord member ID, return the player's level
+     * Given a Discord member ID, return the player's level f
      *
      * @param discordUserId The id of the discord member.
      * @return The level of the player.

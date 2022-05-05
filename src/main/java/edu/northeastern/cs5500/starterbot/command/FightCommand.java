@@ -19,12 +19,19 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class FightCommand implements Command {
 
-    @Inject PlayerController playerController;
-    @Inject CombatController combatController;
-    @Inject PokemonController pokemonController;
+    private PlayerController playerController;
+    private CombatController combatController;
+    private PokemonController pokemonController;
 
     @Inject
-    public FightCommand() {}
+    public FightCommand(
+            PlayerController playerController,
+            CombatController combatController,
+            PokemonController pokemonController) {
+        this.playerController = playerController;
+        this.combatController = combatController;
+        this.pokemonController = pokemonController;
+    }
 
     @Override
     public String getName() {

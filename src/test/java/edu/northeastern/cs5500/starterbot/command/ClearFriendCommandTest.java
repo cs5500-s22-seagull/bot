@@ -4,6 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,13 @@ public class ClearFriendCommandTest {
     }
 
     @Test
-    void testClearFriend() {}
+    void testClearFriend() {
+        playerController.getPlayerFromUserId("userId");
+        playerController.setFriendsForPlayer("userId", Arrays.asList("friend1", "friend2"));
+        assertThat(playerController.getFriendIdsForPlayer("userId")).isNotEmpty();
+        clearFriendCommand.clearFriend("userId");
+        assertThat(playerController.getFriendIdsForPlayer("userId")).isEmpty();
+    }
 
     @Test
     void testGetName() {

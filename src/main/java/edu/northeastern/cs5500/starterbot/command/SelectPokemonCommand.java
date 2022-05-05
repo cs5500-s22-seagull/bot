@@ -18,11 +18,15 @@ import org.bson.types.ObjectId;
 @Slf4j
 public class SelectPokemonCommand implements Command {
 
-    @Inject PlayerController playerController;
-    @Inject PokemonController pokemonController;
+    private PlayerController playerController;
+    private PokemonController pokemonController;
 
     @Inject
-    public SelectPokemonCommand() {}
+    public SelectPokemonCommand(
+            PlayerController playerController, PokemonController pokemonController) {
+        this.playerController = playerController;
+        this.pokemonController = pokemonController;
+    }
 
     @Override
     public String getName() {
