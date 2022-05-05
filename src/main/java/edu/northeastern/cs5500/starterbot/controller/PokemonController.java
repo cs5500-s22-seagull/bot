@@ -10,12 +10,16 @@ import org.bson.types.ObjectId;
 @Slf4j
 @Singleton
 public class PokemonController {
+    private PokemonInfoController pokemonInfoController;
+    private GenericRepository<Pokemon> pokemonRepository;
 
     @Inject
-    PokemonController() {}
-
-    @Inject PokemonInfoController pokemonInfoController;
-    @Inject GenericRepository<Pokemon> pokemonRepository;
+    public PokemonController(
+            PokemonInfoController pokemonInfoController,
+            GenericRepository<Pokemon> pokemonRepository) {
+        this.pokemonInfoController = pokemonInfoController;
+        this.pokemonRepository = pokemonRepository;
+    }
 
     /**
      * Get Pokemon By ObjectId

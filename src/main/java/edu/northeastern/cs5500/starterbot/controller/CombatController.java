@@ -10,11 +10,12 @@ import org.bson.types.ObjectId;
 @Slf4j
 @Singleton
 public class CombatController {
+    private GenericRepository<Combat> combatRepository;
 
     @Inject
-    CombatController() {}
-
-    @Inject GenericRepository<Combat> combatRepository;
+    public CombatController(GenericRepository<Combat> combatRepository) {
+        this.combatRepository = combatRepository;
+    }
 
     public Combat getCombatByUserIds(String userA, String userB) {
         for (Combat combat : combatRepository.getAll()) {

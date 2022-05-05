@@ -11,11 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @Slf4j
 public class PositionController {
-    @Inject PlayerController playerController;
-    @Inject PokeMap pokeMap;
+    private PlayerController playerController;
+    private PokeMap pokeMap;
 
     @Inject
-    PositionController() {}
+    public PositionController(PlayerController playerController, PokeMap pokeMap) {
+        this.playerController = playerController;
+        this.pokeMap = pokeMap;
+    }
 
     public List<MapNode> getPossibleMovesForUser(String discordId) {
         MapNode node = getPlayerLocation(discordId);

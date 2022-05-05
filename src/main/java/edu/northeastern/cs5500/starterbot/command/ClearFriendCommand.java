@@ -13,10 +13,12 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 @Slf4j
 public class ClearFriendCommand implements Command {
 
-    @Inject PlayerController playerController;
+    private PlayerController playerController;
 
     @Inject
-    public ClearFriendCommand() {}
+    public ClearFriendCommand(PlayerController playerController) {
+        this.playerController = playerController;
+    }
 
     @Override
     public String getName() {
