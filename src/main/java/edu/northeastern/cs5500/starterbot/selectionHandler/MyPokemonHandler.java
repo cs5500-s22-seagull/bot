@@ -6,10 +6,12 @@ import edu.northeastern.cs5500.starterbot.controller.PokedexController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonInfoController;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import org.bson.types.ObjectId;
 
+@Singleton
 public class MyPokemonHandler implements SelectionHandler {
 
     @Inject PlayerController playerController;

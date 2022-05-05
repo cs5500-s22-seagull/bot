@@ -1,8 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
@@ -40,23 +38,12 @@ public class PlayerControllerTest {
     void testSetTotalXPForPlayer() {
         playerController.getPlayerFromUserId("123");
         playerController.setTotalXpForPlayer("123", 12);
-        assertEquals(12, playerController.getTotalXpForPlayer("123"));
+        assertThat(playerController.getTotalXpForPlayer("123")).isEqualTo(12);
     }
 
     @Test
     void testGetPlayerFromMemberId() {
         Player player = playerController.getPlayerFromUserId("123");
-        assertEquals(player, playerController.getPlayerFromUserId("123"));
-    }
-
-    @Test
-    void testHashCode() {
-        assertEquals(playerController.hashCode(), playerController.hashCode());
-        assertNotEquals(playerController.hashCode(), new PlayerController().hashCode());
-    }
-
-    @Test
-    void testToString() {
-        assertEquals(playerController.toString(), playerController.toString());
+        assertThat(playerController.getPlayerFromUserId("123")).isEqualTo(player);
     }
 }

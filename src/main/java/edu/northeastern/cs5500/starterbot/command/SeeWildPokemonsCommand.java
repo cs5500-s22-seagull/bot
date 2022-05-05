@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.CatchController;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -30,10 +31,16 @@ public class SeeWildPokemonsCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /seewild");
         ArrayList<String> wildPoke = catchController.seeWildPokemons();
 
+        Builder menu = createMenuBuilder(wildPoke);
+        event.deferReply(true).addActionRow(menu.build()).queue();
+    }
+
+    public Builder createMenuBuilder(ArrayList<String> wildPoke) {
         Builder menu =
                 SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a wild pokemon");
         for (String string : wildPoke) {
@@ -42,6 +49,6 @@ public class SeeWildPokemonsCommand implements Command {
                 break;
             }
         }
-        event.deferReply(true).addActionRow(menu.build()).queue();
+        return menu;
     }
 }

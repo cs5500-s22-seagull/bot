@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,6 +28,7 @@ public class RegisterCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /register");
         String userId = event.getUser().getId();

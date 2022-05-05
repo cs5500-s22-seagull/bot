@@ -1,11 +1,10 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.CombatController;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
 import edu.northeastern.cs5500.starterbot.model.Combat;
-import java.util.ArrayList;
-import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
@@ -38,44 +37,70 @@ public class FightCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /fight");
-        Combat combat = combatController.getCombatByUserIds(event.getUser().getId());
+        String userId = event.getUser().getId();
+        Combat combat = combatController.getCombatByUserIds(userId);
         ObjectId opponent = null;
         if (combat == null) {
             event.reply("There is no challenge directed at you").setEphemeral(true).queue();
             return;
         }
         log.info(combat.toString());
-        if (!combat.getTurn().equals(event.getUser().getId())) {
+        if (!combat.getTurn().equals(userId)) {
             event.reply("It is not your turn").queue();
             return;
         }
-        if (!combat.getDiscordUserA().equals(event.getUser().getId())) {
+        if (!combat.getDiscordUserA().equals(userId)) {
             opponent = playerController.getPlayerFromUserId(combat.getDiscordUserA()).getId();
         } else {
             opponent = playerController.getPlayerFromUserId(combat.getDiscordUserB()).getId();
         }
 
+        EmbedBuilder embedBuilder = createEmbedBuilder(userId, opponent);
+        Builder menu = createMenuBuilder(userId);
+        event.replyEmbeds(embedBuilder.build())
+                .addActionRow(menu.build())
+                .setEphemeral(true)
+                .queue();
+    }
+
+    public Builder createMenuBuilder(String userId) {
+        Builder menu = SelectionMenu.create("menu:abilities").setPlaceholder("Choose an ability");
+        String[] res =
+                pokemonController.getOwnedMoves(
+                        playerController.getSeletedPokemonByDiscordId(userId));
+
+        String[] splitM1 = res[1].split(" ");
+        String[] splitM2 = res[3].split(" ");
+
+        menu.addOption(
+                String.format("%s - Power: %s /Accuracy: %s", res[0], splitM1[0], splitM1[1]),
+                res[1]);
+        menu.addOption(
+                String.format("%s - Power: %s /Accuracy: %s", res[2], splitM2[0], splitM2[1]),
+                res[3]);
+        return menu;
+    }
+
+    public EmbedBuilder createEmbedBuilder(String userId, ObjectId opponent) {
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder
                 .setTitle("Pokemon battle")
                 .addField(
                         "Your pokemon",
                         pokemonController.getName(
-                                playerController.getSeletedPokemonByDiscordId(
-                                        event.getUser().getId())),
+                                playerController.getSeletedPokemonByDiscordId(userId)),
                         false)
                 .addField(
                         "HP",
                         String.format(
                                 "%s / %s",
                                 pokemonController.getCurrentHp(
-                                        playerController.getSeletedPokemonByDiscordId(
-                                                event.getUser().getId())),
+                                        playerController.getSeletedPokemonByDiscordId(userId)),
                                 pokemonController.getHp(
-                                        playerController.getSeletedPokemonByDiscordId(
-                                                event.getUser().getId()))),
+                                        playerController.getSeletedPokemonByDiscordId(userId))),
                         false)
                 .addField(
                         "Enemy Pokemon",
@@ -100,36 +125,13 @@ public class FightCommand implements Command {
                         false)
                 .setImage(
                         pokemonController.getImage(
-                                playerController.getSeletedPokemonByDiscordId(
-                                        event.getUser().getId())))
+                                playerController.getSeletedPokemonByDiscordId(userId)))
                 .setThumbnail(
                         pokemonController.getImage(
                                 playerController.getSeletedPokemonByDiscordId(
                                         playerController
                                                 .getPlayerByObjectId(opponent)
                                                 .getDiscordUserId())));
-
-        Collection<String> abilities = new ArrayList<>();
-        abilities.add("smash");
-        abilities.add("hit");
-        Builder menu = SelectionMenu.create("menu:abilities").setPlaceholder("Choose an ability");
-        String[] res =
-                pokemonController.getOwnedMoves(
-                        playerController.getSeletedPokemonByDiscordId(event.getUser().getId()));
-
-        String[] splitM1 = res[1].split(" ");
-        String[] splitM2 = res[3].split(" ");
-
-        menu.addOption(
-                String.format("%s - Power: %s /Accuracy: %s", res[0], splitM1[0], splitM1[1]),
-                res[1]);
-        menu.addOption(
-                String.format("%s - Power: %s /Accuracy: %s", res[2], splitM2[0], splitM2[1]),
-                res[3]);
-
-        event.replyEmbeds(embedBuilder.build())
-                .addActionRow(menu.build())
-                .setEphemeral(true)
-                .queue();
+        return embedBuilder;
     }
 }

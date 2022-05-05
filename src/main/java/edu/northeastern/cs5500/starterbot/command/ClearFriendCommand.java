@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -28,9 +29,14 @@ public class ClearFriendCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /clearfriend");
-        playerController.setFriendsForPlayer(event.getUser().getId(), new ArrayList<>());
+        clearFriend(event.getUser().getId());
         event.reply("Your friends list has been cleared").setEphemeral(true).queue();
+    }
+
+    public void clearFriend(String userId) {
+        playerController.setFriendsForPlayer(userId, new ArrayList<>());
     }
 }
