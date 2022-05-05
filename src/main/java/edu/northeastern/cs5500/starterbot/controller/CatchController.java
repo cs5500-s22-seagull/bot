@@ -1,6 +1,5 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
-import edu.northeastern.cs5500.starterbot.model.Player;
 import edu.northeastern.cs5500.starterbot.model.Pokedex;
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
@@ -20,12 +19,9 @@ public class CatchController {
     CatchController() {}
 
     @Inject GenericRepository<Pokedex> pokedexRepository;
-    @Inject GenericRepository<PokemonInfo> pokemonInfoRepository;
-    @Inject GenericRepository<Pokemon> pokemonRepository;
-    @Inject GenericRepository<Player> playerRepository;
-
     @Inject PokemonInfoController pokemonInfoController;
     @Inject PlayerController playerController;
+    @Inject PokemonController pokemonController;
 
     public ArrayList<String> seeWildPokemons() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -33,7 +29,7 @@ public class CatchController {
         String currentTime = dtf.format(now).toString();
 
         ArrayList<String> res = new ArrayList<String>();
-        Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
+        Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (Integer.valueOf(currentTime.substring(11, 13).strip()) >= 10
                     && Integer.valueOf(currentTime.substring(11, 13).strip()) <= 15) {
@@ -99,7 +95,7 @@ public class CatchController {
         int hp = (int) ((cp / 19) * (1 + Math.random() * 0.1));
         int level = (int) (cp * 100 / pokemonInfoController.getMaxCpbyName(pokeName));
         String gender = Math.random() > 0.5 ? "male" : "female";
-        Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
+        Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals(pokeName)) {
                 Pokemon pokemon = new Pokemon();
@@ -110,7 +106,7 @@ public class CatchController {
                 pokemon.setLevel(level);
                 pokemon.setGender(gender);
                 pokemon.setOwnedMoves(generateMoves(pokeName, pokemonInfo));
-                pokemonRepository.add(pokemon);
+                pokemonController.addPokemon(pokemon);
                 playerController.addNewPokemonInList(discordMemberId, pokemon);
                 return pokemon;
             }

@@ -16,8 +16,8 @@ public class PokedexController {
     @Inject
     PokedexController() {}
 
+    @Inject PokemonInfoController pokemonInfoController;
     @Inject GenericRepository<Pokedex> pokedexRepository;
-    @Inject GenericRepository<PokemonInfo> pokemonInfoRepository;
 
     public int getSeen(ObjectId id) {
         Pokedex pokedex = pokedexRepository.get(id);
@@ -29,14 +29,14 @@ public class PokedexController {
         return pokedex.getCaught();
     }
 
-    public ObjectId getPokemonInfo(ObjectId id) {
-        Pokedex pokedex = pokedexRepository.get(id);
-        PokemonInfo pokemonInfo = pokemonInfoRepository.get(pokedex.getPokemonInfo());
-        return pokemonInfo.getId();
-    }
+    // public ObjectId getPokemonInfo(ObjectId id) {
+    //     Pokedex pokedex = pokedexRepository.get(id);
+    //     PokemonInfo pokemonInfo = pokemonInfoRepository.get(pokedex.getPokemonInfo());
+    //     return pokemonInfo.getId();
+    // }
 
     public ArrayList<String> getGeneralInfo(String pokeName) {
-        Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
+        Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals(pokeName)) {
                 ArrayList<String> res = new ArrayList<String>();
@@ -69,47 +69,47 @@ public class PokedexController {
         jiggEvo.add("Jigglypuff");
         jiggEvo.add("Wigglytuff");
 
-        Collection<PokemonInfo> pokemonInfos = pokemonInfoRepository.getAll();
+        Collection<PokemonInfo> pokemonInfos = pokemonInfoController.getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals("Pichu")) {
                 pokemonInfo.setEvolution(pikaEvo);
                 pokemonInfo.setMaxCP(475);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasPichu = true;
             }
 
             if (pokemonInfo.getPokemonName().equals("Pikachu")) {
                 pokemonInfo.setMaxCP(950);
                 pokemonInfo.setEvolution(pikaEvo);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasPikachu = true;
             }
 
             if (pokemonInfo.getPokemonName().equals("Raichu")) {
                 pokemonInfo.setEvolution(pikaEvo);
                 pokemonInfo.setMaxCP(2300);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasRaichu = true;
             }
 
             if (pokemonInfo.getPokemonName().equals("Igglybuff")) {
                 pokemonInfo.setEvolution(jiggEvo);
                 pokemonInfo.setMaxCP(520);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasIgglybuff = true;
             }
 
             if (pokemonInfo.getPokemonName().equals("Jigglypuff")) {
                 pokemonInfo.setEvolution(jiggEvo);
                 pokemonInfo.setMaxCP(690);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasJigglypuff = true;
             }
 
             if (pokemonInfo.getPokemonName().equals("Wigglytuff")) {
                 pokemonInfo.setEvolution(jiggEvo);
                 pokemonInfo.setMaxCP(1900);
-                pokemonInfoRepository.update(pokemonInfo);
+                pokemonInfoController.updateRepo(pokemonInfo);
                 hasWigglytuff = true;
             }
         }
@@ -129,7 +129,7 @@ public class PokedexController {
             newMoves.put("Thunderbolt", "90 100");
             newMoves.put("Thunder", "110 70");
             pokemonInfoNew.setMoves(newMoves);
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
 
         if (hasPikachu == false) {
@@ -147,7 +147,7 @@ public class PokedexController {
             newMoves.put("Thunderbolt", "90 100");
             newMoves.put("Thunder", "110 70");
             pokemonInfoNew.setMoves(newMoves);
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
 
         if (hasRaichu == false) {
@@ -167,7 +167,7 @@ public class PokedexController {
             newMoves.put("Thunder", "110 70");
             newMoves.put("Hyper Beam", "150 90");
             pokemonInfoNew.setMoves(newMoves);
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
 
         if (hasIgglybuff == false) {
@@ -185,7 +185,7 @@ public class PokedexController {
             newMoves.put("Fire Blast", "110 85");
             newMoves.put("Psychic", "90 100");
             pokemonInfoNew.setMoves(newMoves);
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
 
         if (hasJigglypuff == false) {
@@ -203,7 +203,7 @@ public class PokedexController {
             newMoves.put("Fire Blast", "110 85");
             newMoves.put("Psychic", "90 100");
             pokemonInfoNew.setMoves(newMoves);
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
 
         if (hasWigglytuff == false) {
@@ -224,7 +224,7 @@ public class PokedexController {
             newMoves.put("Hyper Beam", "150 90");
             pokemonInfoNew.setMoves(newMoves);
 
-            pokemonInfoRepository.add(pokemonInfoNew);
+            pokemonInfoController.addToRepo(pokemonInfoNew);
         }
     }
 }
