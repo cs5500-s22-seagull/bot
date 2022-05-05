@@ -14,8 +14,7 @@ public class PlayerControllerTest {
 
     @BeforeEach
     void setUp() {
-        playerController = new PlayerController();
-        playerController.playerRepository = new InMemoryRepository<>();
+        playerController = new PlayerController(new InMemoryRepository<>());
     }
 
     @Test

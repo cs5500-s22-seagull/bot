@@ -12,12 +12,16 @@ import org.bson.types.ObjectId;
 
 @Singleton
 public class PokedexController {
+    private PokemonInfoController pokemonInfoController;
+    private GenericRepository<Pokedex> pokedexRepository;
 
     @Inject
-    PokedexController() {}
-
-    @Inject PokemonInfoController pokemonInfoController;
-    @Inject GenericRepository<Pokedex> pokedexRepository;
+    public PokedexController(
+            PokemonInfoController pokemonInfoController,
+            GenericRepository<Pokedex> pokedexRepository) {
+        this.pokemonInfoController = pokemonInfoController;
+        this.pokedexRepository = pokedexRepository;
+    }
 
     public int getSeen(ObjectId id) {
         Pokedex pokedex = pokedexRepository.get(id);

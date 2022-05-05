@@ -21,12 +21,12 @@ import org.bson.types.ObjectId;
 @Singleton
 @Slf4j
 public class PlayerController {
-
-    @Inject GenericRepository<Player> playerRepository;
-    @Inject PokemonController pokemonController;
+    private GenericRepository<Player> playerRepository;
 
     @Inject
-    PlayerController() {}
+    public PlayerController(GenericRepository<Player> playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     /**
      * This function returns a collection of all the player's discord member id
