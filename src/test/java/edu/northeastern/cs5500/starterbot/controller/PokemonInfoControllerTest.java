@@ -10,35 +10,53 @@ import org.junit.jupiter.api.Test;
 public class PokemonInfoControllerTest {
 
     private PokemonInfoController pokemonInfoController;
-    private PokedexController pokedexController;
-    private PokemonController pokemonController;
-    private InMemoryRepository inMemoryRepository;
 
     @BeforeEach
     void setUp() {
         pokemonInfoController = new PokemonInfoController();
-        pokedexController = new PokedexController();
-        pokemonController = new PokemonController();
-        inMemoryRepository = new InMemoryRepository<>();
-        pokemonInfoController.pokemonInfoRepository = inMemoryRepository;
-        pokedexController.pokedexRepository = inMemoryRepository;
-        pokedexController.pokemonInfoRepository = inMemoryRepository;
-        pokemonController.pokemonRepository = inMemoryRepository;s
+        pokemonInfoController.pokemonInfoRepository = new InMemoryRepository<>();
     }
 
     @Test
     void testGetMaxCpbyName() {
-        pokedexController.addInitPokeInfo();
-        int maxCp = pokemonInfoController.getMaxCpbyName("Pikachu");
-        assertThat(maxCp).isEqualTo(950);
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setMaxCP(1233);
+        pokemonInfo.setPokemonName("pokemonName");
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
+        assertThat(pokemonInfoController.getMaxCpbyName("pokemonName")).isEqualTo(1233);
     }
 
     @Test
     void testGetPictureAddress() {
         PokemonInfo pokemonInfo = new PokemonInfo();
         pokemonInfo.setPictureAddress("a");
-        inMemoryRepository.add(pokemonInfo);
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
         String address = pokemonInfoController.getPictureAddress(pokemonInfo.getId());
         assertThat(address).isEqualTo("a");
+    }
+
+    @Test
+    void testGetName() {
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setPokemonName("pokemonName");
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
+        assertThat(pokemonInfoController.getName(pokemonInfo.getId())).isEqualTo("pokemonName");
+    }
+
+    @Test
+    void testGetMaxHp() {
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setMaxHP(1234);
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
+        assertThat(pokemonInfoController.getMaxHp(pokemonInfo.getId())).isEqualTo(1234);
+    }
+
+    @Test
+    void testGetImage() {
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setPictureAddress("PictureAddress");
+        pokemonInfoController.pokemonInfoRepository.add(pokemonInfo);
+        assertThat(pokemonInfoController.getPictureAddress(pokemonInfo.getId()))
+                .isEqualTo("PictureAddress");
     }
 }
