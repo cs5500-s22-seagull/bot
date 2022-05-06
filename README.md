@@ -1,5 +1,5 @@
 # Pokemon Bot
-#### Authors: Alexander Lash, Mingyuan Shan, Ruiheng Chen, Qiushi Liang  
+#### Authors: Alexander Lash, Mingyuan Shan, Ruiheng Chen, Qiushi Liang
 
 # Features:
 ### Catch Pokemons:
@@ -13,8 +13,8 @@ Using /challenge command will pull up a dropdown menu that shows friends that ca
 
 
 # Setups/Misc:
-A user must use /register command to register as a player for the game before he uses any other command.  
-For the bot to be properly setup, lookuppokemon/ must be used once to populate the pokemonInfo.  
+A user must use /register command to register as a player for the game before he uses any other command.
+For the bot to be properly setup, lookuppokemon/ must be used once to populate the pokemonInfo.
 
 # Demo:
 Link TDB
