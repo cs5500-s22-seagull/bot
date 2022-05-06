@@ -2,7 +2,6 @@ package edu.northeastern.cs5500.starterbot.command;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import edu.northeastern.cs5500.starterbot.controller.PokedexController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonInfoController;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
 import java.util.ArrayList;
@@ -11,16 +10,13 @@ import org.junit.jupiter.api.Test;
 
 public class LookUpPokemonCommandTest {
 
-    private PokedexController pokedexController;
     private PokemonInfoController pokemonInfoController;
     private LookUpPokemonCommand command;
 
     @BeforeEach
     void setUp() {
         pokemonInfoController = new PokemonInfoController(new InMemoryRepository<>());
-        pokedexController =
-                new PokedexController(pokemonInfoController, new InMemoryRepository<>());
-        command = new LookUpPokemonCommand(pokedexController);
+        command = new LookUpPokemonCommand(pokemonInfoController);
     }
 
     @Test

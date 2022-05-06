@@ -4,33 +4,28 @@ import static com.google.common.truth.Truth.assertThat;
 
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
-import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import java.util.HashMap;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PokemonControllerTest {
-    private GenericRepository<PokemonInfo> pokemonInfoRepository;
-    private GenericRepository<Pokemon> pokemonRepository;
+
     private PokemonInfoController pokemonInfoController;
     private PokemonController pokemonController;
 
     @BeforeEach
     void setUp() {
-        // TODO: this is not a good idea, you shouldn't need to manipulate the repository directly
-        // to test the controllers
-        pokemonInfoRepository = new InMemoryRepository<>();
-        pokemonRepository = new InMemoryRepository<>();
-
-        pokemonInfoController = new PokemonInfoController(pokemonInfoRepository);
-        pokemonController = new PokemonController(pokemonInfoController, pokemonRepository);
+        pokemonInfoController = new PokemonInfoController(new InMemoryRepository<>());
+        pokemonController =
+                new PokemonController(pokemonInfoController, new InMemoryRepository<>());
     }
 
     @Test
     void testGetPokemonByObjectId() {
         Pokemon pokemon = new Pokemon();
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         Pokemon pokemon2 = pokemonController.getPokemonByObjectId(pokemon.getId());
         assertThat(pokemon2).isEqualTo(pokemon);
     }
@@ -39,7 +34,7 @@ public class PokemonControllerTest {
     void testGetGender() {
         Pokemon pokemon = new Pokemon();
         pokemon.setGender("male");
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         String gender = pokemonController.getGender(pokemon.getId());
         assertThat(gender).isEqualTo("male");
     }
@@ -48,7 +43,7 @@ public class PokemonControllerTest {
     void testGetCp() {
         Pokemon pokemon = new Pokemon();
         pokemon.setCp(123);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         int cp = pokemonController.getCp(pokemon.getId());
         assertThat(cp).isEqualTo(123);
     }
@@ -56,10 +51,10 @@ public class PokemonControllerTest {
     @Test
     void testGetPokemonInfo() {
         PokemonInfo pokemonInfo = new PokemonInfo();
-        pokemonInfoRepository.add(pokemonInfo);
+        pokemonInfoController.addToRepo(pokemonInfo);
         Pokemon pokemon = new Pokemon();
         pokemon.setPokemonInfo(pokemonInfo.getId());
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         ObjectId info = pokemonController.getPokemonInfo(pokemon.getId());
         assertThat(info).isEqualTo(pokemonInfo.getId());
     }
@@ -68,7 +63,7 @@ public class PokemonControllerTest {
     void testGetLevel() {
         Pokemon pokemon = new Pokemon();
         pokemon.setLevel(66);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         int level = pokemonController.getLevel(pokemon.getId());
         assertThat(level).isEqualTo(66);
     }
@@ -77,7 +72,7 @@ public class PokemonControllerTest {
     void testPowerUp() {
         Pokemon pokemon = new Pokemon();
         pokemon.setLevel(67);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         pokemonController.powerUp(pokemon.getId());
         assertThat(pokemon.getLevel()).isEqualTo(68);
     }
@@ -86,10 +81,10 @@ public class PokemonControllerTest {
     void testGetName() {
         PokemonInfo pokemonInfo = new PokemonInfo();
         pokemonInfo.setPokemonName("testPokemonName");
-        pokemonInfoRepository.add(pokemonInfo);
+        pokemonInfoController.addToRepo(pokemonInfo);
         Pokemon pokemon = new Pokemon();
         pokemon.setPokemonInfo(pokemonInfo.getId());
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         assertThat(pokemonController.getName(pokemon.getId())).isEqualTo("testPokemonName");
     }
 
@@ -97,7 +92,7 @@ public class PokemonControllerTest {
     void testGetHp() {
         Pokemon pokemon = new Pokemon();
         pokemon.setHp(100);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         assertThat(pokemonController.getHp(pokemon.getId())).isEqualTo(100);
     }
 
@@ -105,10 +100,10 @@ public class PokemonControllerTest {
     void testGetMaxHp() {
         PokemonInfo pokemonInfo = new PokemonInfo();
         pokemonInfo.setMaxHP(1200);
-        pokemonInfoRepository.add(pokemonInfo);
+        pokemonInfoController.addToRepo(pokemonInfo);
         Pokemon pokemon = new Pokemon();
         pokemon.setPokemonInfo(pokemonInfo.getId());
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         assertThat(pokemonController.getMaxHp(pokemon.getId())).isEqualTo(1200);
     }
 
@@ -116,10 +111,10 @@ public class PokemonControllerTest {
     void testGetImage() {
         PokemonInfo pokemonInfo = new PokemonInfo();
         pokemonInfo.setPictureAddress("pictureAddress");
-        pokemonInfoRepository.add(pokemonInfo);
+        pokemonInfoController.addToRepo(pokemonInfo);
         Pokemon pokemon = new Pokemon();
         pokemon.setPokemonInfo(pokemonInfo.getId());
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         assertThat(pokemonController.getImage(pokemon.getId())).isEqualTo("pictureAddress");
     }
 
@@ -127,7 +122,7 @@ public class PokemonControllerTest {
     void testGetCurrentHp() {
         Pokemon pokemon = new Pokemon();
         pokemon.setCurrentHp(1201);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         assertThat(pokemonController.getCurrentHp(pokemon.getId())).isEqualTo(1201);
     }
 
@@ -135,8 +130,19 @@ public class PokemonControllerTest {
     void testSetCurrentHp() {
         Pokemon pokemon = new Pokemon();
         pokemon.setCurrentHp(1001);
-        pokemonRepository.add(pokemon);
+        pokemonController.addPokemon(pokemon);
         pokemonController.setCurrentHp(pokemon.getId(), 1021);
         assertThat(pokemonController.getCurrentHp(pokemon.getId())).isEqualTo(1021);
+    }
+
+    @Test
+    void testGetOwnedMoves() {
+        HashMap<String, String> newMoves = new HashMap<String, String>();
+        newMoves.put("Seed Bomb", "80 100");
+        newMoves.put("Take Down", "90 85");
+        Pokemon pokemon = new Pokemon();
+        pokemon.setOwnedMoves(newMoves);
+        pokemonController.addPokemon(pokemon);
+        assertThat(pokemonController.getOwnedMoves(pokemon.getId()).length).isEqualTo(4);
     }
 }

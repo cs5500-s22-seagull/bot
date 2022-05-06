@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.starterbot.command;
 
 import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
-import edu.northeastern.cs5500.starterbot.controller.PokedexController;
+import edu.northeastern.cs5500.starterbot.controller.PokemonInfoController;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,11 +16,11 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 @Slf4j
 public class LookUpPokemonCommand implements Command {
 
-    private PokedexController pokedexController;
+    private PokemonInfoController pokemonInfoController;
 
     @Inject
-    public LookUpPokemonCommand(PokedexController pokedexController) {
-        this.pokedexController = pokedexController;
+    public LookUpPokemonCommand(PokemonInfoController pokemonInfoController) {
+        this.pokemonInfoController = pokemonInfoController;
     }
 
     @Override
@@ -45,9 +45,9 @@ public class LookUpPokemonCommand implements Command {
     @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /lookup");
-        pokedexController.addInitPokeInfo();
+        pokemonInfoController.addInitPokeInfo();
         ArrayList<String> res =
-                pokedexController.getGeneralInfo(
+                pokemonInfoController.getGeneralInfo(
                         event.getOption("pokemonname").getAsString().strip());
         if (res != null) {
             EmbedBuilder info = createEmbedBuilder(res);
