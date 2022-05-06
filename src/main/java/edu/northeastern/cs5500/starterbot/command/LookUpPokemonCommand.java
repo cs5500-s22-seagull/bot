@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.command;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.PokedexController;
 import java.util.ArrayList;
 import javax.inject.Inject;
@@ -15,10 +16,12 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 @Slf4j
 public class LookUpPokemonCommand implements Command {
 
-    @Inject PokedexController pokedexController;
+    private PokedexController pokedexController;
 
     @Inject
-    public LookUpPokemonCommand() {}
+    public LookUpPokemonCommand(PokedexController pokedexController) {
+        this.pokedexController = pokedexController;
+    }
 
     @Override
     public String getName() {
@@ -39,6 +42,7 @@ public class LookUpPokemonCommand implements Command {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(CommandInteraction event) {
         log.info("event: /lookup");
         pokedexController.addInitPokeInfo();

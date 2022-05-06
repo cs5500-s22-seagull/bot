@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SeeWildPokemonsCommandTest {
+public class MyPokemonCommandTest {
 
-    private SeeWildPokemonsCommand command;
+    private MyPokemonCommand command;
 
     @BeforeEach
     void setUp() {
-        command = new SeeWildPokemonsCommand();
+        command = new MyPokemonCommand();
     }
 
     @Test
@@ -22,15 +22,11 @@ public class SeeWildPokemonsCommandTest {
 
     @Test
     void testGetName() {
-        assertThat(command.getName()).isEqualTo("seewild");
+        assertThat(command.getName()).isEqualTo("mypokemon");
     }
 
     @Test
     void testCreateMenu() {
         assertThat(command.createMenuBuilder(new ArrayList<>()).getOptions()).isEmpty();
-        ArrayList<String> poke = new ArrayList<>();
-        poke.add("poke1");
-        poke.add("poke2");
-        assertThat(command.createMenuBuilder(poke).getOptions().size()).isEqualTo(2);
     }
 }
