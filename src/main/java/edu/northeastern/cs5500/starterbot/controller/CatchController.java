@@ -96,9 +96,6 @@ public class CatchController {
      * @return HashMap<String, String>
      */
     public HashMap<String, String> generateMoves(String pokeName, PokemonInfo pokemonInfo) {
-        if (pokemonInfo.getPokemonName() != pokeName) {
-            return null;
-        }
         int size = pokemonInfo.getMoves().size();
         int moves1no = (int) Math.random() * size;
         int moves2no = moves1no;
