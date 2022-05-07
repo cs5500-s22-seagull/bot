@@ -62,6 +62,12 @@ public class LookUpPokemonCommand implements Command {
         }
     }
 
+    /**
+     * Create embed builder for pokemon
+     *
+     * @param res
+     * @return EmbedBuilder
+     */
     public EmbedBuilder createEmbedBuilder(ArrayList<String> res) {
         String pokemonName = res.get(0);
         String pokemonNumber = res.get(1);

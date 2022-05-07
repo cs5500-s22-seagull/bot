@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.repository;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeClassFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.model.Model;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import javax.inject.Singleton;
 import org.bson.types.ObjectId;
 
 @Singleton
+@ExcludeClassFromJacocoGeneratedReport
 public class InMemoryRepository<T extends Model> implements GenericRepository<T> {
 
     HashMap<ObjectId, T> collection;

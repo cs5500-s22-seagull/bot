@@ -65,6 +65,12 @@ public class ChallengeCommand implements Command {
         lookupUsersById(event, friendIds);
     }
 
+    /**
+     * Lookup users by id
+     *
+     * @param event
+     * @param friendIds
+     */
     @ExcludeFromJacocoGeneratedReport
     private void lookupUsersById(CommandInteraction event, List<String> friendIds) {
         List<CompletableFuture<User>> lookups = new ArrayList<>();
@@ -89,6 +95,12 @@ public class ChallengeCommand implements Command {
                         });
     }
 
+    /**
+     * Create battle menu
+     *
+     * @param friends
+     * @return SelectionMenu
+     */
     @ExcludeFromJacocoGeneratedReport
     SelectionMenu createBattleMenu(List<User> friends) {
         SelectionMenu.Builder menu =

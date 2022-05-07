@@ -49,6 +49,12 @@ public class MovePositionCommand implements Command {
         event.deferReply(true).addActionRow(menu.build()).addEmbeds(info.build()).queue();
     }
 
+    /**
+     * Create menu builder
+     *
+     * @param neighbors
+     * @return Builder
+     */
     public Builder createMenuBuilder(List<MapNode> neighbors) {
         Builder menu =
                 SelectionMenu.create("menu:nextnode").setPlaceholder("Choose your next node");
@@ -61,6 +67,12 @@ public class MovePositionCommand implements Command {
         return menu;
     }
 
+    /**
+     * Create EmbedBuilder of position selection UI
+     *
+     * @param currNode
+     * @return EmbedBuilder
+     */
     public EmbedBuilder createEmbedBuilder(MapNode currNode) {
         String locName = currNode.getName();
         String locPic = currNode.getImageUrl();

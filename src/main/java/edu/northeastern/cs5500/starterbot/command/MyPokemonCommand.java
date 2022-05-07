@@ -17,11 +17,15 @@ import org.bson.types.ObjectId;
 @Singleton
 public class MyPokemonCommand implements Command {
 
-    @Inject PlayerController playerController;
-    @Inject PokemonController pokemonController;
+    private PlayerController playerController;
+    private PokemonController pokemonController;
 
     @Inject
-    public MyPokemonCommand() {}
+    public MyPokemonCommand(
+            PlayerController playerController, PokemonController pokemonController) {
+        this.playerController = playerController;
+        this.pokemonController = pokemonController;
+    }
 
     @Override
     public String getName() {
@@ -45,6 +49,12 @@ public class MyPokemonCommand implements Command {
         event.deferReply(true).addActionRow(menu.build()).queue();
     }
 
+    /**
+     * Create menu builder of pokemonlist
+     *
+     * @param pokemonList
+     * @return Builder
+     */
     public Builder createMenuBuilder(List<ObjectId> pokemonList) {
         Builder menu =
                 SelectionMenu.create("menu:mypoke").setPlaceholder("Select a pokemon for details");
@@ -54,6 +64,9 @@ public class MyPokemonCommand implements Command {
                             "%s cp: %s",
                             pokemonController.getName(id), pokemonController.getCp(id)),
                     id.toHexString());
+            if (menu.getOptions().size() >= 25) {
+                break;
+            }
         }
         return menu;
     }

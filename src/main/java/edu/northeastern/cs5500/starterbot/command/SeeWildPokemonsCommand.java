@@ -46,6 +46,12 @@ public class SeeWildPokemonsCommand implements Command {
         event.deferReply(true).addActionRow(menu.build()).queue();
     }
 
+    /**
+     * Create menu builder of wild pokemons
+     *
+     * @param wildPoke
+     * @return Builder
+     */
     public Builder createMenuBuilder(ArrayList<String> wildPoke) {
         Builder menu =
                 SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a wild pokemon");

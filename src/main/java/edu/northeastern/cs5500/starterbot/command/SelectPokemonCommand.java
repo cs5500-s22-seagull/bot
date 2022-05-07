@@ -50,6 +50,12 @@ public class SelectPokemonCommand implements Command {
         event.deferReply(true).addActionRow(menu.build()).queue();
     }
 
+    /**
+     * Create menu builder of pokemons for slection
+     *
+     * @param pokemonList
+     * @return Builder
+     */
     public Builder createMenuBuilder(List<ObjectId> pokemonList) {
         Builder menu =
                 SelectionMenu.create("menu:selectpokemon")
