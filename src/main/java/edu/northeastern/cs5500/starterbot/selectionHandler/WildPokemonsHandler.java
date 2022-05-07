@@ -42,7 +42,7 @@ public class WildPokemonsHandler implements SelectionHandler {
                 playerController.getItemsForPlayer(event.getUser().getId());
 
         double randomNumber =
-                catchController.getCatchChange(wildPoke); // chance to catch the wild pokemon
+                catchController.getCatchChance(wildPoke); // chance to catch the wild pokemon
         String arr[] = wildPoke.split(" ", 2); // split the wildPoke for getting first words
         if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber >= 0.2) {
             items = playerController.useGreatBall(event.getUser().getId());

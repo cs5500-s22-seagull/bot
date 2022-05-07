@@ -17,6 +17,13 @@ public class CombatController {
         this.combatRepository = combatRepository;
     }
 
+    /**
+     * Start a combat to another player
+     *
+     * @param userA
+     * @param userB
+     * @return Combat
+     */
     public Combat getCombatByUserIds(String userA, String userB) {
         for (Combat combat : combatRepository.getAll()) {
             if (combat.getDiscordUserA().equals(userA) && combat.getDiscordUserB().equals(userB)
@@ -35,7 +42,12 @@ public class CombatController {
         return newBat;
     }
 
-    // accept combat
+    /**
+     * Accept combat
+     *
+     * @param userA
+     * @return Combat
+     */
     public Combat getCombatByUserIds(String userA) {
         for (Combat combat : combatRepository.getAll()) {
             if (combat.getDiscordUserB().equals(userA) || combat.getDiscordUserA().equals(userA)) {
@@ -45,12 +57,22 @@ public class CombatController {
         return null;
     }
 
+    /**
+     * Set turn for user
+     *
+     * @param user
+     */
     public void setTurn(String user) {
         Combat combat = getCombatByUserIds(user);
         combat.setTurn(user);
         combatRepository.update(combat);
     }
 
+    /**
+     * Resolve combat when combat end
+     *
+     * @param id
+     */
     public void resolveCombat(ObjectId id) {
         combatRepository.delete(id);
     }

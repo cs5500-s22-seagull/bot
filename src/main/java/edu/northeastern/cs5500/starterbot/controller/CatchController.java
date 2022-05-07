@@ -1,9 +1,7 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
-import edu.northeastern.cs5500.starterbot.model.Pokedex;
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
-import edu.northeastern.cs5500.starterbot.repository.GenericRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,16 +18,20 @@ public class CatchController {
 
     @Inject
     public CatchController(
-            GenericRepository<Pokedex> pokedexRepository,
             PokemonInfoController pokemonInfoController,
             PlayerController playerController,
-            PokemonController pokemonController,
-            PositionController positionController) {
+            PokemonController pokemonController) {
         this.pokemonInfoController = pokemonInfoController;
         this.playerController = playerController;
         this.pokemonController = pokemonController;
     }
 
+    /**
+     * See wild Pokemons by location name
+     *
+     * @param locName
+     * @return ArrayList<String>
+     */
     public ArrayList<String> seeWildPokemons(String locName) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -64,7 +66,13 @@ public class CatchController {
         return res;
     }
 
-    public double getCatchChange(String arr) {
+    /**
+     * Get catch chance for selected Pokemon
+     *
+     * @param arr
+     * @return double
+     */
+    public double getCatchChance(String arr) {
         String pokeName = arr.substring(arr.lastIndexOf(" ") + 1).strip();
         int maxCp = pokemonInfoController.getMaxCpbyName(pokeName);
         double randomNum = Math.random();
@@ -80,7 +88,17 @@ public class CatchController {
         return randomNum;
     }
 
+    /**
+     * Generate moves for Pokemon
+     *
+     * @param pokeName
+     * @param pokemonInfo
+     * @return HashMap<String, String>
+     */
     public HashMap<String, String> generateMoves(String pokeName, PokemonInfo pokemonInfo) {
+        if (pokemonInfo.getPokemonName() != pokeName) {
+            return null;
+        }
         int size = pokemonInfo.getMoves().size();
         int moves1no = (int) Math.random() * size;
         int moves2no = moves1no;
@@ -100,6 +118,13 @@ public class CatchController {
         return res;
     }
 
+    /**
+     * Catch the wild Pokemon
+     *
+     * @param discordMemberId
+     * @param arr
+     * @return Pokemon
+     */
     public Pokemon catchPokemon(String discordMemberId, String arr) {
         String pokeName = arr.substring(arr.lastIndexOf(" ") + 1).strip();
         int cp =

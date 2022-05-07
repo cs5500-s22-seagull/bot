@@ -4,6 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -83,5 +84,13 @@ public class PokemonInfoControllerTest {
         pokemonInfo.setPokemonName("pokemonName");
         pokemonInfoController.addToRepo(pokemonInfo);
         assertThat(pokemonInfoController.getName(pokemonInfo.getId())).isEqualTo("pokemonName");
+    }
+
+    @Test
+    void testInitAndGetGeneralInfo() {
+        pokemonInfoController.addInitPokeInfo();
+        ArrayList<String> res = pokemonInfoController.getGeneralInfo("Pikachu");
+        String pokemonName = res.get(0);
+        assertThat(pokemonName).isEqualTo("Pikachu");
     }
 }
