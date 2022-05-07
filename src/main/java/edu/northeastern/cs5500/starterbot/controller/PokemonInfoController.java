@@ -156,47 +156,23 @@ public class PokemonInfoController {
         Collection<PokemonInfo> pokemonInfos = getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
             if (pokemonInfo.getPokemonName().equals("Pichu")) {
-                pokemonInfo.setEvolution(pikaEvo);
-                pokemonInfo.setMaxCP(475);
-                updateRepo(pokemonInfo);
                 hasPichu = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Pikachu")) {
-                pokemonInfo.setMaxCP(950);
-                pokemonInfo.setEvolution(pikaEvo);
-                updateRepo(pokemonInfo);
                 hasPikachu = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Raichu")) {
-                pokemonInfo.setEvolution(pikaEvo);
-                pokemonInfo.setMaxCP(2300);
-                updateRepo(pokemonInfo);
                 hasRaichu = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Igglybuff")) {
-                pokemonInfo.setEvolution(jiggEvo);
-                pokemonInfo.setMaxCP(520);
-                updateRepo(pokemonInfo);
                 hasIgglybuff = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Jigglypuff")) {
-                pokemonInfo.setEvolution(jiggEvo);
-                pokemonInfo.setMaxCP(690);
-                updateRepo(pokemonInfo);
                 hasJigglypuff = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Wigglytuff")) {
-                pokemonInfo.setEvolution(jiggEvo);
-                pokemonInfo.setMaxCP(1900);
-                updateRepo(pokemonInfo);
                 hasWigglytuff = true;
             }
-
             if (pokemonInfo.getPokemonName().equals("Bulbasaur")) {
                 hasBulbasaur = true;
             }

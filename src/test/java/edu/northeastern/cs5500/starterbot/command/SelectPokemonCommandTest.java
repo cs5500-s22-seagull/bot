@@ -5,8 +5,12 @@ import static com.google.common.truth.Truth.assertThat;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonInfoController;
+import edu.northeastern.cs5500.starterbot.model.Pokemon;
+import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import edu.northeastern.cs5500.starterbot.repository.InMemoryRepository;
 import java.util.ArrayList;
+import java.util.List;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,5 +43,16 @@ public class SelectPokemonCommandTest {
     @Test
     void testcreateMenuBuilder() {
         assertThat(command.createMenuBuilder(new ArrayList<>()).getOptions()).isEmpty();
+
+        PokemonInfo pokemonInfo = new PokemonInfo();
+        pokemonInfo.setPokemonName("pokemonName");
+        pokemonInfoController.addToRepo(pokemonInfo);
+        Pokemon pokemon = new Pokemon();
+        pokemon.setCp(12);
+        pokemon.setPokemonInfo(pokemonInfo.getId());
+        pokemonController.addPokemon(pokemon);
+        List<ObjectId> pokemonList = new ArrayList<>();
+        pokemonList.add(pokemon.getId());
+        assertThat(command.createMenuBuilder(pokemonList).getOptions().size()).isEqualTo(1);
     }
 }

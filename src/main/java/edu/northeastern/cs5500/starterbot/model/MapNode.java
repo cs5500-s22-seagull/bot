@@ -1,9 +1,11 @@
 package edu.northeastern.cs5500.starterbot.model;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeClassFromJacocoGeneratedReport;
 import javax.annotation.Nonnull;
 import lombok.Data;
 
 @Data
+@ExcludeClassFromJacocoGeneratedReport
 public class MapNode {
     private final int location;
     @Nonnull private final String imageUrl;
