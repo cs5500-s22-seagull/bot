@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.selectionHandler;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.CatchController;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokedexController;
@@ -23,12 +24,25 @@ public class MyPokemonHandler implements SelectionHandler {
     @Inject
     MyPokemonHandler() {}
 
+    /**
+     * This function returns the name of the command.
+     *
+     * @return The name of the command.
+     */
     @Override
     public String getName() {
         return "menu:mypoke";
     }
 
+    /**
+     * It takes the selected pokemon's id, and uses it to get the pokemon's name, gender, level, cp,
+     * hp, and picture address. Then it builds an embed with all of that information and sends it to
+     * the user
+     *
+     * @param event The event that triggered the listener.
+     */
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(SelectionMenuEvent event) {
         String hexPokemon = event.getSelectedOptions().get(0).getValue();
         ObjectId id = new ObjectId(hexPokemon);
