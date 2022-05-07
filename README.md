@@ -13,8 +13,12 @@ Using /challenge command will pull up a dropdown menu that shows friends that ca
 
 
 # Setups/Misc:
-A user must use /register command to register as a player for the game before he uses any other command.
-For the bot to be properly setup, lookuppokemon/ must be used once to populate the pokemonInfo.
+### A user must use /register command to register as a player for the game before he uses any other command.
+### For the bot to be properly setup, lookuppokemon/ must be used once to populate the pokemonInfo.
+### /clearfriend can be used to clear a player's friend list
+### /mypokemon can be used to see information about a player's pokemons
+### /selectpokemon is used to select an owned pokemon as active pokemon
+
 
 # Demo:
 Link TDB
