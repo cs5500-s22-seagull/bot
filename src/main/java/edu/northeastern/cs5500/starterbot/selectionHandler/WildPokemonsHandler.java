@@ -33,6 +33,35 @@ public class WildPokemonsHandler implements SelectionHandler {
         return "menu:wildpokemons";
     }
 
+    public EmbedBuilder createEmbedBuilder(Pokemon caughtPoke, String wildPoke) {
+        EmbedBuilder info = new EmbedBuilder();
+        info.setTitle(
+                String.format(
+                        "Succesfully caught %s !",
+                        wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)));
+        info.addField("Gender: ", caughtPoke.getGender(), false);
+        info.addField("CP: ", "" + caughtPoke.getCp(), false);
+        info.addField("HP: ", "" + caughtPoke.getHp(), false);
+        info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
+        info.setColor(0xf45642);
+        return info;
+    }
+
+    public Builder createMenu(HashMap<String, Integer> items, String wildPoke) {
+        Builder menu = SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a ball");
+        int pokeBallNum = 0;
+        int greatBallNum = 0;
+        if (items.containsKey("poke ball") && items.get("poke ball") > 0) {
+            pokeBallNum = items.get("poke ball");
+            menu.addOption("poke ball - remaining: " + pokeBallNum, "pokeball " + wildPoke);
+        }
+        if (items.containsKey("great ball") && items.get("great ball") > 0) {
+            greatBallNum = items.get("great ball");
+            menu.addOption("great ball - remaining: " + greatBallNum, "greatball " + wildPoke);
+        }
+        return menu;
+    }
+
     @Override
     public void onEvent(SelectionMenuEvent event) {
         String wildPoke = event.getSelectedOptions().get(0).getValue();
@@ -47,33 +76,13 @@ public class WildPokemonsHandler implements SelectionHandler {
         if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber >= 0.2) {
             items = playerController.useGreatBall(event.getUser().getId());
             Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
-            EmbedBuilder info = new EmbedBuilder();
-            info.setTitle(
-                    "Successfully caught "
-                            + wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)
-                            + "!");
-            info.addField("Gender: ", caughtPoke.getGender(), false);
-            info.addField("CP: ", "" + caughtPoke.getCp(), false);
-            info.addField("HP: ", "" + caughtPoke.getHp(), false);
-            info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
-            info.setColor(0xf45642);
+            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke);
             event.replyEmbeds(info.build()).queue();
         } else if (arr[0].equals("pokeball") && items.get("poke ball") > 0 && randomNumber >= 0.3) {
             items = playerController.usePokeBall(event.getUser().getId());
             Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
-
-            EmbedBuilder info = new EmbedBuilder();
-            info.setTitle(
-                    String.format(
-                            "Succesfully caught %s !",
-                            wildPoke.substring(wildPoke.lastIndexOf(" ") + 1)));
-            info.addField("Gender: ", caughtPoke.getGender(), false);
-            info.addField("CP: ", String.valueOf(caughtPoke.getCp()), false);
-            info.addField("HP: ", String.valueOf(caughtPoke.getHp()), false);
-            info.setImage(pokemonInfoController.getPictureAddress(caughtPoke.getPokemonInfo()));
-            info.setColor(0xf45642);
+            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke);
             event.replyEmbeds(info.build()).queue();
-
         } else {
             if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber < 0.2) {
                 items = playerController.useGreatBall(event.getUser().getId());
@@ -81,18 +90,7 @@ public class WildPokemonsHandler implements SelectionHandler {
             if (arr[0].equals("pokeball") && items.get("poke ball") > 0 && randomNumber < 0.3) {
                 items = playerController.usePokeBall(event.getUser().getId());
             }
-            Builder menu =
-                    SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a ball");
-            int pokeBallNum = 0;
-            int greatBallNum = 0;
-            if (items.containsKey("poke ball") && items.get("poke ball") > 0) {
-                pokeBallNum = items.get("poke ball");
-                menu.addOption("poke ball - remaining: " + pokeBallNum, "pokeball " + wildPoke);
-            }
-            if (items.containsKey("great ball") && items.get("great ball") > 0) {
-                greatBallNum = items.get("great ball");
-                menu.addOption("great ball - remaining: " + greatBallNum, "greatball " + wildPoke);
-            }
+            Builder menu = createMenu(items, wildPoke);
             event.deferReply(true).addActionRow(menu.build()).queue();
         }
     }
