@@ -35,10 +35,10 @@ public class CatchControllerTest {
     }
 
     @Test
-    void testGetCatchChange() {
+    void testGetCatchChance() {
         pokemonInfoController.addInitPokeInfo();
         Double chance = catchController.getCatchChance("Pikachu");
-        assertThat(chance).isAtLeast(0.1);
+        assertThat(chance).isLessThan(1.0);
     }
 
     @Test
