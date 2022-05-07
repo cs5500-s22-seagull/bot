@@ -38,6 +38,11 @@ public class ClearFriendCommand implements Command {
         event.reply("Your friends list has been cleared").setEphemeral(true).queue();
     }
 
+    /**
+     * Clear friend list for player
+     *
+     * @param userId
+     */
     public void clearFriend(String userId) {
         playerController.setFriendsForPlayer(userId, new ArrayList<>());
     }
