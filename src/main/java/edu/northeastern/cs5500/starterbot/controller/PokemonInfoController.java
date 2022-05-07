@@ -104,6 +104,12 @@ public class PokemonInfoController {
         pokemonInfoRepository.add(pokemonInfoNew);
     }
 
+    /**
+     * Get general info of the pokemon by name
+     *
+     * @param pokeName
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getGeneralInfo(String pokeName) {
         Collection<PokemonInfo> pokemonInfos = getAll();
         for (PokemonInfo pokemonInfo : pokemonInfos) {
@@ -119,6 +125,7 @@ public class PokemonInfoController {
         return null;
     }
 
+    /** add initial PokemonInfo to repository */
     public void addInitPokeInfo() {
 
         boolean hasPichu = false;

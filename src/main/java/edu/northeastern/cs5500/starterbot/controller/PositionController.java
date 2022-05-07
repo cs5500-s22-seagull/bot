@@ -20,6 +20,12 @@ public class PositionController {
         this.pokeMap = pokeMap;
     }
 
+    /**
+     * Get possible moves for user
+     *
+     * @param discordId
+     * @return List<MapNode>
+     */
     public List<MapNode> getPossibleMovesForUser(String discordId) {
         MapNode node = getPlayerLocation(discordId);
         List<MapNode> currNeighbor = pokeMap.getAdjacentNodes(node);
@@ -27,6 +33,12 @@ public class PositionController {
         return currNeighbor;
     }
 
+    /**
+     * Get player's current location
+     *
+     * @param discordId
+     * @return MapNode
+     */
     public MapNode getPlayerLocation(String discordId) {
         Player player = playerController.getPlayerFromUserId(discordId);
         Integer location = player.getLocation();

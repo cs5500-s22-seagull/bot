@@ -294,6 +294,12 @@ public class PlayerController {
         playerRepository.update(player);
     }
 
+    /**
+     * Move to new node
+     *
+     * @param discordId
+     * @param newLocation
+     */
     public void moveToNode(String discordId, Integer newLocation) {
         Player player = getPlayerFromUserId(discordId);
         player.setLocation(newLocation);
