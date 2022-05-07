@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.controller;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.model.Pokemon;
 import edu.northeastern.cs5500.starterbot.model.PokemonInfo;
 import java.time.LocalDateTime;
@@ -27,11 +28,13 @@ public class CatchController {
     }
 
     /**
-     * See wild Pokemons by location name
+     * See wild Pokemons by location name. Since current time is always different, so we may ignore
+     * testing this function.
      *
      * @param locName
      * @return ArrayList<String>
      */
+    @ExcludeFromJacocoGeneratedReport
     public ArrayList<String> seeWildPokemons(String locName) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();

@@ -21,4 +21,4 @@ Using /challenge command will pull up a dropdown menu that shows friends that ca
 
 
 # Demo:
-Link TDB
+Link: https://youtu.be/hs4FAAKvVlQ

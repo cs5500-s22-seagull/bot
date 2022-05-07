@@ -89,6 +89,7 @@ public class PokemonInfoControllerTest {
     @Test
     void testInitAndGetGeneralInfo() {
         pokemonInfoController.addInitPokeInfo();
+        pokemonInfoController.addInitPokeInfo();
         ArrayList<String> res = pokemonInfoController.getGeneralInfo("Pikachu");
         String pokemonName = res.get(0);
         assertThat(pokemonName).isEqualTo("Pikachu");

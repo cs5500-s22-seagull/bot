@@ -1,6 +1,7 @@
 /** This class is used to store the information of the players */
 package edu.northeastern.cs5500.starterbot.model;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeClassFromJacocoGeneratedReport;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
+@ExcludeClassFromJacocoGeneratedReport
 public class PokeMap {
     public static final Integer STARTING_LOCATION = 1;
     private HashMap<MapNode, ArrayList<MapNode>> adjacentNodes;

@@ -27,6 +27,14 @@ public class CombatControllerTest {
                 combatController.getCombatByUserIds(
                         player.getDiscordUserId(), player2.getDiscordUserId());
         assertThat(combat.getDiscordUserA()).isEqualTo(player.getDiscordUserId());
+        Combat combat2 =
+                combatController.getCombatByUserIds(
+                        player.getDiscordUserId(), player2.getDiscordUserId());
+        assertThat(combat2.getDiscordUserA()).isEqualTo(player.getDiscordUserId());
+        Combat combat3 =
+                combatController.getCombatByUserIds(
+                        player2.getDiscordUserId(), player.getDiscordUserId());
+        assertThat(combat3.getDiscordUserA()).isEqualTo(player.getDiscordUserId());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.selectionHandler;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.CatchController;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokedexController;
@@ -63,6 +64,7 @@ public class WildPokemonsHandler implements SelectionHandler {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(SelectionMenuEvent event) {
         String wildPoke = event.getSelectedOptions().get(0).getValue();
         log.info(wildPoke);

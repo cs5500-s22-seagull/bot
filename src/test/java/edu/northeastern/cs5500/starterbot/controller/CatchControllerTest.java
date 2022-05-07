@@ -39,6 +39,17 @@ public class CatchControllerTest {
         pokemonInfoController.addInitPokeInfo();
         Double chance = catchController.getCatchChance("Pikachu");
         assertThat(chance).isLessThan(1.0);
+        Double chance2 = catchController.getCatchChance("Pichu");
+        Double chance3 = catchController.getCatchChance("Raichu");
+        Double chance4 = catchController.getCatchChance("Igglybuff");
+        Double chance5 = catchController.getCatchChance("Jigglypuff");
+        Double chance6 = catchController.getCatchChance("Wigglytuff");
+        assertThat(chance2).isLessThan(1.0);
+        assertThat(chance2).isLessThan(1.0);
+        assertThat(chance3).isLessThan(1.0);
+        assertThat(chance4).isLessThan(1.0);
+        assertThat(chance5).isLessThan(1.0);
+        assertThat(chance6).isLessThan(1.0);
     }
 
     @Test
