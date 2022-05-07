@@ -3,8 +3,10 @@ package edu.northeastern.cs5500.starterbot.selectionHandler;
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoSet;
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeClassFromJacocoGeneratedReport;
 
 @Module
+@ExcludeClassFromJacocoGeneratedReport
 public class SelectionHandlerModule {
 
     @Provides

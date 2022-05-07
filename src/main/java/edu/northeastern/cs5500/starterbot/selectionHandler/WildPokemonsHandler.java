@@ -29,12 +29,25 @@ public class WildPokemonsHandler implements SelectionHandler {
     @Inject
     WildPokemonsHandler() {}
 
+    /**
+     * This function returns the name of the command.
+     *
+     * @return The name of the menu.
+     */
     @Override
     public String getName() {
         return "menu:wildpokemons";
     }
 
-    public EmbedBuilder createEmbedBuilder(Pokemon caughtPoke, String wildPoke) {
+    /**
+     * It creates an embed builder object with the information of the caught pokemon
+     *
+     * @param caughtPoke The Pokemon object that was caught
+     * @param wildPoke The name of the pokemon that was caught.
+     * @return An EmbedBuilder object
+     */
+    public EmbedBuilder createEmbedBuilder(
+            Pokemon caughtPoke, String wildPoke, PokemonInfoController pokemonInfoController) {
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle(
                 String.format(
@@ -48,6 +61,14 @@ public class WildPokemonsHandler implements SelectionHandler {
         return info;
     }
 
+    /**
+     * It creates a menu with the title "menu:wildpokemons" and adds two options to it, one for poke
+     * ball and one for great ball
+     *
+     * @param items The items the player has in their inventory.
+     * @param wildPoke The name of the pokemon that is being battled.
+     * @return A menu object
+     */
     public Builder createMenu(HashMap<String, Integer> items, String wildPoke) {
         Builder menu = SelectionMenu.create("menu:wildpokemons").setPlaceholder("Choose a ball");
         int pokeBallNum = 0;
@@ -63,6 +84,14 @@ public class WildPokemonsHandler implements SelectionHandler {
         return menu;
     }
 
+    /**
+     * The function is called when a user selects a pokemon to catch from the menu. It checks if the
+     * user has enough pokeballs to catch the pokemon, and if they do, it checks if the pokemon is
+     * caught. If the pokemon is caught, it is added to the user's pokedex. If the pokemon is not
+     * caught, the user is given another chance to catch the pokemon
+     *
+     * @param event The event that triggered the listener.
+     */
     @Override
     @ExcludeFromJacocoGeneratedReport
     public void onEvent(SelectionMenuEvent event) {
@@ -78,12 +107,12 @@ public class WildPokemonsHandler implements SelectionHandler {
         if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber >= 0.2) {
             items = playerController.useGreatBall(event.getUser().getId());
             Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
-            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke);
+            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke, pokemonInfoController);
             event.replyEmbeds(info.build()).queue();
         } else if (arr[0].equals("pokeball") && items.get("poke ball") > 0 && randomNumber >= 0.3) {
             items = playerController.usePokeBall(event.getUser().getId());
             Pokemon caughtPoke = catchController.catchPokemon(event.getUser().getId(), wildPoke);
-            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke);
+            EmbedBuilder info = createEmbedBuilder(caughtPoke, wildPoke, pokemonInfoController);
             event.replyEmbeds(info.build()).queue();
         } else {
             if (arr[0].equals("greatball") && items.get("great ball") > 0 && randomNumber < 0.2) {

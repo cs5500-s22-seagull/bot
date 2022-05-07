@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.starterbot.selectionHandler;
 
+import edu.northeastern.cs5500.starterbot.annotation.ExcludeFromJacocoGeneratedReport;
 import edu.northeastern.cs5500.starterbot.controller.CombatController;
 import edu.northeastern.cs5500.starterbot.controller.PlayerController;
 import edu.northeastern.cs5500.starterbot.controller.PokemonController;
@@ -24,12 +25,24 @@ public class SelectAbilitiesHandler implements SelectionHandler {
     @Inject
     SelectAbilitiesHandler() {}
 
+    /**
+     * This function returns the name of the command.
+     *
+     * @return The name of the command.
+     */
     @Override
     public String getName() {
         return "menu:abilities";
     }
 
+    /**
+     * It takes the ability selected by the user, calculates the damage, and then deals the damage
+     * to the opponent
+     *
+     * @param event The event that triggered the listener
+     */
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public void onEvent(SelectionMenuEvent event) {
         String ability = event.getSelectedOptions().get(0).getValue();
         String[] split = ability.split(" ");
