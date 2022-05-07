@@ -61,7 +61,7 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                 event.getChannel()
                         .sendMessage(
                                 String.format(
-                                        "%s has defeated <@%s@>",
+                                        "%s has defeated <@%s>",
                                         event.getUser().getAsMention(), opponent))
                         .queue();
                 event.reply("The fight has concluded");
@@ -71,7 +71,7 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                 event.getChannel()
                         .sendMessage(
                                 String.format(
-                                        "%s dealt %s damage to <@%s@> using ability %s",
+                                        "%s dealt %s damage to <@%s> using ability %s",
                                         event.getUser().getAsMention(),
                                         dmg,
                                         opponent,
@@ -88,7 +88,7 @@ public class SelectAbilitiesHandler implements SelectionHandler {
                     .queue();
         }
         combatController.setTurn(opponent);
-        event.getChannel().sendMessage(String.format("It is <@%s@>'s turn", opponent)).queue();
+        event.getChannel().sendMessage(String.format("It is <@%s>'s turn", opponent)).queue();
         event.reply("waiting opponent's turn").setEphemeral(true).queue();
     }
 }
