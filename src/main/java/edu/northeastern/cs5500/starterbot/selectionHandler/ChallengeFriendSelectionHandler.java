@@ -37,7 +37,7 @@ public class ChallengeFriendSelectionHandler implements SelectionHandler {
         event.getChannel()
                 .sendMessage(
                         String.format(
-                                "%s has challenged <@%s@> to a duel!",
+                                "%s has challenged <@%s> to a duel!",
                                 event.getUser().getName(), friendDiscordId))
                 .queue();
     }
